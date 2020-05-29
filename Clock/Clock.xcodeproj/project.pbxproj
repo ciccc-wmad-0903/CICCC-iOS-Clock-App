@@ -105,8 +105,6 @@
 		6FDACBDE248071DB0062818E /* WorldClock */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBE82480759C0062818E /* Models */,
-				6FDACBE7248075990062818E /* Views */,
 				6FDACBE6248075950062818E /* Controllers */,
 			);
 			path = WorldClock;
@@ -115,8 +113,6 @@
 		6FDACBDF248071E50062818E /* StopWatch */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBEE248075B80062818E /* Models */,
-				6FDACBED248075B50062818E /* Views */,
 				6FDACBEC248075B30062818E /* Controllers */,
 			);
 			path = StopWatch;
@@ -125,8 +121,6 @@
 		6FDACBE02480721D0062818E /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBF1248075BF0062818E /* Models */,
-				6FDACBF0248075BD0062818E /* Views */,
 				6FDACBEF248075BB0062818E /* Controllers */,
 			);
 			path = Timer;
@@ -135,8 +129,6 @@
 		6FDACBE12480722B0062818E /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBEB248075B10062818E /* Models */,
-				6FDACBEA248075AE0062818E /* Views */,
 				6FDACBE9248075AB0062818E /* Controllers */,
 			);
 			path = Alarm;
@@ -160,40 +152,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		6FDACBE7248075990062818E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6FDACBE82480759C0062818E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		6FDACBE9248075AB0062818E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6FDACBF4248076840062818E /* AlarmTableViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		6FDACBEA248075AE0062818E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6FDACBEB248075B10062818E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		6FDACBEC248075B30062818E /* Controllers */ = {
@@ -204,40 +168,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		6FDACBED248075B50062818E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6FDACBEE248075B80062818E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		6FDACBEF248075BB0062818E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6FDACBF8248076B50062818E /* TimerViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		6FDACBF0248075BD0062818E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6FDACBF1248075BF0062818E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		6FDACC0024807B920062818E /* Controllers */ = {
