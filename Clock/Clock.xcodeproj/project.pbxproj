@@ -113,7 +113,7 @@
 		6FDACBDF248071E50062818E /* StopWatch */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBEC248075B30062818E /* Controllers */,
+				6FDACBEC248075B30062818E /* View */,
 			);
 			path = StopWatch;
 			sourceTree = "<group>";
@@ -160,12 +160,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		6FDACBEC248075B30062818E /* Controllers */ = {
+		6FDACBEC248075B30062818E /* View */ = {
 			isa = PBXGroup;
 			children = (
 				6FDACBF6248076A40062818E /* StopWatchViewController.swift */,
 			);
-			path = Controllers;
+			path = View;
 			sourceTree = "<group>";
 		};
 		6FDACBEF248075BB0062818E /* Controllers */ = {
