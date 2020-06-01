@@ -20,14 +20,13 @@ class ClockTabBarController: UITabBarController {
         worldClockTVC.tabBarItem = UITabBarItem(title: "World Clock", image: UIImage.init(systemName: "globe")?.withTintColor(UIColor.mainTintColor), tag: 0)
         let alarmTVC = AlarmTableViewController()
         alarmTVC.tabBarItem = UITabBarItem(title: "Alarm", image: UIImage.init(systemName: "alarm.fill")?.withTintColor(UIColor.mainTintColor), tag: 1)
-        let stopWatchVC = StopWatchViewController()
-        stopWatchVC.tabBarItem = UITabBarItem(title: "Stopwatch", image: UIImage.init(systemName: "stopwatch.fill")?.withTintColor(UIColor.mainTintColor), tag: 2)
+        let stopwatchNC = UINavigationController()
+        stopwatchNC.tabBarItem = UITabBarItem(title: "Stopwatch", image: UIImage.init(systemName: "stopwatch.fill")?.withTintColor(UIColor.mainTintColor), tag: 2)
         let timerVC = TimerViewController()
         timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage.init(systemName: "timer")?.withTintColor(UIColor.mainTintColor), tag: 3)
         
         viewControllers = [
-            // UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopWatchVC, timerVC ]
-            stopWatchVC, UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), timerVC ]
+            UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopwatchNC, timerVC ]
         
         let whiteTextColorAttribution = [NSAttributedString.Key.foregroundColor : UIColor.white]
         worldClockTVC.view.backgroundColor = .black
@@ -46,8 +45,8 @@ class ClockTabBarController: UITabBarController {
         alarmTVC.navigationItem.title = "Alarm"
         alarmTVC.navigationItem.largeTitleDisplayMode = .always
         
-        let stopWatchCoordinator = StopWatchCoordinatorImpl(viewController: stopWatchVC)
-        stopWatchCoordinator.start()
+        let stopwatchCoordinator = StopwatchCoordinatorImpl(navigationController: stopwatchNC)
+        stopwatchCoordinator.start()
         
         timerVC.view.backgroundColor = .black
     }
