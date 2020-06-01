@@ -45,9 +45,14 @@ class ClockTabBarController: UITabBarController {
         alarmTVC.navigationController?.navigationBar.largeTitleTextAttributes = whiteTextColorAttribution
         alarmTVC.navigationItem.title = "Alarm"
         alarmTVC.navigationItem.largeTitleDisplayMode = .always
-        
+        alarmTVC.navigationItem.leftBarButtonItem = self.editButtonItem
+        alarmTVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         stopWatchVC.view.backgroundColor = .black
         timerVC.view.backgroundColor = .black
     }
     
+    @objc func addTapped(){
+        print(#function)
+       
+    }
 }
