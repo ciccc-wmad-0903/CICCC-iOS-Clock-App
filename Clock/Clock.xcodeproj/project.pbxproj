@@ -22,9 +22,11 @@
 		6FDACBFF2480799D0062818E /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBFC2480799D0062818E /* UIView+ConstraintLayout.swift */; };
 		6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACC0124807BAA0062818E /* ClockTabBarController.swift */; };
 		6FDACC0524807E470062818E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACC0424807E470062818E /* Colors.swift */; };
+		E28040FE2F3C680C89BA013E /* Pods_Clock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1A5D252484751A00DCFB72 /* StopWatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchCoordinator.swift; sourceTree = "<group>"; };
 		6F1A5D282484756900DCFB72 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +44,8 @@
 		6FDACBFC2480799D0062818E /* UIView+ConstraintLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintLayout.swift"; sourceTree = "<group>"; };
 		6FDACC0124807BAA0062818E /* ClockTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTabBarController.swift; sourceTree = "<group>"; };
 		6FDACC0424807E470062818E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock.release.xcconfig"; path = "Target Support Files/Pods-Clock/Pods-Clock.release.xcconfig"; sourceTree = "<group>"; };
+		D01D1FBDD54848C65738E019 /* Pods-Clock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock.debug.xcconfig"; path = "Target Support Files/Pods-Clock/Pods-Clock.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28040FE2F3C680C89BA013E /* Pods_Clock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +81,8 @@
 			children = (
 				6FDACBC724806CFA0062818E /* Clock */,
 				6FDACBC624806CFA0062818E /* Products */,
+				8149354229F4909538C5479B /* Pods */,
+				9C0F0FE570BFC6F78E961D2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +221,24 @@
 			path = Values;
 			sourceTree = "<group>";
 		};
+		8149354229F4909538C5479B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D01D1FBDD54848C65738E019 /* Pods-Clock.debug.xcconfig */,
+				8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9C0F0FE570BFC6F78E961D2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -221,9 +246,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FDACBD924806CFF0062818E /* Build configuration list for PBXNativeTarget "Clock" */;
 			buildPhases = (
+				C6128E017E51252502C7D4A6 /* [CP] Check Pods Manifest.lock */,
 				6FDACBC124806CFA0062818E /* Sources */,
 				6FDACBC224806CFA0062818E /* Frameworks */,
 				6FDACBC324806CFA0062818E /* Resources */,
+				EFC6053AF74C8B118A30B8FE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,6 +305,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C6128E017E51252502C7D4A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Clock-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFC6053AF74C8B118A30B8FE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Clock/Pods-Clock-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Clock/Pods-Clock-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Clock/Pods-Clock-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6FDACBC124806CFA0062818E /* Sources */ = {
@@ -430,6 +499,7 @@
 		};
 		6FDACBDA24806CFF0062818E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D01D1FBDD54848C65738E019 /* Pods-Clock.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -447,6 +517,7 @@
 		};
 		6FDACBDB24806CFF0062818E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
