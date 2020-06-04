@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RxCocoa
 
 struct Stopwatch: Codable {
     
-    private(set) var status: Status = .stop
+    private(set) var status: TimewatchStatus = .stop
     private(set) var base: Date?
     private(set) var pauseStart: Date?
     private(set) var lapStart: Date?
@@ -66,6 +67,6 @@ struct Stopwatch: Codable {
     
 }
 
-enum Status: Int, Codable {
+enum TimewatchStatus: Int, Codable {
     case start, stop, pause
 }

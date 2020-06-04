@@ -46,7 +46,6 @@ class ClockTabBarController: UITabBarController {
         alarmTVC.navigationItem.largeTitleDisplayMode = .always
         alarmTVC.navigationItem.leftBarButtonItem = self.editButtonItem
         alarmTVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        stopWatchVC.view.backgroundColor = .black
         
         let stopwatchCoordinator = StopwatchCoordinatorImpl(navigationController: stopwatchNC)
         stopwatchCoordinator.start()

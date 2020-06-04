@@ -25,6 +25,11 @@ class StopwatchViewController: UIViewController {
     var viewModel: StopwatchViewModel!
 }
 
+// MARK: - Binding
+extension StopwatchViewController {
+    
+}
+
 // MARK: - UI Setup
 extension StopwatchViewController {
     

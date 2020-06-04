@@ -12,6 +12,8 @@ import RxCocoa
 protocol StopwatchViewModel: class {
     // Input
     var viewDidLoad: PublishRelay<Void> { get }
+    var didTouchLeftButton: PublishRelay<Void> { get }
+    var didTouchRightButton: PublishRelay<Void> { get }
     
     // Output
     
@@ -21,16 +23,20 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     // MARK: - Input
     let viewDidLoad = PublishRelay<Void>()
+    let didTouchLeftButton = PublishRelay<Void>()
+    let didTouchRightButton = PublishRelay<Void>()
     
     // MARK: - Output
     
     // MARK: - Private Properties
+    private var stopwatch: Stopwatch
     private let coordinator: StopwatchCoordinator
     
     private let disposeBag = DisposeBag()
     
     // MARK: - Initialization
-    init(coordinator: StopwatchCoordinator) {
+    init(stopwatch: Stopwatch, coordinator: StopwatchCoordinator) {
+        self.stopwatch = stopwatch
         self.coordinator = coordinator
         bindOnViewDidLoad()
     }
@@ -39,19 +45,10 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private func bindOnViewDidLoad() {
         viewDidLoad
             .observeOn(MainScheduler.instance)
-            .do(onNext: { [unowned self] _ in
-                self.loadStopwatchData()
-            })
+//            .do(onNext: { [unowned self] _ in })
             .subscribe()
             .disposed(by: disposeBag)
     }
     
     // MARK: - Service Methods
-    private func saveStopwatchData() {
-        
-    }
-    
-    private func loadStopwatchData() {
-        
-    }
 }
