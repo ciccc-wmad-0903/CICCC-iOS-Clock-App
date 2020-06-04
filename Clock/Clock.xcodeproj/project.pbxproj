@@ -3,17 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F1A5D262484751A00DCFB72 /* StopwatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5D252484751A00DCFB72 /* StopwatchCoordinator.swift */; };
+		6F1A5D292484756900DCFB72 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5D282484756900DCFB72 /* Coordinator.swift */; };
+		6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */; };
+		6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41624849B31007B5593 /* Stopwatch.swift */; };
 		6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBC824806CFA0062818E /* AppDelegate.swift */; };
 		6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBCA24806CFA0062818E /* SceneDelegate.swift */; };
 		6FDACBD224806CFF0062818E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD124806CFF0062818E /* Assets.xcassets */; };
 		6FDACBD524806CFF0062818E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD324806CFF0062818E /* LaunchScreen.storyboard */; };
 		6FDACBF3248076610062818E /* WorldClockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF2248076610062818E /* WorldClockTableViewController.swift */; };
 		6FDACBF5248076840062818E /* AlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF4248076840062818E /* AlarmTableViewController.swift */; };
-		6FDACBF7248076A40062818E /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF6248076A40062818E /* StopWatchViewController.swift */; };
+		6FDACBF7248076A40062818E /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF6248076A40062818E /* StopwatchViewController.swift */; };
 		6FDACBF9248076B50062818E /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF8248076B50062818E /* TimerViewController.swift */; };
 		6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBFA2480799D0062818E /* HorizontalStackView.swift */; };
 		6FDACBFE2480799D0062818E /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBFB2480799D0062818E /* VerticalStackView.swift */; };
@@ -22,9 +26,15 @@
 		6FDACC0524807E470062818E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACC0424807E470062818E /* Colors.swift */; };
 		9DF9AB272485C03B00C89681 /* AddAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9AB262485C03B00C89681 /* AddAlarmTableViewController.swift */; };
 		9DF9AB2A2485C67000C89681 /* SegueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9AB292485C67000C89681 /* SegueInfo.swift */; };
+		E28040FE2F3C680C89BA013E /* Pods_Clock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F1A5D252484751A00DCFB72 /* StopwatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchCoordinator.swift; sourceTree = "<group>"; };
+		6F1A5D282484756900DCFB72 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
+		6FC1C41624849B31007B5593 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACBC824806CFA0062818E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FDACBCA24806CFA0062818E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +43,7 @@
 		6FDACBD624806CFF0062818E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FDACBF2248076610062818E /* WorldClockTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockTableViewController.swift; sourceTree = "<group>"; };
 		6FDACBF4248076840062818E /* AlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewController.swift; sourceTree = "<group>"; };
-		6FDACBF6248076A40062818E /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
+		6FDACBF6248076A40062818E /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
 		6FDACBF8248076B50062818E /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		6FDACBFA2480799D0062818E /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		6FDACBFB2480799D0062818E /* VerticalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
@@ -42,6 +52,8 @@
 		6FDACC0424807E470062818E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		9DF9AB262485C03B00C89681 /* AddAlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewController.swift; sourceTree = "<group>"; };
 		9DF9AB292485C67000C89681 /* SegueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueInfo.swift; sourceTree = "<group>"; };
+		8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock.release.xcconfig"; path = "Target Support Files/Pods-Clock/Pods-Clock.release.xcconfig"; sourceTree = "<group>"; };
+		D01D1FBDD54848C65738E019 /* Pods-Clock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock.debug.xcconfig"; path = "Target Support Files/Pods-Clock/Pods-Clock.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,17 +61,52 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28040FE2F3C680C89BA013E /* Pods_Clock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F1A5D24248474FD00DCFB72 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6F1A5D252484751A00DCFB72 /* StopwatchCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6F1A5D272484755900DCFB72 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6F1A5D282484756900DCFB72 /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6FC1C41224848BF6007B5593 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		6FC1C415248491B8007B5593 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6FC1C41624849B31007B5593 /* Stopwatch.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		6FDACBBC24806CFA0062818E = {
 			isa = PBXGroup;
 			children = (
 				6FDACBC724806CFA0062818E /* Clock */,
 				6FDACBC624806CFA0062818E /* Products */,
+				8149354229F4909538C5479B /* Pods */,
+				9C0F0FE570BFC6F78E961D2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,7 +125,7 @@
 				6FDACBDD248071D40062818E /* Common */,
 				6FDACBDE248071DB0062818E /* WorldClock */,
 				6FDACBE12480722B0062818E /* Alarm */,
-				6FDACBDF248071E50062818E /* StopWatch */,
+				6FDACBDF248071E50062818E /* Stopwatch */,
 				6FDACBE02480721D0062818E /* Timer */,
 				6FDACBDC24806DEE0062818E /* Supporting Files */,
 				6FDACBD624806CFF0062818E /* Info.plist */,
@@ -100,6 +147,7 @@
 		6FDACBDD248071D40062818E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6F1A5D272484755900DCFB72 /* Coordinator */,
 				6FDACC0324807E330062818E /* Values */,
 				6FDACC0024807B920062818E /* Controllers */,
 				6FDACBE22480727A0062818E /* Utils */,
@@ -115,12 +163,15 @@
 			path = WorldClock;
 			sourceTree = "<group>";
 		};
-		6FDACBDF248071E50062818E /* StopWatch */ = {
+		6FDACBDF248071E50062818E /* Stopwatch */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBEC248075B30062818E /* Controllers */,
+				6F1A5D24248474FD00DCFB72 /* Coordinator */,
+				6FC1C415248491B8007B5593 /* Models */,
+				6FDACBEC248075B30062818E /* View */,
+				6FC1C41224848BF6007B5593 /* View Model */,
 			);
-			path = StopWatch;
+			path = Stopwatch;
 			sourceTree = "<group>";
 		};
 		6FDACBE02480721D0062818E /* Timer */ = {
@@ -165,12 +216,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		6FDACBEC248075B30062818E /* Controllers */ = {
+		6FDACBEC248075B30062818E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBF6248076A40062818E /* StopWatchViewController.swift */,
+				6FDACBF6248076A40062818E /* StopwatchViewController.swift */,
 			);
-			path = Controllers;
+			path = View;
 			sourceTree = "<group>";
 		};
 		6FDACBEF248075BB0062818E /* Controllers */ = {
@@ -222,6 +273,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8149354229F4909538C5479B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D01D1FBDD54848C65738E019 /* Pods-Clock.debug.xcconfig */,
+				8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9C0F0FE570BFC6F78E961D2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,9 +297,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FDACBD924806CFF0062818E /* Build configuration list for PBXNativeTarget "Clock" */;
 			buildPhases = (
+				C6128E017E51252502C7D4A6 /* [CP] Check Pods Manifest.lock */,
 				6FDACBC124806CFA0062818E /* Sources */,
 				6FDACBC224806CFA0062818E /* Frameworks */,
 				6FDACBC324806CFA0062818E /* Resources */,
+				EFC6053AF74C8B118A30B8FE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -287,6 +357,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C6128E017E51252502C7D4A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Clock-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFC6053AF74C8B118A30B8FE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Clock/Pods-Clock-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Clock/Pods-Clock-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Clock/Pods-Clock-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6FDACBC124806CFA0062818E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -294,8 +406,12 @@
 			files = (
 				6FDACBF3248076610062818E /* WorldClockTableViewController.swift in Sources */,
 				6FDACC0524807E470062818E /* Colors.swift in Sources */,
+				6F1A5D292484756900DCFB72 /* Coordinator.swift in Sources */,
+				6F1A5D262484751A00DCFB72 /* StopwatchCoordinator.swift in Sources */,
 				6FDACBF5248076840062818E /* AlarmTableViewController.swift in Sources */,
 				6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */,
+				6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */,
+				6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */,
 				6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */,
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
 				6FDACBFE2480799D0062818E /* VerticalStackView.swift in Sources */,
@@ -305,6 +421,7 @@
 				6FDACBF9248076B50062818E /* TimerViewController.swift in Sources */,
 				6FDACBF7248076A40062818E /* StopWatchViewController.swift in Sources */,
 				9DF9AB272485C03B00C89681 /* AddAlarmTableViewController.swift in Sources */,
+				6FDACBF7248076A40062818E /* StopwatchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +555,7 @@
 		};
 		6FDACBDA24806CFF0062818E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D01D1FBDD54848C65738E019 /* Pods-Clock.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -458,6 +576,7 @@
 		};
 		6FDACBDB24806CFF0062818E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
