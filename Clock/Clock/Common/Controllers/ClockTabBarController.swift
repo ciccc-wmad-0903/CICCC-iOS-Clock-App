@@ -53,6 +53,7 @@ class ClockTabBarController: UITabBarController {
     
     @objc func addTapped(){
         print(#function)
-       
+        let addAlarmTVC = UINavigationController(rootViewController: AddAlarmTableViewController())
+        self.show(addAlarmTVC, sender: AnyObject.self)
     }
 }
