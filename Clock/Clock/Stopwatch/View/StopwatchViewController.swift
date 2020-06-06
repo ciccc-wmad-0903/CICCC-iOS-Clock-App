@@ -30,7 +30,7 @@ class StopwatchViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print(#function)
+        viewModel.viewDidDisappear.accept(())
     }
     
     // MARK: - Properties
@@ -151,11 +151,15 @@ extension StopwatchViewController {
     private func setupUILapTableView() {
         view.addSubview(lapTableView)
         lapTableView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor,
-                             leadingAnchor: view.leadingAnchor,
-                             trailingAnchor: view.trailingAnchor,
+                             leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor,
+                             trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor,
                              bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
-                             padding: .init(top: UIDevice.current.safeAreaSize!.height * 0.565, left: 0, bottom: 0, right: 0))
+                             padding: .init(top: UIDevice.current.safeAreaSize!.height * 0.565, left: 0, bottom: 0, right: 16))
         lapTableView.separatorColor = .tableViewSeparatorColor
+        let line = UIView(frame: CGRect(x: 0, y: 0, width: lapTableView.frame.size.width, height: 1 / UIScreen.main.scale))
+        line.backgroundColor = .tableViewSeparatorColor
+        lapTableView.tableHeaderView = line
+        
     }
     
 }
