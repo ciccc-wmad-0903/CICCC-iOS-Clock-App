@@ -18,6 +18,8 @@ class StopwatchViewController: UIViewController {
         setupUI()
 
         viewModel.viewDidLoad.accept(())
+        
+        bindOnButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,9 +27,9 @@ class StopwatchViewController: UIViewController {
         viewModel.viewWillAppear.accept(())
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.viewWillDisappear.accept(())
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print(#function)
     }
     
     // MARK: - Properties
@@ -70,13 +72,37 @@ class StopwatchViewController: UIViewController {
         return tableView
     }()
     
-    lazy var leftButton = CircleButton(title: "Lap", baseColor: .white, isEnabled: true)
+    lazy var leftButton = CircleButton(title: "Lap", baseColor: .white, isEnabled: false)
     lazy var rightButton = CircleButton(title: "Start", baseColor: .systemRed)
     
 }
 
 // MARK: - Binding
 extension StopwatchViewController {
+    
+    private func bindOnButtons() {
+        leftButton.rx.tap
+            .bind(to: viewModel.didTapLeftButton)
+            .disposed(by: disposeBag)
+        
+        rightButton.rx.tap
+            .bind(to: viewModel.didTapRightButton)
+            .disposed(by: disposeBag)
+        
+        viewModel.rightButtomStatus
+            .drive(onNext: {
+                self.rightButton.baseColor = $0
+                self.rightButton.setTitle($1, for: .normal)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.leftButtonStatus
+            .drive(onNext: {
+                self.leftButton.setTitle($0, for: .normal)
+                self.leftButton.isEnabled = $1
+            })
+            .disposed(by: disposeBag)
+    }
     
 }
 
@@ -94,18 +120,13 @@ extension StopwatchViewController {
     
     private func setupUIButtons() {
         let buttonDiameter = CircleButton.buttonDiameter
-        let buttonsView = UIView()
-        view.addSubview(buttonsView)
-        buttonsView.constraintHeight(equalToConstant: buttonDiameter)
-        buttonsView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: buttonDiameter / 2).isActive = true
-        buttonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        buttonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        
-        buttonsView.addSubview(leftButton)
-        leftButton.anchors(topAnchor: buttonsView.topAnchor, leadingAnchor: buttonsView.leadingAnchor, trailingAnchor: nil, bottomAnchor: nil,
+        view.addSubview(leftButton)
+        leftButton.anchors(topAnchor: nil, leadingAnchor: view.leadingAnchor, trailingAnchor: nil, bottomAnchor: scrollView.bottomAnchor,
+                           padding: .init(top: 0, left: 16, bottom: -buttonDiameter / 2, right: 0),
                            size: .init(width: buttonDiameter, height: buttonDiameter))
-        buttonsView.addSubview(rightButton)
-        rightButton.anchors(topAnchor: buttonsView.topAnchor, leadingAnchor: nil, trailingAnchor: buttonsView.trailingAnchor, bottomAnchor: nil,
+        view.addSubview(rightButton)
+        rightButton.anchors(topAnchor: nil, leadingAnchor: nil, trailingAnchor: view.trailingAnchor, bottomAnchor: scrollView.bottomAnchor,
+                            padding: .init(top: 0, left: 0, bottom: -buttonDiameter / 2, right: 16),
                             size: .init(width: buttonDiameter, height: buttonDiameter))
     }
     
