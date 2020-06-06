@@ -12,6 +12,8 @@
 		6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */; };
 		6F1A5D262484751A00DCFB72 /* StopwatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5D252484751A00DCFB72 /* StopwatchCoordinator.swift */; };
 		6F1A5D292484756900DCFB72 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5D282484756900DCFB72 /* Coordinator.swift */; };
+		6F2010F0248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */; };
+		6F2010F2248BBA0700683DD9 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */; };
 		6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */; };
 		6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41624849B31007B5593 /* Stopwatch.swift */; };
 		6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBC824806CFA0062818E /* AppDelegate.swift */; };
@@ -39,6 +41,8 @@
 		6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+string.swift"; sourceTree = "<group>"; };
 		6F1A5D252484751A00DCFB72 /* StopwatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchCoordinator.swift; sourceTree = "<group>"; };
 		6F1A5D282484756900DCFB72 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchLapsTableViewCell.swift; sourceTree = "<group>"; };
+		6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
 		6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
 		6FC1C41624849B31007B5593 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +209,7 @@
 				6FDACBFB2480799D0062818E /* VerticalStackView.swift */,
 				6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */,
 				6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */,
+				6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				6FDACBF6248076A40062818E /* StopwatchViewController.swift */,
+				6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -425,6 +431,8 @@
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
 				6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */,
 				6F18CFE2248B245D00E91F3F /* CircleButton.swift in Sources */,
+				6F2010F2248BBA0700683DD9 /* ReuseIdentifiable.swift in Sources */,
+				6F2010F0248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift in Sources */,
 				6FDACBFE2480799D0062818E /* VerticalStackView.swift in Sources */,
 				6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */,
 				9DF9AB2A2485C67000C89681 /* SegueInfo.swift in Sources */,
