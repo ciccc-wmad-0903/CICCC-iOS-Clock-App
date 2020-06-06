@@ -11,16 +11,15 @@ import UIKit
 import RxSwift
 
 class StopwatchViewController: UIViewController {
-
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
-        viewModel.viewDidLoad.accept(())
         
         bindOnButtons()
         bindOnDigitalStopwatch()
+        bindOnTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +38,9 @@ class StopwatchViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
-
+    
+    private var laps = [String]()
+    
     private var digitalStopwatchLabelLeadingConstraintWith4: NSLayoutConstraint?
     private var digitalStopwatchLabelLeadingConstraintWith12: NSLayoutConstraint?
     private var digitalStopwatchLabelTrailingConstraintWith4: NSLayoutConstraint?
@@ -96,30 +97,62 @@ extension StopwatchViewController {
             .disposed(by: disposeBag)
         
         viewModel.rightButtomStatus
-            .drive(onNext: {
-                self.rightButton.baseColor = $0
-                self.rightButton.setTitle($1, for: .normal)
+            .drive(onNext: { color, title in
+                DispatchQueue.main.async {
+                    self.rightButton.baseColor = color
+                    self.rightButton.setTitle(title, for: .normal)
+                }
             })
             .disposed(by: disposeBag)
         
         viewModel.leftButtonStatus
-            .drive(onNext: {
-                self.leftButton.setTitle($0, for: .normal)
-                self.leftButton.isEnabled = $1
+            .drive(onNext: { title, enabled in
+                DispatchQueue.main.async {
+                    self.leftButton.setTitle(title, for: .normal)
+                    self.leftButton.isEnabled = enabled
+                }
             })
             .disposed(by: disposeBag)
     }
     
     private func bindOnDigitalStopwatch() {
         viewModel.digitalCurrentText
-            .drive(onNext: {
-                self.updateConstraintForDigitalStopwatch($0.count > 8)
-                self.view.layoutIfNeeded()
-                self.digitalStopwatchLabel.text = $0
-                self.digitalStopwatchInAnalogLabel.text = $0
+            .drive(onNext: { text in
+                DispatchQueue.main.async {
+                    self.updateConstraintForDigitalStopwatch(text.count > 8)
+                    self.view.layoutIfNeeded()
+                    self.digitalStopwatchLabel.text = text
+                    self.digitalStopwatchInAnalogLabel.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOnTableView() {
+        viewModel.digitalCurrentLapText
+            .drive(onNext: { text in
+                DispatchQueue.main.async {
+                    if let cell = self.lapTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? StopwatchLapsTableViewCell {
+                        if let lapText = text {
+                            cell.lapNumberLabel.text = "Lap \(self.laps.count + 1)"
+                            cell.lapRecordLabel.text = lapText
+                        } else {
+                            cell.lapNumberLabel.text = ""
+                            cell.lapRecordLabel.text = ""
+                        }
+                    }
+                }
             })
             .disposed(by: disposeBag)
         
+        viewModel.updateLaps
+            .drive(onNext: { laps in
+                DispatchQueue.main.async {
+                    self.laps = laps
+                    self.lapTableView.reloadData()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
 }
@@ -148,22 +181,54 @@ extension StopwatchViewController {
                             size: .init(width: buttonDiameter, height: buttonDiameter))
     }
     
+}
+
+// MARK: - UI Setup: TableView
+extension StopwatchViewController: UITableViewDataSource, UITableViewDelegate {
+    
     private func setupUILapTableView() {
         view.addSubview(lapTableView)
         lapTableView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor,
-                             leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor,
-                             trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor,
+                             leadingAnchor: view.leadingAnchor,
+                             trailingAnchor: view.trailingAnchor,
                              bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
-                             padding: .init(top: UIDevice.current.safeAreaSize!.height * 0.565, left: 0, bottom: 0, right: 16))
+                             padding: .init(top: UIDevice.current.safeAreaSize!.height * 0.565, left: 16, bottom: 0, right: 16))
         lapTableView.separatorColor = .tableViewSeparatorColor
-        let line = UIView(frame: CGRect(x: 0, y: 0, width: lapTableView.frame.size.width, height: 1 / UIScreen.main.scale))
+        lapTableView.register(StopwatchLapsTableViewCell.self, forCellReuseIdentifier: StopwatchLapsTableViewCell.reuseIdentifier)
+        lapTableView.dataSource = self
+        lapTableView.delegate = self
+        
+        let line = UIView(frame: CGRect(x: 20, y: 0, width: lapTableView.frame.size.width - 36, height: 1 / UIScreen.main.scale))
         line.backgroundColor = .tableViewSeparatorColor
         lapTableView.tableHeaderView = line
-        
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height / 7.3
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 1 : laps.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StopwatchLapsTableViewCell.reuseIdentifier, for: indexPath) as! StopwatchLapsTableViewCell
+        if indexPath.section == 1 {
+            cell.lapNumberLabel.text = "Lap \(laps.count - indexPath.row)"
+            cell.lapRecordLabel.text = laps[indexPath.row]
+        }
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = .zero
+        cell.layoutMargins = .zero
+        return cell
+    }
 }
 
+// MARK: - UI Setup: Paging ScrollView
 extension StopwatchViewController: UIScrollViewDelegate {
     
     /// Add Page-enabled ScrollView
