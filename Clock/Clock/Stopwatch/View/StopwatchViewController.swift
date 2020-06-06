@@ -20,6 +20,7 @@ class StopwatchViewController: UIViewController {
         viewModel.viewDidLoad.accept(())
         
         bindOnButtons()
+        bindOnDigitalStopwatch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,11 @@ class StopwatchViewController: UIViewController {
     
     private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
+
+    private var digitalStopwatchLabelLeadingConstraintWith4: NSLayoutConstraint?
+    private var digitalStopwatchLabelLeadingConstraintWith12: NSLayoutConstraint?
+    private var digitalStopwatchLabelTrailingConstraintWith4: NSLayoutConstraint?
+    private var digitalStopwatchLabelTrailingConstraintWith12: NSLayoutConstraint?
     
     lazy var digitalStopwatchLabel: UILabel = {
         let label = UILabel()
@@ -102,6 +108,18 @@ extension StopwatchViewController {
                 self.leftButton.isEnabled = $1
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func bindOnDigitalStopwatch() {
+        viewModel.digitalCurrentText
+            .drive(onNext: {
+                self.updateConstraintForDigitalStopwatch($0.count > 8)
+                self.view.layoutIfNeeded()
+                self.digitalStopwatchLabel.text = $0
+                self.digitalStopwatchInAnalogLabel.text = $0
+            })
+            .disposed(by: disposeBag)
+        
     }
     
 }
@@ -170,8 +188,12 @@ extension StopwatchViewController: UIScrollViewDelegate {
         
         digitalView.addSubview(digitalStopwatchLabel)
         digitalStopwatchLabel.centerYAnchor.constraint(equalTo: digitalView.centerYAnchor).isActive = true
-        digitalStopwatchLabel.leadingAnchor.constraint(equalTo: digitalView.leadingAnchor, constant: 12).isActive = true
-        digitalStopwatchLabel.trailingAnchor.constraint(equalTo: digitalView.trailingAnchor, constant: -12).isActive = true
+        digitalStopwatchLabelLeadingConstraintWith4 = digitalStopwatchLabel.leadingAnchor.constraint(equalTo: digitalView.leadingAnchor, constant: 4)
+        digitalStopwatchLabelLeadingConstraintWith12 = digitalStopwatchLabel.leadingAnchor.constraint(equalTo: digitalView.leadingAnchor, constant: 12)
+        digitalStopwatchLabelTrailingConstraintWith4 = digitalStopwatchLabel.trailingAnchor.constraint(equalTo: digitalView.trailingAnchor, constant: -4)
+        digitalStopwatchLabelTrailingConstraintWith12 = digitalStopwatchLabel.trailingAnchor.constraint(equalTo: digitalView.trailingAnchor, constant: -12)
+        digitalStopwatchLabelLeadingConstraintWith12?.isActive = true
+        digitalStopwatchLabelTrailingConstraintWith12?.isActive = true
         
         let analogView = UIView()
         analogView.translatesAutoresizingMaskIntoConstraints = false
@@ -204,6 +226,20 @@ extension StopwatchViewController: UIScrollViewDelegate {
         UIView.animate(withDuration: 0.33) { [weak self] in
             guard let self = self else { return }
             self.scrollView.contentOffset.x = CGFloat(sender.currentPage * Int(self.scrollView.bounds.width))
+        }
+    }
+    
+    private func updateConstraintForDigitalStopwatch(_ moreThan8Chars: Bool) {
+        if moreThan8Chars {
+            self.digitalStopwatchLabelLeadingConstraintWith12?.isActive = false
+            self.digitalStopwatchLabelTrailingConstraintWith12?.isActive = false
+            self.digitalStopwatchLabelLeadingConstraintWith4?.isActive = true
+            self.digitalStopwatchLabelTrailingConstraintWith4?.isActive = true
+        } else {
+            self.digitalStopwatchLabelLeadingConstraintWith4?.isActive = false
+            self.digitalStopwatchLabelTrailingConstraintWith4?.isActive = false
+            self.digitalStopwatchLabelLeadingConstraintWith12?.isActive = true
+            self.digitalStopwatchLabelTrailingConstraintWith12?.isActive = true
         }
     }
     

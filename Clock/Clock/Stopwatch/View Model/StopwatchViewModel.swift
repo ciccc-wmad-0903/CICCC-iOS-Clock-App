@@ -20,6 +20,8 @@ protocol StopwatchViewModel: class {
     // Output
     var leftButtonStatus: Driver<(String, Bool)> { get }
     var rightButtomStatus: Driver<(UIColor, String)> { get }
+    var digitalCurrentText: Driver<String> { get }
+    var digitalCurrentLapText: Driver<String> { get }
     
 }
 
@@ -35,10 +37,14 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     // MARK: - Output
     let leftButtonStatus: Driver<(String, Bool)>
     let rightButtomStatus: Driver<(UIColor, String)>
+    let digitalCurrentText: Driver<String>
+    let digitalCurrentLapText: Driver<String>
     
     // MARK: - Private Properties(Reactive)
     private let coordinator: StopwatchCoordinator
     private let disposeBag = DisposeBag()
+    private let globalScheduler = ConcurrentDispatchQueueScheduler.init(queue: DispatchQueue.global())
+    private var frameUpdateDisposable = SingleAssignmentDisposable()
     
     // MARK: - Private Properties(Stopwatch)
     private let stopwatchStatus = BehaviorRelay<StopwatchStatus>(value: .stop)
@@ -47,12 +53,17 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private let stopwatchLapStart = BehaviorRelay<Date?>(value: nil)
     private let stopwatchLaps = BehaviorRelay<[TimeInterval]>(value: [])
     
+    private let digitalCurrent = BehaviorRelay<TimeInterval>(value: 0)
+    private let digitalCurrentLap = BehaviorRelay<TimeInterval?>(value: nil)
+    
     private var stopwatchCurrent: TimeInterval {
         get { stopwatchBase.value?.distance(to: Date()) ?? 0 }
     }
-    private var stopwatchLapCurrent: TimeInterval {
-        get { stopwatchLapStart.value?.distance(to: Date()) ?? 0 }
+    private var stopwatchLapCurrent: TimeInterval? {
+        get { stopwatchLapStart.value?.distance(to: Date()) }
     }
+    
+    private let fps = 60
     
     // MARK: - Initialization
     init(stopwatch: Stopwatch, coordinator: StopwatchCoordinator) {
@@ -77,6 +88,26 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             })
             .asDriver(onErrorJustReturn: (UIColor.systemGreen, "Start"))
         
+        digitalCurrentText = digitalCurrent
+            .map({ $0.toStopwatchString() })
+            .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
+        
+        digitalCurrentLapText = digitalCurrentLap
+            .compactMap({ $0?.toStopwatchString() })
+            .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
+        
+        stopwatchStatus
+            .do(onNext: { status in
+                self.frameUpdater(isStart: status == .start)
+            })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        stopwatchBase
+            .do(onNext: { _ in self.digitalCurrent.accept(self.stopwatchCurrent) })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         bindOnViewDidLoad()
         bindOnViewWillAppear()
         bindOnViewDidDisappear()
@@ -96,7 +127,11 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private func bindOnViewWillAppear() {
         viewWillAppear
             .observeOn(MainScheduler.instance)
-            .do(onNext: { print(#function) })
+            .do(onNext: {
+                if self.stopwatchStatus.value == .start {
+                    self.frameUpdater(isStart: true)
+                }
+            })
             .subscribe()
             .disposed(by: disposeBag)
     }
@@ -104,7 +139,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private func bindOnViewDidDisappear() {
         viewDidDisappear
             .observeOn(MainScheduler.instance)
-            .do(onNext: { print(#function) })
+            .do(onNext: { self.frameUpdater(isStart: false) })
             .subscribe()
             .disposed(by: disposeBag)
     }
@@ -115,10 +150,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
                 switch self.stopwatchStatus.value {
                 case .start: // To Check Lap
                     self.stopwatchLap()
-                    print("Check Lap!")
                 case .pause: // To Reset
                     self.stopwatchReset()
-                    print("Reset!")
                 case .stop: // Disabled: Never execute!
                     assertionFailure("Shouldn't be here")
                 }
@@ -133,13 +166,10 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
                 switch self.stopwatchStatus.value {
                 case .stop: // To Start
                     self.stopwatchStart()
-                    print("Start!")
                 case .start: // To Pause
                     self.stopwatchPause()
-                    print("Pause!")
                 case .pause: // To Restart
                     self.stopwatchRestart()
-                    print("Restart!")
                 }
             })
             .disposed(by: disposeBag)
@@ -190,6 +220,21 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             stopwatchLaps.accept(prevLaps)
         } else {
             stopwatchReset()
+        }
+    }
+    
+    private func frameUpdater(isStart: Bool) {
+        frameUpdateDisposable.dispose()
+        frameUpdateDisposable = SingleAssignmentDisposable()
+        if isStart {
+            let interval = 1000 / (fps * 2)
+            let frameUpdater = Observable<Int>
+                .interval(RxTimeInterval.milliseconds(interval), scheduler: globalScheduler)
+                .map ({ _ in
+                    self.digitalCurrent.accept(self.stopwatchCurrent)
+                })
+                .replayAll()
+            frameUpdateDisposable.setDisposable(frameUpdater.connect())
         }
     }
 }
