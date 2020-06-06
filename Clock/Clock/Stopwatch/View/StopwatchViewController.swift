@@ -76,6 +76,7 @@ class StopwatchViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .black
+        tableView.separatorInset = .zero
         return tableView
     }()
     
@@ -221,9 +222,6 @@ extension StopwatchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.lapNumberLabel.text = "Lap \(laps.count - indexPath.row)"
             cell.lapRecordLabel.text = laps[indexPath.row]
         }
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = .zero
-        cell.layoutMargins = .zero
         return cell
     }
 }
