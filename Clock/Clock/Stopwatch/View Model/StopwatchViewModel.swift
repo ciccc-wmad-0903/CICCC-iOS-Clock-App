@@ -11,7 +11,6 @@ import RxCocoa
 
 protocol StopwatchViewModel: class {
     // Input
-    var viewDidLoad: PublishRelay<Void> { get }
     var viewWillAppear: PublishRelay<Void> { get }
     var viewDidDisappear: PublishRelay<Void> { get }
     var didTapLeftButton: PublishRelay<Void> { get }
@@ -21,14 +20,14 @@ protocol StopwatchViewModel: class {
     var leftButtonStatus: Driver<(String, Bool)> { get }
     var rightButtomStatus: Driver<(UIColor, String)> { get }
     var digitalCurrentText: Driver<String> { get }
-    var digitalCurrentLapText: Driver<String> { get }
+    var digitalCurrentLapText: Driver<String?> { get }
+    var updateLaps: Driver<[String]> { get }
     
 }
 
 final class StopwatchViewModelImpl: StopwatchViewModel {
     
     // MARK: - Input
-    let viewDidLoad = PublishRelay<Void>()
     let viewWillAppear = PublishRelay<Void>()
     let viewDidDisappear = PublishRelay<Void>()
     let didTapLeftButton = PublishRelay<Void>()
@@ -38,7 +37,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     let leftButtonStatus: Driver<(String, Bool)>
     let rightButtomStatus: Driver<(UIColor, String)>
     let digitalCurrentText: Driver<String>
-    let digitalCurrentLapText: Driver<String>
+    let digitalCurrentLapText: Driver<String?>
+    let updateLaps: Driver<[String]>
     
     // MARK: - Private Properties(Reactive)
     private let coordinator: StopwatchCoordinator
@@ -93,8 +93,18 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
         
         digitalCurrentLapText = digitalCurrentLap
-            .compactMap({ $0?.toStopwatchString() })
+            .map({ $0?.toStopwatchString() ?? nil })
             .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
+        
+        updateLaps = stopwatchLaps
+            .map({
+                var lapStrings = [String]()
+                for lap in $0 {
+                    lapStrings.insert(lap.toStopwatchString(), at: 0)
+                }
+                return lapStrings
+            })
+            .asDriver(onErrorJustReturn: [])
         
         stopwatchStatus
             .do(onNext: { status in
@@ -108,7 +118,11 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .subscribe()
             .disposed(by: disposeBag)
         
-        bindOnViewDidLoad()
+        stopwatchLapStart
+            .do(onNext: { _ in self.digitalCurrentLap.accept(self.stopwatchLapCurrent)})
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         bindOnViewWillAppear()
         bindOnViewDidDisappear()
         bindOnDidTapLeftButton()
@@ -116,13 +130,6 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     }
     
     // MARK: - Bindings
-    private func bindOnViewDidLoad() {
-        viewDidLoad
-            .observeOn(MainScheduler.instance)
-            .do(onNext: { print(#function) })
-            .subscribe()
-            .disposed(by: disposeBag)
-    }
     
     private func bindOnViewWillAppear() {
         viewWillAppear
@@ -232,6 +239,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
                 .interval(RxTimeInterval.milliseconds(interval), scheduler: globalScheduler)
                 .map ({ _ in
                     self.digitalCurrent.accept(self.stopwatchCurrent)
+                    self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
                 })
                 .replayAll()
             frameUpdateDisposable.setDisposable(frameUpdater.connect())
