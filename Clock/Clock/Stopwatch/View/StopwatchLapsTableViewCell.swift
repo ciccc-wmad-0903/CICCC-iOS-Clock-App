@@ -43,4 +43,14 @@ class StopwatchLapsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setTextColor(min: Bool = false, max: Bool = false, normal: Bool = true) {
+        if min || max {
+            lapNumberLabel.textColor = max ? .systemRed : .systemGreen
+            lapRecordLabel.textColor = max ? .systemRed : .systemGreen
+        } else {
+            lapNumberLabel.textColor = .white
+            lapRecordLabel.textColor = .white
+        }
+    }
+    
 }

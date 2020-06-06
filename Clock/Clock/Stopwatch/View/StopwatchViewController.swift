@@ -147,15 +147,25 @@ extension StopwatchViewController {
             .disposed(by: disposeBag)
         
         viewModel.updateLaps
-            .drive(onNext: { laps in
+            .drive(onNext: { laps, arg1 in
                 DispatchQueue.main.async {
-                    self.laps = laps
-                    self.lapTableView.reloadData()
+                    if laps.count > 1 {
+                        self.laps = laps
+                        self.lapTableView.reloadData()
+                        if let (min, max) = arg1,
+                            let minCell = self.lapTableView.cellForRow(at: IndexPath(row: min, section: 1)) as? StopwatchLapsTableViewCell,
+                            let maxCell = self.lapTableView.cellForRow(at: IndexPath(row: max, section: 1)) as? StopwatchLapsTableViewCell {
+                            minCell.setTextColor(min: true)
+                            maxCell.setTextColor(max: true)
+                        }
+                    } else {
+                        self.laps = laps
+                        self.lapTableView.reloadData()
+                    }
                 }
             })
             .disposed(by: disposeBag)
     }
-    
 }
 
 // MARK: - UI Setup
@@ -221,6 +231,7 @@ extension StopwatchViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 1 {
             cell.lapNumberLabel.text = "Lap \(laps.count - indexPath.row)"
             cell.lapRecordLabel.text = laps[indexPath.row]
+            cell.setTextColor()
         }
         return cell
     }

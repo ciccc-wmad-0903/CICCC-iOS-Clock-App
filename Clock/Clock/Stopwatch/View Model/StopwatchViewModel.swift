@@ -21,8 +21,7 @@ protocol StopwatchViewModel: class {
     var rightButtomStatus: Driver<(UIColor, String)> { get }
     var digitalCurrentText: Driver<String> { get }
     var digitalCurrentLapText: Driver<String?> { get }
-    var updateLaps: Driver<[String]> { get }
-    
+    var updateLaps: Driver<([String], (Int, Int)?)> { get }
 }
 
 final class StopwatchViewModelImpl: StopwatchViewModel {
@@ -38,7 +37,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     let rightButtomStatus: Driver<(UIColor, String)>
     let digitalCurrentText: Driver<String>
     let digitalCurrentLapText: Driver<String?>
-    let updateLaps: Driver<[String]>
+    let updateLaps: Driver<([String], (Int, Int)?)>
     
     // MARK: - Private Properties(Reactive)
     private let coordinator: StopwatchCoordinator
@@ -97,14 +96,29 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
         
         updateLaps = stopwatchLaps
-            .map({
+            .map({ laps -> ([TimeInterval], [String]) in
                 var lapStrings = [String]()
-                for lap in $0 {
+                for lap in laps {
                     lapStrings.insert(lap.toStopwatchString(), at: 0)
                 }
-                return lapStrings
+                return (laps, lapStrings)
             })
-            .asDriver(onErrorJustReturn: [])
+            .map({ laps, lapStrings in
+                return (laps.reversed().enumerated(), lapStrings)
+            })
+            .map({ enumLaps, lapStrings in
+                let count = lapStrings.count
+                if count < 2 {
+                    return (lapStrings, nil)
+                }
+                if let min = enumLaps.min(by: { $0.element < $1.element })?.offset,
+                    let max = enumLaps.max(by: { $0.element < $1.element })?.offset {
+                    return (lapStrings, (min, max))
+                } else {
+                    return (lapStrings, nil)
+                }
+            })
+            .asDriver(onErrorJustReturn: ([], nil))
         
         stopwatchStatus
             .do(onNext: { status in
