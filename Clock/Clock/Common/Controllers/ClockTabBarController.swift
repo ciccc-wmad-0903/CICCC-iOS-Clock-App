@@ -26,7 +26,8 @@ class ClockTabBarController: UITabBarController {
         timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage.init(systemName: "timer")?.withTintColor(UIColor.mainTintColor), tag: 3)
         
         viewControllers = [
-            UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopwatchNC, timerVC ]
+            stopwatchNC, UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), timerVC ]
+//            UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopwatchNC, timerVC ]
         
         let whiteTextColorAttribution = [NSAttributedString.Key.foregroundColor : UIColor.white]
         worldClockTVC.view.backgroundColor = .black
