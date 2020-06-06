@@ -13,7 +13,9 @@ class CircleButton: UIButton {
     
     static let buttonDiameter = UIDevice.current.safeAreaSize!.height * 0.1
     
-    private var baseColor: UIColor
+    var baseColor: UIColor {
+        didSet { refreshButton() }
+    }
 
     required init(title: String, baseColor: UIColor, isEnabled: Bool = true) {
         self.baseColor = baseColor
@@ -31,17 +33,22 @@ class CircleButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func setTitle(_ title: String?, for state: UIControl.State) {
+        super.setTitle(title, for: state)
+        refreshButton()
+    }
+    
     open override var isHighlighted: Bool {
-        didSet {
-            backgroundColor = baseColor.withAlphaComponent(isHighlighted ? 0.105 : 0.21)
-        }
+        didSet { backgroundColor = baseColor.withAlphaComponent(isHighlighted ? 0.105 : 0.21) }
     }
         
     open override var isEnabled: Bool {
-        didSet {
-            setTitleColor(baseColor.withAlphaComponent(isEnabled ? 1.0 : 0.5), for: .normal)
-            backgroundColor = baseColor.withAlphaComponent(isEnabled ? 0.21 : 0.105)
-        }
+        didSet { refreshButton() }
+    }
+    
+    private func refreshButton() {
+        setTitleColor(baseColor.withAlphaComponent(isEnabled ? 1.0 : 0.5), for: .normal)
+        backgroundColor = baseColor.withAlphaComponent(isEnabled ? 0.21 : 0.105)
     }
     
     private func drawBorder() {
