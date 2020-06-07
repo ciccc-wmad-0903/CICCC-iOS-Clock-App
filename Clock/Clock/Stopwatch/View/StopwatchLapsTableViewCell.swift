@@ -39,10 +39,6 @@ class StopwatchLapsTableViewCell: UITableViewCell {
         lapRecordLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func setTextColor(min: Bool = false, max: Bool = false, normal: Bool = true) {
         if min || max {
             lapNumberLabel.textColor = max ? .systemRed : .systemGreen
@@ -51,6 +47,10 @@ class StopwatchLapsTableViewCell: UITableViewCell {
             lapNumberLabel.textColor = .white
             lapRecordLabel.textColor = .white
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

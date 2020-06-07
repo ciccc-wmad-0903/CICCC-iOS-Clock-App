@@ -36,20 +36,10 @@ class StopwatchViewController: UIViewController {
     var viewModel: StopwatchViewModel!
     private let disposeBag = DisposeBag()
     
-    private var laps = [Lap]()
-    
     lazy var leftButton = CircleButton(title: "Lap", baseColor: .white, isEnabled: false)
     lazy var rightButton = CircleButton(title: "Start", baseColor: .systemRed)
     lazy var stopwatchScrollView = StopwatchScrollView()
-    
-    lazy var lapTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .black
-        tableView.separatorInset = .zero
-        return tableView
-    }()
-    
+    lazy var lapTableView = StopwatchTableView()
 }
 
 // MARK: - Binding
@@ -102,7 +92,7 @@ extension StopwatchViewController {
                 DispatchQueue.main.async {
                     if let cell = self.lapTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? StopwatchLapsTableViewCell {
                         if let lapText = text {
-                            cell.lapNumberLabel.text = "Lap \(self.laps.count + 1)"
+                            cell.lapNumberLabel.text = "Lap \(self.lapTableView.laps.count + 1)"
                             cell.lapRecordLabel.text = lapText
                         } else {
                             cell.lapNumberLabel.text = ""
@@ -117,7 +107,7 @@ extension StopwatchViewController {
         viewModel.updateLaps
             .drive(onNext: { laps in
                 DispatchQueue.main.async {
-                    self.laps = laps
+                    self.lapTableView.laps = laps
                     self.lapTableView.reloadData()
                 }
             })
@@ -141,8 +131,11 @@ extension StopwatchViewController {
         let pageControl = stopwatchScrollView.pageControl
         view.addSubview(stopwatchScrollView)
         view.addSubview(pageControl)
-        stopwatchScrollView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor, leadingAnchor: view.leadingAnchor,
-                                    trailingAnchor: nil, bottomAnchor: nil, size: stopwatchScrollView.scrollViewSize)
+        stopwatchScrollView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor,
+                                    leadingAnchor: view.leadingAnchor,
+                                    trailingAnchor: nil,
+                                    bottomAnchor: nil,
+                                    size: stopwatchScrollView.scrollViewSize)
         
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         pageControl.bottomAnchor.constraint(equalTo: stopwatchScrollView.bottomAnchor, constant: stopwatchScrollView.scrollViewSize.height * 0.055).isActive = true
@@ -151,19 +144,20 @@ extension StopwatchViewController {
     private func setupUIButtons() {
         let buttonDiameter = CircleButton.buttonDiameter
         view.addSubview(leftButton)
-        leftButton.anchors(topAnchor: nil, leadingAnchor: view.leadingAnchor, trailingAnchor: nil, bottomAnchor: stopwatchScrollView.bottomAnchor,
+        leftButton.anchors(topAnchor: nil,
+                           leadingAnchor: view.leadingAnchor,
+                           trailingAnchor: nil,
+                           bottomAnchor: stopwatchScrollView.bottomAnchor,
                            padding: .init(top: 0, left: 16, bottom: -buttonDiameter / 2, right: 0),
                            size: .init(width: buttonDiameter, height: buttonDiameter))
         view.addSubview(rightButton)
-        rightButton.anchors(topAnchor: nil, leadingAnchor: nil, trailingAnchor: view.trailingAnchor, bottomAnchor: stopwatchScrollView.bottomAnchor,
+        rightButton.anchors(topAnchor: nil,
+                            leadingAnchor: nil,
+                            trailingAnchor: view.trailingAnchor,
+                            bottomAnchor: stopwatchScrollView.bottomAnchor,
                             padding: .init(top: 0, left: 0, bottom: -buttonDiameter / 2, right: 16),
                             size: .init(width: buttonDiameter, height: buttonDiameter))
     }
-    
-}
-
-// MARK: - UI Setup: TableView
-extension StopwatchViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func setupUILapTableView() {
         view.addSubview(lapTableView)
@@ -172,37 +166,6 @@ extension StopwatchViewController: UITableViewDataSource, UITableViewDelegate {
                              trailingAnchor: view.trailingAnchor,
                              bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
                              padding: .init(top: UIDevice.current.safeAreaSize!.height * 0.565, left: 16, bottom: 0, right: 16))
-        lapTableView.separatorColor = .tableViewSeparatorColor
-        lapTableView.register(StopwatchLapsTableViewCell.self, forCellReuseIdentifier: StopwatchLapsTableViewCell.reuseIdentifier)
-        lapTableView.dataSource = self
-        lapTableView.delegate = self
-        
-        let line = UIView(frame: CGRect(x: 20, y: 0, width: lapTableView.frame.size.width - 36, height: 1 / UIScreen.main.scale))
-        line.backgroundColor = .tableViewSeparatorColor
-        lapTableView.tableHeaderView = line
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / 7.3
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : laps.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StopwatchLapsTableViewCell.reuseIdentifier, for: indexPath) as! StopwatchLapsTableViewCell
-        if indexPath.section == 1 {
-            let data = laps[laps.count - indexPath.row - 1]
-            cell.lapNumberLabel.text = "Lap \(laps.count - indexPath.row)"
-            cell.lapRecordLabel.text = data.lapString
-            cell.setTextColor(min: data.min, max: data.max, normal: !(data.min || data.max))
-        }
-        return cell
     }
     
 }
