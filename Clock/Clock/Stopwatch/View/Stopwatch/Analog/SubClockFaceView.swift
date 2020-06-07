@@ -41,7 +41,7 @@ class SubClockFaceView: UIView {
         layer.addSublayer(replicatorLayer0_5)
         
         let instanceLayer0_5 = CALayer()
-        instanceLayer0_5.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 6)
+        instanceLayer0_5.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 5)
         instanceLayer0_5.backgroundColor = UIColor.analogClockGrayColor.cgColor
         replicatorLayer0_5.addSublayer(instanceLayer0_5)
         
@@ -52,7 +52,7 @@ class SubClockFaceView: UIView {
         layer.addSublayer(replicatorLayer1)
 
         let instanceLayer1 = CALayer()
-        instanceLayer1.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 10)
+        instanceLayer1.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 9)
         instanceLayer1.backgroundColor = UIColor.analogClockGrayColor.cgColor
         replicatorLayer1.addSublayer(instanceLayer1)
         
@@ -63,7 +63,7 @@ class SubClockFaceView: UIView {
         layer.addSublayer(replicatorLayer5)
         
         let instanceLayer5 = CALayer()
-        instanceLayer5.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 10)
+        instanceLayer5.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 9)
         instanceLayer5.backgroundColor = UIColor.white.cgColor
         replicatorLayer5.addSublayer(instanceLayer5)
         
@@ -74,11 +74,12 @@ class SubClockFaceView: UIView {
             let y = numRect.midY - CGFloat(cos(Double.pi / 3.0 * Double(i))) * radius - 10
             let numLayer = CATextLayer()
             numLayer.string = "\(i * 5)"
-            numLayer.font = UIFont.systemFont(ofSize: 0, weight: .semibold)
-            numLayer.fontSize = 16.5
+            numLayer.font = UIFont.systemFont(ofSize: 0, weight: .medium)
+            numLayer.fontSize = 14.5
             numLayer.alignmentMode = .center
             numLayer.foregroundColor = UIColor.white.cgColor
             numLayer.frame = CGRect(x: x, y: y, width: 20, height: 16.5)
+            numLayer.allowsFontSubpixelQuantization = true
             layer.addSublayer(numLayer)
         }
     }

@@ -42,7 +42,7 @@ class MainClockFaceView: UIView {
         layer.addSublayer(replicatorLayer0_25)
         
         let instanceLayer0_25 = CALayer()
-        instanceLayer0_25.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 8)
+        instanceLayer0_25.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 7)
         instanceLayer0_25.backgroundColor = UIColor.analogClockGrayColor.cgColor
         replicatorLayer0_25.addSublayer(instanceLayer0_25)
         
@@ -53,7 +53,7 @@ class MainClockFaceView: UIView {
         layer.addSublayer(replicatorLayer1)
 
         let instanceLayer1 = CALayer()
-        instanceLayer1.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 16)
+        instanceLayer1.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 15)
         instanceLayer1.backgroundColor = UIColor.analogClockGrayColor.cgColor
         replicatorLayer1.addSublayer(instanceLayer1)
         
@@ -64,7 +64,7 @@ class MainClockFaceView: UIView {
         layer.addSublayer(replicatorLayer5)
         
         let instanceLayer5 = CALayer()
-        instanceLayer5.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 16)
+        instanceLayer5.frame = CGRect(x: startX, y: 0, width: instanceWidth, height: 15)
         instanceLayer5.backgroundColor = UIColor.white.cgColor
         replicatorLayer5.addSublayer(instanceLayer5)
         
@@ -76,10 +76,11 @@ class MainClockFaceView: UIView {
             let numLayer = CATextLayer()
             numLayer.string = "\(i * 5)"
             numLayer.font = UIFont.systemFont(ofSize: 0, weight: .regular)
-            numLayer.fontSize = 30
+            numLayer.fontSize = 28
             numLayer.alignmentMode = .center
             numLayer.foregroundColor = UIColor.white.cgColor
             numLayer.frame = CGRect(x: x, y: y, width: 40, height: 35)
+            numLayer.allowsFontSubpixelQuantization = true
             layer.addSublayer(numLayer)
         }
     }
