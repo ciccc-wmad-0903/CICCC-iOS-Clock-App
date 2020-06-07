@@ -14,6 +14,7 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     
     lazy var digitalStopwatchLabel = StopwatchDigitalLabel()
     lazy var digitalStopwatchInAnalogLabel = StopwatchDigitalLabel()
+    lazy var analogClockView = AnalogClockView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +22,8 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         scrollViewSize = CGSize(width: safeAreaSize.width, height: safeAreaSize.height * 0.491)
         
         setupScrollViewProperties()
-        setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
+//        setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
+        setupPagesStackView(setupAnalogViewPage(), setupDigitalViewPage())
         setupPageControl()
     }
     
@@ -93,9 +95,14 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         analogView.constraintWidth(equalToConstant: scrollViewSize.width, heightEqualToConstant: scrollViewSize.height)
         
         analogView.addSubview(digitalStopwatchInAnalogLabel)
+        digitalStopwatchInAnalogLabel.font = .monospacedDigitSystemFont(ofSize: 100, weight: .regular)
         digitalStopwatchInAnalogLabel.bottomAnchor.constraint(equalTo: analogView.bottomAnchor, constant: -scrollViewSize.height * 0.25).isActive = true
         digitalStopwatchInAnalogLabel.leadingAnchor.constraint(equalTo: analogView.leadingAnchor, constant: scrollViewSize.width * 0.375).isActive = true
         digitalStopwatchInAnalogLabel.trailingAnchor.constraint(equalTo: analogView.trailingAnchor, constant: -scrollViewSize.width * 0.375).isActive = true
+        
+        analogView.addSubview(analogClockView)
+        analogClockView.constraintWidth(equalToConstant: scrollViewSize.height * 0.9, heightEqualToConstant: scrollViewSize.height * 0.9)
+        analogClockView.centerXYin(analogView)
         
         return analogView
     }
