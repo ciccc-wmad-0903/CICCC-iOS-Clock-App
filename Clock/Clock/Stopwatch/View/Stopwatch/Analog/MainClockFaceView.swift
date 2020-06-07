@@ -85,7 +85,7 @@ class MainClockFaceView: UIView {
     }
     
     private func drawHands(_ rect: CGRect) {
-        let instanceWidth: CGFloat = 2.3
+        let instanceWidth: CGFloat = 2.5
         
         mainHandLayer = CALayer()
         mainHandLayer.backgroundColor = UIColor.mainTintColor.cgColor

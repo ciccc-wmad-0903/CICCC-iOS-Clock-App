@@ -99,6 +99,12 @@ extension StopwatchViewController {
                 DispatchQueue.main.async { self.stopwatchScrollView.setLapHandAngle(radian) }
             })
             .disposed(by: disposeBag)
+        
+        viewModel.analogCurrentSubDegree
+            .drive(onNext: { radian in
+                DispatchQueue.main.async { self.stopwatchScrollView.setSubHandAngle(radian) }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindOnTableView() {
