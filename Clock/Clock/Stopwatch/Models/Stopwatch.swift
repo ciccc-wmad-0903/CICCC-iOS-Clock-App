@@ -14,7 +14,18 @@ struct Stopwatch: Codable {
     var base: Date?
     var pauseStart: Date?
     var lapStart: Date?
-    var laps = [TimeInterval]()
+    var laps = [Lap]()
+}
+
+struct Lap: Codable {
+    var lap: TimeInterval
+    var lapString: String
+    var min = false, max = false
+    
+    init(lap: TimeInterval) {
+        self.lap = lap
+        self.lapString = lap.toStopwatchString()
+    }
 }
 
 enum StopwatchStatus: Int, Codable {
