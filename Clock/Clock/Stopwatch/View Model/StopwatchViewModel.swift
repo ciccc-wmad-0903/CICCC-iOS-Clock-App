@@ -119,7 +119,25 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .observeOn(MainScheduler.asyncInstance)
             .do(onNext: { status in
                 self.frameUpdater(isStart: status == .start)
+                self.coordinator.cacheStopwatch(stopwatch: Stopwatch(status: status,
+                                                                     base: self.stopwatchBase.value,
+                                                                     pauseStart: self.stopwatchPauseStart.value,
+                                                                     lapStart: self.stopwatchLapStart.value,
+                                                                     laps: self.stopwatchLaps.value))
             })
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        stopwatchLaps
+            .observeOn(globalScheduler)
+            .do(onNext: { laps in
+                self.coordinator.cacheStopwatch(stopwatch: Stopwatch(status: self.stopwatchStatus.value,
+                                                                     base: self.stopwatchBase.value,
+                                                                     pauseStart: self.stopwatchPauseStart.value,
+                                                                     lapStart: self.stopwatchLapStart.value,
+                                                                     laps: laps))
+            })
+            .subscribeOn(globalScheduler)
             .subscribe()
             .disposed(by: disposeBag)
         
@@ -144,6 +162,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         bindOnViewDidDisappear()
         bindOnDidTapLeftButton()
         bindOnDidTapRightButton()
+        
+        loadStopwatch(stopwatch: stopwatch)
     }
     
     // MARK: - Bindings
@@ -153,6 +173,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .observeOn(MainScheduler.asyncInstance)
             .do(onNext: {
                 if self.stopwatchStatus.value == .start {
+                    self.digitalCurrent.accept(self.stopwatchCurrent)
+                    self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
                     self.frameUpdater(isStart: true)
                 }
             })
@@ -201,6 +223,14 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     }
     
     // MARK: - Service Methods
+    private func loadStopwatch(stopwatch: Stopwatch) {
+        stopwatchBase.accept(stopwatch.base)
+        stopwatchPauseStart.accept(stopwatch.pauseStart)
+        stopwatchLapStart.accept(stopwatch.lapStart)
+        stopwatchLaps.accept(stopwatch.laps)
+        stopwatchStatus.accept(stopwatch.status)
+    }
+    
     private func stopwatchReset() {
         stopwatchBase.accept(nil)
         stopwatchPauseStart.accept(nil)
@@ -252,6 +282,15 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
                 laps[1].min = !gtFirst
                 laps[1].max = gtFirst
             } else if laps.count > 2 {
+                if minLap.index < 0 || maxLap.index < 0 {
+                    for (index, lap) in laps.enumerated() {
+                        if lap.min {
+                            minLap = (lap.lap, index)
+                        } else if lap.max {
+                            maxLap = (lap.lap, index)
+                        }
+                    }
+                }
                 let curIndex = laps.count - 1
                 if laps[curIndex].lap < minLap.lap {
                     laps[minLap.index].min = false
