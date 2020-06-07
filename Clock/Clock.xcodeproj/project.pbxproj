@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04E33554248D69470091B33F /* CustomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33552248D69470091B33F /* CustomCellTableViewCell.swift */; };
+		04E33555248D69470091B33F /* TimeZonesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */; };
+		04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33556248D69500091B33F /* WorldClockTableViewController.swift */; };
+		04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */; };
 		6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBC824806CFA0062818E /* AppDelegate.swift */; };
 		6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBCA24806CFA0062818E /* SceneDelegate.swift */; };
 		6FDACBD224806CFF0062818E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD124806CFF0062818E /* Assets.xcassets */; };
 		6FDACBD524806CFF0062818E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD324806CFF0062818E /* LaunchScreen.storyboard */; };
-		6FDACBF3248076610062818E /* WorldClockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF2248076610062818E /* WorldClockTableViewController.swift */; };
 		6FDACBF5248076840062818E /* AlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF4248076840062818E /* AlarmTableViewController.swift */; };
 		6FDACBF7248076A40062818E /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF6248076A40062818E /* StopWatchViewController.swift */; };
 		6FDACBF9248076B50062818E /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBF8248076B50062818E /* TimerViewController.swift */; };
@@ -23,13 +26,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E33552248D69470091B33F /* CustomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellTableViewCell.swift; sourceTree = "<group>"; };
+		04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZonesTableViewCell.swift; sourceTree = "<group>"; };
+		04E33556248D69500091B33F /* WorldClockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockTableViewController.swift; sourceTree = "<group>"; };
+		04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTimeZoneTableViewController.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACBC824806CFA0062818E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FDACBCA24806CFA0062818E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6FDACBD124806CFF0062818E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FDACBD424806CFF0062818E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FDACBD624806CFF0062818E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6FDACBF2248076610062818E /* WorldClockTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockTableViewController.swift; sourceTree = "<group>"; };
 		6FDACBF4248076840062818E /* AlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewController.swift; sourceTree = "<group>"; };
 		6FDACBF6248076A40062818E /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
 		6FDACBF8248076B50062818E /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04E33551248D68DA0091B33F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04E33552248D69470091B33F /* CustomCellTableViewCell.swift */,
+				04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6FDACBBC24806CFA0062818E = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +120,7 @@
 		6FDACBDE248071DB0062818E /* WorldClock */ = {
 			isa = PBXGroup;
 			children = (
+				04E33551248D68DA0091B33F /* View */,
 				6FDACBE6248075950062818E /* Controllers */,
 			);
 			path = WorldClock;
@@ -147,7 +163,8 @@
 		6FDACBE6248075950062818E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBF2248076610062818E /* WorldClockTableViewController.swift */,
+				04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */,
+				04E33556248D69500091B33F /* WorldClockTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,13 +279,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FDACBF3248076610062818E /* WorldClockTableViewController.swift in Sources */,
 				6FDACC0524807E470062818E /* Colors.swift in Sources */,
 				6FDACBF5248076840062818E /* AlarmTableViewController.swift in Sources */,
 				6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */,
 				6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */,
+				04E33555248D69470091B33F /* TimeZonesTableViewCell.swift in Sources */,
+				04E33554248D69470091B33F /* CustomCellTableViewCell.swift in Sources */,
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
 				6FDACBFE2480799D0062818E /* VerticalStackView.swift in Sources */,
+				04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */,
+				04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */,
 				6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */,
 				6FDACBFF2480799D0062818E /* UIView+ConstraintLayout.swift in Sources */,
 				6FDACBF9248076B50062818E /* TimerViewController.swift in Sources */,
