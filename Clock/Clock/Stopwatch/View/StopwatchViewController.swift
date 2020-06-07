@@ -19,6 +19,7 @@ class StopwatchViewController: UIViewController {
         
         bindOnButtons()
         bindOnDigitalStopwatch()
+        bindOnAnalogStopwatch()
         bindOnTableView()
     }
     
@@ -80,8 +81,22 @@ extension StopwatchViewController {
                     self.stopwatchScrollView.updateConstraintForDigitalStopwatch(text.count > 8)
                     self.view.layoutIfNeeded()
                     self.stopwatchScrollView.digitalStopwatchLabel.text = text
-                    self.stopwatchScrollView.digitalStopwatchInAnalogLabel.text = text
+                    self.stopwatchScrollView.setDigitalStopwatchInAnalogLabelText(text)
                 }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindOnAnalogStopwatch() {
+        viewModel.analogCurrentDegree
+            .drive(onNext: { radian in
+                DispatchQueue.main.async { self.stopwatchScrollView.setMainHandAngle(radian) }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.analogCurrentLapDegree
+            .drive(onNext: { radian in
+                DispatchQueue.main.async { self.stopwatchScrollView.setLapHandAngle(radian) }
             })
             .disposed(by: disposeBag)
     }

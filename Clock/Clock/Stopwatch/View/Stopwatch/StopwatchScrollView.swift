@@ -13,8 +13,7 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     private(set) var scrollViewSize: CGSize!
     
     lazy var digitalStopwatchLabel = StopwatchDigitalLabel()
-    lazy var digitalStopwatchInAnalogLabel = StopwatchDigitalLabel()
-    lazy var analogClockView = AnalogClockView()
+    lazy var analogClockView = AnalogClockView(size: CGSize(width: self.scrollViewSize.height * 0.9, height: self.scrollViewSize.height * 0.9))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +24,22 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
 //        setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
         setupPagesStackView(setupAnalogViewPage(), setupDigitalViewPage())
         setupPageControl()
+    }
+    
+    func setDigitalStopwatchInAnalogLabelText(_ stopwatchText: String) {
+        analogClockView.digitalStopwatchInAnalogLabel.text = stopwatchText
+    }
+    
+    func setMainHandAngle(_ radian: CGFloat) {
+        CALayer.performWithoutAnimation {
+            analogClockView.mainAnalogClockFace.mainHandLayer.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
+        }
+    }
+    
+    func setLapHandAngle(_ radian: CGFloat) {
+        CALayer.performWithoutAnimation {
+            analogClockView.mainAnalogClockFace.lapHandLayer.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
+        }
     }
     
     func updateConstraintForDigitalStopwatch(_ moreThan8Chars: Bool) {
@@ -93,12 +108,6 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         let analogView = UIView()
         analogView.translatesAutoresizingMaskIntoConstraints = false
         analogView.constraintWidth(equalToConstant: scrollViewSize.width, heightEqualToConstant: scrollViewSize.height)
-        
-        analogView.addSubview(digitalStopwatchInAnalogLabel)
-        digitalStopwatchInAnalogLabel.font = .monospacedDigitSystemFont(ofSize: 100, weight: .regular)
-        digitalStopwatchInAnalogLabel.bottomAnchor.constraint(equalTo: analogView.bottomAnchor, constant: -scrollViewSize.height * 0.25).isActive = true
-        digitalStopwatchInAnalogLabel.leadingAnchor.constraint(equalTo: analogView.leadingAnchor, constant: scrollViewSize.width * 0.375).isActive = true
-        digitalStopwatchInAnalogLabel.trailingAnchor.constraint(equalTo: analogView.trailingAnchor, constant: -scrollViewSize.width * 0.375).isActive = true
         
         analogView.addSubview(analogClockView)
         analogClockView.constraintWidth(equalToConstant: scrollViewSize.height * 0.9, heightEqualToConstant: scrollViewSize.height * 0.9)
