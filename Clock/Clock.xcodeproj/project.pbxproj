@@ -84,6 +84,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F0972E1248CE0B7001C798A /* LapTable */ = {
+			isa = PBXGroup;
+			children = (
+				6F0972DF248CD764001C798A /* StopwatchTableView.swift */,
+				6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */,
+			);
+			path = LapTable;
+			sourceTree = "<group>";
+		};
+		6F0972E2248CE117001C798A /* DigitalStopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */,
+			);
+			path = DigitalStopwatch;
+			sourceTree = "<group>";
+		};
+		6F0972E3248CE127001C798A /* AnalogStopwatch */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AnalogStopwatch;
+			sourceTree = "<group>";
+		};
 		6F1A5D24248474FD00DCFB72 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,9 +265,9 @@
 			children = (
 				6FDACBF6248076A40062818E /* StopwatchViewController.swift */,
 				6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */,
-				6F0972DF248CD764001C798A /* StopwatchTableView.swift */,
-				6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */,
-				6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */,
+				6F0972E1248CE0B7001C798A /* LapTable */,
+				6F0972E2248CE117001C798A /* DigitalStopwatch */,
+				6F0972E3248CE127001C798A /* AnalogStopwatch */,
 			);
 			path = View;
 			sourceTree = "<group>";

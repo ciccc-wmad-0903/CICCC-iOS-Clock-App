@@ -12,7 +12,6 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     
     private(set) var scrollViewSize: CGSize!
     
-    lazy var pageControl = UIPageControl()
     lazy var digitalStopwatchLabel = StopwatchDigitalLabel()
     lazy var digitalStopwatchInAnalogLabel = StopwatchDigitalLabel()
     
@@ -22,14 +21,9 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         scrollViewSize = CGSize(width: safeAreaSize.width, height: safeAreaSize.height * 0.491)
         
         setupScrollViewProperties()
-        setupPagesStackView()
+        setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
         setupPageControl()
     }
-    
-    private var digitalStopwatchLabelLeadingConstraintWith4: NSLayoutConstraint?
-    private var digitalStopwatchLabelLeadingConstraintWith12: NSLayoutConstraint?
-    private var digitalStopwatchLabelTrailingConstraintWith4: NSLayoutConstraint?
-    private var digitalStopwatchLabelTrailingConstraintWith12: NSLayoutConstraint?
     
     func updateConstraintForDigitalStopwatch(_ moreThan8Chars: Bool) {
         if moreThan8Chars {
@@ -65,14 +59,16 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         delegate = self
     }
     
-    private func setupPagesStackView() {
-        let pagesStackView = HorizontalStackView(arrangedSubviews: [], distribution: .equalSpacing)
+    private func setupPagesStackView(_ digitalView: UIView, _ analogView: UIView) {
+        let pagesStackView = HorizontalStackView(arrangedSubviews: [digitalView, analogView], distribution: .equalSpacing)
         addSubview(pagesStackView)
         pagesStackView.matchParent()
-        
-        pagesStackView.addArrangedSubview(setupDigitalViewPage())
-        pagesStackView.addArrangedSubview(setupAnalogViewPage())
     }
+    
+    private var digitalStopwatchLabelLeadingConstraintWith4: NSLayoutConstraint?
+    private var digitalStopwatchLabelLeadingConstraintWith12: NSLayoutConstraint?
+    private var digitalStopwatchLabelTrailingConstraintWith4: NSLayoutConstraint?
+    private var digitalStopwatchLabelTrailingConstraintWith12: NSLayoutConstraint?
     
     private func setupDigitalViewPage() -> UIView {
         let digitalView = UIView()
@@ -103,6 +99,8 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         
         return analogView
     }
+    
+    lazy var pageControl = UIPageControl()
     
     private func setupPageControl() {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
