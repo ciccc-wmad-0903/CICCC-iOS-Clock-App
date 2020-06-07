@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0972DE248CD4D6001C798A /* StopwatchDigitalLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */; };
+		6F0972E0248CD764001C798A /* StopwatchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0972DF248CD764001C798A /* StopwatchTableView.swift */; };
 		6F18CFE0248AD77500E91F3F /* UIDevice+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */; };
 		6F18CFE2248B245D00E91F3F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFE1248B245D00E91F3F /* CircleButton.swift */; };
 		6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */; };
@@ -14,8 +16,13 @@
 		6F1A5D292484756900DCFB72 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5D282484756900DCFB72 /* Coordinator.swift */; };
 		6F2010F0248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */; };
 		6F2010F2248BBA0700683DD9 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */; };
+		6F3135B5248CE445000A9DF6 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */; };
+		6F3135B7248CE66E000A9DF6 /* MainClockFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */; };
+		6F3135B9248CE67B000A9DF6 /* SubClockFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */; };
+		6F86D346248D2A43009C607A /* CALayer+withoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86D345248D2A43009C607A /* CALayer+withoutAnimation.swift */; };
 		6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */; };
 		6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41624849B31007B5593 /* Stopwatch.swift */; };
+		6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */; };
 		6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBC824806CFA0062818E /* AppDelegate.swift */; };
 		6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBCA24806CFA0062818E /* SceneDelegate.swift */; };
 		6FDACBD224806CFF0062818E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD124806CFF0062818E /* Assets.xcassets */; };
@@ -36,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDigitalLabel.swift; sourceTree = "<group>"; };
+		6F0972DF248CD764001C798A /* StopwatchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchTableView.swift; sourceTree = "<group>"; };
 		6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+size.swift"; sourceTree = "<group>"; };
 		6F18CFE1248B245D00E91F3F /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+string.swift"; sourceTree = "<group>"; };
@@ -43,8 +52,13 @@
 		6F1A5D282484756900DCFB72 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchLapsTableViewCell.swift; sourceTree = "<group>"; };
 		6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
+		6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainClockFaceView.swift; sourceTree = "<group>"; };
+		6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubClockFaceView.swift; sourceTree = "<group>"; };
+		6F86D345248D2A43009C607A /* CALayer+withoutAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+withoutAnimation.swift"; sourceTree = "<group>"; };
 		6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
 		6FC1C41624849B31007B5593 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchScrollView.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACBC824806CFA0062818E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FDACBCA24806CFA0062818E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +92,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F0972E1248CE0B7001C798A /* LapTable */ = {
+			isa = PBXGroup;
+			children = (
+				6F0972DF248CD764001C798A /* StopwatchTableView.swift */,
+				6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */,
+			);
+			path = LapTable;
+			sourceTree = "<group>";
+		};
+		6F0972E2248CE117001C798A /* Stopwatch */ = {
+			isa = PBXGroup;
+			children = (
+				6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */,
+				6F0972E3248CE127001C798A /* Analog */,
+				6F3135BA248CE86D000A9DF6 /* Digital */,
+			);
+			path = Stopwatch;
+			sourceTree = "<group>";
+		};
+		6F0972E3248CE127001C798A /* Analog */ = {
+			isa = PBXGroup;
+			children = (
+				6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */,
+				6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */,
+				6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */,
+			);
+			path = Analog;
+			sourceTree = "<group>";
+		};
 		6F1A5D24248474FD00DCFB72 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +135,14 @@
 				6F1A5D282484756900DCFB72 /* Coordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6F3135BA248CE86D000A9DF6 /* Digital */ = {
+			isa = PBXGroup;
+			children = (
+				6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */,
+			);
+			path = Digital;
 			sourceTree = "<group>";
 		};
 		6FC1C41224848BF6007B5593 /* View Model */ = {
@@ -210,6 +261,7 @@
 				6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */,
 				6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */,
 				6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */,
+				6F86D345248D2A43009C607A /* CALayer+withoutAnimation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -234,7 +286,8 @@
 			isa = PBXGroup;
 			children = (
 				6FDACBF6248076A40062818E /* StopwatchViewController.swift */,
-				6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */,
+				6F0972E1248CE0B7001C798A /* LapTable */,
+				6F0972E2248CE117001C798A /* Stopwatch */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -423,12 +476,16 @@
 				6FDACC0524807E470062818E /* Colors.swift in Sources */,
 				6F1A5D292484756900DCFB72 /* Coordinator.swift in Sources */,
 				6F1A5D262484751A00DCFB72 /* StopwatchCoordinator.swift in Sources */,
+				6F0972E0248CD764001C798A /* StopwatchTableView.swift in Sources */,
 				6FDACBF5248076840062818E /* AlarmTableViewController.swift in Sources */,
 				6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */,
 				6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */,
 				6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */,
 				6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */,
+				6F0972DE248CD4D6001C798A /* StopwatchDigitalLabel.swift in Sources */,
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
+				6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */,
+				6F3135B5248CE445000A9DF6 /* AnalogClockView.swift in Sources */,
 				6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */,
 				6F18CFE2248B245D00E91F3F /* CircleButton.swift in Sources */,
 				6F2010F2248BBA0700683DD9 /* ReuseIdentifiable.swift in Sources */,
@@ -440,7 +497,10 @@
 				6F18CFE0248AD77500E91F3F /* UIDevice+size.swift in Sources */,
 				6FDACBF9248076B50062818E /* TimerViewController.swift in Sources */,
 				6FDACBF7248076A40062818E /* StopwatchViewController.swift in Sources */,
+				6F3135B9248CE67B000A9DF6 /* SubClockFaceView.swift in Sources */,
+				6F3135B7248CE66E000A9DF6 /* MainClockFaceView.swift in Sources */,
 				9DF9AB272485C03B00C89681 /* AddAlarmTableViewController.swift in Sources */,
+				6F86D346248D2A43009C607A /* CALayer+withoutAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

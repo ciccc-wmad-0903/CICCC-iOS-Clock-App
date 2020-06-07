@@ -21,6 +21,9 @@ protocol StopwatchViewModel: class {
     var rightButtomStatus: Driver<(UIColor, String)> { get }
     var digitalCurrentText: Driver<String> { get }
     var digitalCurrentLapText: Driver<String?> { get }
+    var analogCurrentDegree: Driver<CGFloat> { get }
+    var analogCurrentLapDegree: Driver<CGFloat> { get }
+    var analogCurrentSubDegree: Driver<CGFloat> { get }
     var updateLaps: Driver<([Lap])> { get }
 }
 
@@ -37,6 +40,9 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     let rightButtomStatus: Driver<(UIColor, String)>
     let digitalCurrentText: Driver<String>
     let digitalCurrentLapText: Driver<String?>
+    let analogCurrentDegree: Driver<CGFloat>
+    let analogCurrentLapDegree: Driver<CGFloat>
+    let analogCurrentSubDegree: Driver<CGFloat>
     let updateLaps: Driver<([Lap])>
     
     // MARK: - Private Properties(Reactive)
@@ -59,7 +65,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private var stopwatchCurrent: TimeInterval { get { stopwatchBase.value?.distance(to: Date()) ?? 0 } }
     private var stopwatchLapCurrent: TimeInterval? { get { stopwatchLapStart.value?.distance(to: Date()) } }
     
-    private let fps = 60 // 29.976 or 23.976
+    private let fps = 23.976
     private var minLap: (lap: TimeInterval, index: Int) = (0, -1)
     private var maxLap: (lap: TimeInterval, index: Int) = (0, -1)
     
@@ -93,6 +99,18 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         digitalCurrentLapText = digitalCurrentLap
             .map({ $0?.toStopwatchString() ?? nil })
             .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
+        
+        analogCurrentDegree = digitalCurrent
+            .map({ CGFloat(Double.pi * 2 * $0.truncatingRemainder(dividingBy: 60) / 60) })
+            .asDriver(onErrorJustReturn: CGFloat(0))
+        
+        analogCurrentLapDegree = digitalCurrentLap
+            .map({ CGFloat(Double.pi * 2 * ($0?.truncatingRemainder(dividingBy: 60) ?? 0) / 60) })
+            .asDriver(onErrorJustReturn: CGFloat(0))
+        
+        analogCurrentSubDegree = digitalCurrent
+            .map({ CGFloat(Double.pi * 2 * $0.truncatingRemainder(dividingBy: 1800) / 1800) })
+            .asDriver(onErrorJustReturn: CGFloat(0))
         
         updateLaps = stopwatchLaps
             .asDriver(onErrorJustReturn: ([]))
