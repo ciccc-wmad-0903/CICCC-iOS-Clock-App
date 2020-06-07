@@ -8,19 +8,32 @@
 
 import UIKit
 
+fileprivate var viewSize: CGSize = .zero
+
 class SubClockFaceView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear
+        
+        setupViewProperties()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    convenience init(size: CGSize) {
+        viewSize = size
+        self.init()
     }
     
     override func draw(_ rect: CGRect) {
         
+    }
+    
+    private func setupViewProperties() {
+        backgroundColor = .clear
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
