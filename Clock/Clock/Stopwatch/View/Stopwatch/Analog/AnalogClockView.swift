@@ -14,7 +14,7 @@ class AnalogClockView: UIView {
     
     lazy var digitalStopwatchInAnalogLabel = StopwatchDigitalLabel()
     lazy var mainAnalogClockFace = MainClockFaceView(size: viewSize)
-    lazy var subAnalogClockFace = SubClockFaceView(size: CGSize(width: viewSize.width / 4, height: viewSize.height / 4))
+    lazy var subAnalogClockFace = SubClockFaceView(size: CGSize(width: viewSize.width * 0.275, height: viewSize.height * 0.275))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,9 +50,9 @@ class AnalogClockView: UIView {
     
     private func setupSubClockFaceView() {
         addSubview(subAnalogClockFace)
-        subAnalogClockFace.constraintWidth(equalToConstant: viewSize.width / 4, heightEqualToConstant: viewSize.height / 4)
+        subAnalogClockFace.constraintWidth(equalToConstant: viewSize.width * 0.275, heightEqualToConstant: viewSize.height * 0.275)
         subAnalogClockFace.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        subAnalogClockFace.topAnchor.constraint(equalTo: topAnchor, constant: viewSize.height * 0.2).isActive = true
+        subAnalogClockFace.topAnchor.constraint(equalTo: topAnchor, constant: viewSize.height * 0.19).isActive = true
     }
     
     required init?(coder: NSCoder) {

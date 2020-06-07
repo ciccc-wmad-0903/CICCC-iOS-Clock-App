@@ -23,6 +23,7 @@ protocol StopwatchViewModel: class {
     var digitalCurrentLapText: Driver<String?> { get }
     var analogCurrentDegree: Driver<CGFloat> { get }
     var analogCurrentLapDegree: Driver<CGFloat> { get }
+    var analogCurrentSubDegree: Driver<CGFloat> { get }
     var updateLaps: Driver<([Lap])> { get }
 }
 
@@ -41,6 +42,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     let digitalCurrentLapText: Driver<String?>
     let analogCurrentDegree: Driver<CGFloat>
     let analogCurrentLapDegree: Driver<CGFloat>
+    let analogCurrentSubDegree: Driver<CGFloat>
     let updateLaps: Driver<([Lap])>
     
     // MARK: - Private Properties(Reactive)
@@ -104,6 +106,10 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         
         analogCurrentLapDegree = digitalCurrentLap
             .map({ CGFloat(Double.pi * 2 * ($0?.truncatingRemainder(dividingBy: 60) ?? 0) / 60) })
+            .asDriver(onErrorJustReturn: CGFloat(0))
+        
+        analogCurrentSubDegree = digitalCurrent
+            .map({ CGFloat(Double.pi * 2 * $0.truncatingRemainder(dividingBy: 1800) / 1800) })
             .asDriver(onErrorJustReturn: CGFloat(0))
         
         updateLaps = stopwatchLaps

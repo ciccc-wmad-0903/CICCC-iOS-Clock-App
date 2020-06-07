@@ -21,8 +21,7 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         scrollViewSize = CGSize(width: safeAreaSize.width, height: safeAreaSize.height * 0.491)
         
         setupScrollViewProperties()
-//        setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
-        setupPagesStackView(setupAnalogViewPage(), setupDigitalViewPage())
+        setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
         setupPageControl()
     }
     
@@ -39,6 +38,12 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     func setLapHandAngle(_ radian: CGFloat) {
         CALayer.performWithoutAnimation {
             analogClockView.mainAnalogClockFace.lapHandLayer.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
+        }
+    }
+    
+    func setSubHandAngle(_ radian: CGFloat) {
+        CALayer.performWithoutAnimation {
+            analogClockView.subAnalogClockFace.handLayer.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
         }
     }
     
