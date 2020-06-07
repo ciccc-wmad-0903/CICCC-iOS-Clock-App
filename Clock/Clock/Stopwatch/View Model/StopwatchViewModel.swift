@@ -21,7 +21,7 @@ protocol StopwatchViewModel: class {
     var rightButtomStatus: Driver<(UIColor, String)> { get }
     var digitalCurrentText: Driver<String> { get }
     var digitalCurrentLapText: Driver<String?> { get }
-    var updateLaps: Driver<([String], (Int, Int)?)> { get }
+    var updateLaps: Driver<([Lap])> { get }
 }
 
 final class StopwatchViewModelImpl: StopwatchViewModel {
@@ -37,12 +37,13 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     let rightButtomStatus: Driver<(UIColor, String)>
     let digitalCurrentText: Driver<String>
     let digitalCurrentLapText: Driver<String?>
-    let updateLaps: Driver<([String], (Int, Int)?)>
+    let updateLaps: Driver<([Lap])>
     
     // MARK: - Private Properties(Reactive)
     private let coordinator: StopwatchCoordinator
     private let disposeBag = DisposeBag()
     private let globalScheduler = ConcurrentDispatchQueueScheduler.init(queue: DispatchQueue.global())
+    private let uiScheduler = ConcurrentDispatchQueueScheduler.init(qos: .userInteractive)
     private var frameUpdateDisposable = SingleAssignmentDisposable()
     
     // MARK: - Private Properties(Stopwatch)
@@ -50,19 +51,17 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private let stopwatchBase = BehaviorRelay<Date?>(value: nil)
     private let stopwatchPauseStart = BehaviorRelay<Date?>(value: nil)
     private let stopwatchLapStart = BehaviorRelay<Date?>(value: nil)
-    private let stopwatchLaps = BehaviorRelay<[TimeInterval]>(value: [])
+    private let stopwatchLaps = BehaviorRelay<[Lap]>(value: [])
     
     private let digitalCurrent = BehaviorRelay<TimeInterval>(value: 0)
     private let digitalCurrentLap = BehaviorRelay<TimeInterval?>(value: nil)
     
-    private var stopwatchCurrent: TimeInterval {
-        get { stopwatchBase.value?.distance(to: Date()) ?? 0 }
-    }
-    private var stopwatchLapCurrent: TimeInterval? {
-        get { stopwatchLapStart.value?.distance(to: Date()) }
-    }
+    private var stopwatchCurrent: TimeInterval { get { stopwatchBase.value?.distance(to: Date()) ?? 0 } }
+    private var stopwatchLapCurrent: TimeInterval? { get { stopwatchLapStart.value?.distance(to: Date()) } }
     
-    private let fps = 60
+    private let fps = 60 // 29.976 or 23.976
+    private var minLap: (lap: TimeInterval, index: Int) = (0, -1)
+    private var maxLap: (lap: TimeInterval, index: Int) = (0, -1)
     
     // MARK: - Initialization
     init(stopwatch: Stopwatch, coordinator: StopwatchCoordinator) {
@@ -96,31 +95,10 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
         
         updateLaps = stopwatchLaps
-            .map({ laps -> ([TimeInterval], [String]) in
-                var lapStrings = [String]()
-                for lap in laps {
-                    lapStrings.insert(lap.toStopwatchString(), at: 0)
-                }
-                return (laps, lapStrings)
-            })
-            .map({ laps, lapStrings in
-                return (laps.reversed().enumerated(), lapStrings)
-            })
-            .map({ enumLaps, lapStrings in
-                let count = lapStrings.count
-                if count < 2 {
-                    return (lapStrings, nil)
-                }
-                if let min = enumLaps.min(by: { $0.element < $1.element })?.offset,
-                    let max = enumLaps.max(by: { $0.element < $1.element })?.offset {
-                    return (lapStrings, (min, max))
-                } else {
-                    return (lapStrings, nil)
-                }
-            })
-            .asDriver(onErrorJustReturn: ([], nil))
+            .asDriver(onErrorJustReturn: ([]))
         
         stopwatchStatus
+            .observeOn(MainScheduler.asyncInstance)
             .do(onNext: { status in
                 self.frameUpdater(isStart: status == .start)
             })
@@ -133,7 +111,14 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .disposed(by: disposeBag)
         
         stopwatchLapStart
-            .do(onNext: { _ in self.digitalCurrentLap.accept(self.stopwatchLapCurrent)})
+            .observeOn(MainScheduler.asyncInstance)
+            .do(onNext: { laps in
+                if laps == nil {
+                    self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
+                    self.minLap = (0, -1)
+                    self.maxLap = (0, -1)
+                }
+            })
             .subscribe()
             .disposed(by: disposeBag)
         
@@ -147,7 +132,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     private func bindOnViewWillAppear() {
         viewWillAppear
-            .observeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.asyncInstance)
             .do(onNext: {
                 if self.stopwatchStatus.value == .start {
                     self.frameUpdater(isStart: true)
@@ -159,7 +144,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     private func bindOnViewDidDisappear() {
         viewDidDisappear
-            .observeOn(MainScheduler.instance)
+            .observeOn(MainScheduler.asyncInstance)
             .do(onNext: { self.frameUpdater(isStart: false) })
             .subscribe()
             .disposed(by: disposeBag)
@@ -167,6 +152,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     private func bindOnDidTapLeftButton() {
         didTapLeftButton
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: {
                 switch self.stopwatchStatus.value {
                 case .start: // To Check Lap
@@ -236,9 +222,30 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         if stopwatchStatus.value == .start, let lapStart = stopwatchLapStart.value {
             let current = Date()
             stopwatchLapStart.accept(current)
-            var prevLaps = stopwatchLaps.value
-            prevLaps.append(lapStart.distance(to: current))
-            stopwatchLaps.accept(prevLaps)
+            var laps = stopwatchLaps.value
+            laps.append(Lap(lap: lapStart.distance(to: current)))
+            
+            if laps.count == 2 {
+                let gtFirst = laps[0].lap < laps[1].lap
+                minLap = (laps[gtFirst ? 0 : 1].lap, gtFirst ? 0 : 1)
+                maxLap = (laps[gtFirst ? 1 : 0].lap, gtFirst ? 1 : 0)
+                laps[0].min = gtFirst
+                laps[0].max = !gtFirst
+                laps[1].min = !gtFirst
+                laps[1].max = gtFirst
+            } else if laps.count > 2 {
+                let curIndex = laps.count - 1
+                if laps[curIndex].lap < minLap.lap {
+                    laps[minLap.index].min = false
+                    laps[curIndex].min = true
+                    minLap = (laps[curIndex].lap, curIndex)
+                } else if maxLap.lap < laps[curIndex].lap {
+                    laps[maxLap.index].max = false
+                    laps[curIndex].max = true
+                    maxLap = (laps[curIndex].lap, curIndex)
+                }
+            }
+            stopwatchLaps.accept(laps)
         } else {
             stopwatchReset()
         }
@@ -248,9 +255,9 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         frameUpdateDisposable.dispose()
         frameUpdateDisposable = SingleAssignmentDisposable()
         if isStart {
-            let interval = 1000 / (fps * 2)
+            let interval = Int(1000 / fps)
             let frameUpdater = Observable<Int>
-                .interval(RxTimeInterval.milliseconds(interval), scheduler: globalScheduler)
+                .interval(RxTimeInterval.milliseconds(interval), scheduler: uiScheduler)
                 .map ({ _ in
                     self.digitalCurrent.accept(self.stopwatchCurrent)
                     self.digitalCurrentLap.accept(self.stopwatchLapCurrent)

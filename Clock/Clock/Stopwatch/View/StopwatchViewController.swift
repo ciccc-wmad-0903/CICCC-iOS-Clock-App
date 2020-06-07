@@ -39,7 +39,7 @@ class StopwatchViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let pageControl = UIPageControl()
     
-    private var laps = [String]()
+    private var laps = [Lap]()
     
     private var digitalStopwatchLabelLeadingConstraintWith4: NSLayoutConstraint?
     private var digitalStopwatchLabelLeadingConstraintWith12: NSLayoutConstraint?
@@ -147,21 +147,10 @@ extension StopwatchViewController {
             .disposed(by: disposeBag)
         
         viewModel.updateLaps
-            .drive(onNext: { laps, arg1 in
+            .drive(onNext: { laps in
                 DispatchQueue.main.async {
-                    if laps.count > 1 {
-                        self.laps = laps
-                        self.lapTableView.reloadData()
-                        if let (min, max) = arg1,
-                            let minCell = self.lapTableView.cellForRow(at: IndexPath(row: min, section: 1)) as? StopwatchLapsTableViewCell,
-                            let maxCell = self.lapTableView.cellForRow(at: IndexPath(row: max, section: 1)) as? StopwatchLapsTableViewCell {
-                            minCell.setTextColor(min: true)
-                            maxCell.setTextColor(max: true)
-                        }
-                    } else {
-                        self.laps = laps
-                        self.lapTableView.reloadData()
-                    }
+                    self.laps = laps
+                    self.lapTableView.reloadData()
                 }
             })
             .disposed(by: disposeBag)
@@ -229,9 +218,10 @@ extension StopwatchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StopwatchLapsTableViewCell.reuseIdentifier, for: indexPath) as! StopwatchLapsTableViewCell
         if indexPath.section == 1 {
+            let data = laps[laps.count - indexPath.row - 1]
             cell.lapNumberLabel.text = "Lap \(laps.count - indexPath.row)"
-            cell.lapRecordLabel.text = laps[indexPath.row]
-            cell.setTextColor()
+            cell.lapRecordLabel.text = data.lapString
+            cell.setTextColor(min: data.min, max: data.max, normal: !(data.min || data.max))
         }
         return cell
     }
