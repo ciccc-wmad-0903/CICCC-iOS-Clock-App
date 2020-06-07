@@ -153,6 +153,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .observeOn(MainScheduler.asyncInstance)
             .do(onNext: {
                 if self.stopwatchStatus.value == .start {
+                    self.digitalCurrent.accept(self.stopwatchCurrent)
+                    self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
                     self.frameUpdater(isStart: true)
                 }
             })

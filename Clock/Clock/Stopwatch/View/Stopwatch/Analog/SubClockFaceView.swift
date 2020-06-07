@@ -104,6 +104,7 @@ class SubClockFaceView: UIView {
     
     private func setupViewProperties() {
         backgroundColor = .clear
+        clearsContextBeforeDrawing = false
         translatesAutoresizingMaskIntoConstraints = false
     }
     
