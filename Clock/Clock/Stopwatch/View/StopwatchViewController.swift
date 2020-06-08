@@ -10,11 +10,15 @@ import UIKit
 
 import RxSwift
 
+let reloadAnalogStopwatchNotification = Notification.Name("StopwatchViewController.reloadAnalogClockView")
+
 class StopwatchViewController: UIViewController {
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAnalogClockView), name: reloadAnalogStopwatchNotification, object: nil)
+        
         setupUI()
         
         bindOnButtons()
@@ -26,12 +30,16 @@ class StopwatchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear.accept(())
-        stopwatchScrollView.reloadAnalogClockView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel.viewDidDisappear.accept(())
+    }
+    
+    @objc func reloadAnalogClockView() {
+        stopwatchScrollView.reloadAnalogClockView()
+        viewModel.viewWillAppear.accept(())
     }
     
     // MARK: - Properties

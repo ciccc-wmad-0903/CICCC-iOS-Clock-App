@@ -8,19 +8,16 @@
 
 import UIKit
 
-let saveStopwatchNotification = Notification.Name("StopwatchCoordinator.saveStopwatch")
-
 protocol StopwatchCoordinator: class {
-    func saveStopwatch()
+    func saveStopwatch(stopwatch: Stopwatch)
     func loadStopwatch() -> Stopwatch
-    func cacheStopwatch(stopwatch: Stopwatch)
 }
 
 class StopwatchCoordinatorImpl: Coordinator {
     
     unowned let navigationController: UINavigationController
     
-    private var stopwatch: Stopwatch!
+    private var stopwatch: Stopwatch?
     
     private let archiveURL: URL = {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("stopwatch").appendingPathExtension("plist")
@@ -28,14 +25,11 @@ class StopwatchCoordinatorImpl: Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        stopwatch = loadStopwatch()
-        NotificationCenter.default.addObserver(self, selector: #selector(saveStopwatch), name: saveStopwatchNotification, object: nil)
     }
     
     func start() {
         let stopwatchViewController = StopwatchViewController()
-        let stopwatchViewModel = StopwatchViewModelImpl(stopwatch: stopwatch, coordinator: self)
-        stopwatchViewController.viewModel = stopwatchViewModel
+        stopwatchViewController.viewModel = StopwatchViewModelImpl(coordinator: self, stopwatch: loadStopwatch())
         navigationController.pushViewController(stopwatchViewController, animated: true)
     }
     
@@ -43,22 +37,21 @@ class StopwatchCoordinatorImpl: Coordinator {
 
 extension StopwatchCoordinatorImpl: StopwatchCoordinator {
     
-    @objc func saveStopwatch() {
-        if let encodedStopwatch = try? PropertyListEncoder().encode(stopwatch) {
-            try? encodedStopwatch.write(to: archiveURL, options: .noFileProtection)
+    func saveStopwatch(stopwatch: Stopwatch) {
+        if self.stopwatch != stopwatch {
+            self.stopwatch = stopwatch
+            if let encodedStopwatch = try? PropertyListEncoder().encode(stopwatch) {
+                try? encodedStopwatch.write(to: archiveURL, options: .noFileProtection)
+            }
         }
     }
     
     func loadStopwatch() -> Stopwatch {
         if let retrievedStopwatchData = try? Data(contentsOf: archiveURL), let decodedStopwatch = try? PropertyListDecoder().decode(Stopwatch.self, from: retrievedStopwatchData) {
-                return decodedStopwatch
+            return decodedStopwatch
         } else {
             return Stopwatch()
         }
-    }
-    
-    func cacheStopwatch(stopwatch: Stopwatch) {
-        self.stopwatch = stopwatch
     }
     
 }
