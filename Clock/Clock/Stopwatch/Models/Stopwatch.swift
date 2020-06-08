@@ -9,7 +9,7 @@
 import Foundation
 import RxCocoa
 
-struct Stopwatch: Codable {
+struct Stopwatch: Codable, Equatable {
     var status: StopwatchStatus = .stop
     var base: Date?
     var pauseStart: Date?
@@ -17,7 +17,7 @@ struct Stopwatch: Codable {
     var laps = [Lap]()
 }
 
-struct Lap: Codable {
+struct Lap: Codable, Equatable {
     var lap: TimeInterval
     var lapString: String
     var min = false, max = false

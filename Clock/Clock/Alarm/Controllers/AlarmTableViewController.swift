@@ -12,6 +12,8 @@ class AlarmTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem?.tintColor = .mainTintColor
+        self.navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
         
         
     }

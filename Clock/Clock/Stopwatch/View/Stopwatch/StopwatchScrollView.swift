@@ -8,8 +8,6 @@
 
 import UIKit
 
-let reloadAnalogStopwatchNotification = Notification.Name("StopwatchScrollView.reloadAnalogClockView")
-
 class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     
     private(set) var scrollViewSize: CGSize!
@@ -20,7 +18,6 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadAnalogClockView), name: reloadAnalogStopwatchNotification, object: nil)
         
         let safeAreaSize = UIDevice.current.safeAreaSize!
         scrollViewSize = CGSize(width: safeAreaSize.width, height: safeAreaSize.height * 0.491)
@@ -72,7 +69,7 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
     
-    @objc func reloadAnalogClockView() {
+    func reloadAnalogClockView() {
         pagesStackView?.removeFromSuperview()
         setupPagesStackView(setupDigitalViewPage(), setupAnalogViewPage())
     }
