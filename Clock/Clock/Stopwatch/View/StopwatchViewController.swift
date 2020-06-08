@@ -26,6 +26,7 @@ class StopwatchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewWillAppear.accept(())
+        stopwatchScrollView.reloadAnalogClockView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -80,7 +81,7 @@ extension StopwatchViewController {
                 DispatchQueue.main.async {
                     self.stopwatchScrollView.updateConstraintForDigitalStopwatch(text.count > 8)
                     self.view.layoutIfNeeded()
-                    self.stopwatchScrollView.digitalStopwatchLabel.text = text
+                    self.stopwatchScrollView.digitalStopwatchLabel?.text = text
                     self.stopwatchScrollView.setDigitalStopwatchInAnalogLabelText(text)
                 }
             })

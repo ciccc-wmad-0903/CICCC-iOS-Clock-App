@@ -12,8 +12,8 @@ fileprivate var viewSize: CGSize = .zero
 
 class MainClockFaceView: UIView {
     
-    var mainHandLayer: CALayer!
-    var lapHandLayer: CALayer!
+    var mainHandLayer: CALayer?
+    var lapHandLayer: CALayer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,29 +88,28 @@ class MainClockFaceView: UIView {
     private func drawHands(_ rect: CGRect) {
         let instanceWidth: CGFloat = 2.5
         
-        mainHandLayer = CALayer()
-        mainHandLayer.backgroundColor = UIColor.mainTintColor.cgColor
-        mainHandLayer.anchorPoint = CGPoint(x: 0.5, y: 0.825)
-        mainHandLayer.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
-        mainHandLayer.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)
-        
-        lapHandLayer = CALayer()
-        lapHandLayer.backgroundColor = UIColor.analogClockLapHandColor.cgColor
-        lapHandLayer.anchorPoint = CGPoint(x: 0.5, y: 0.825)
-        lapHandLayer.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
-        lapHandLayer.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)
-        
         let radius:CGFloat = 4.5
         let centerCircleLayer = CALayer()
+        layer.addSublayer(centerCircleLayer)
         centerCircleLayer.frame = CGRect(x: rect.midX - radius, y: rect.midY - radius, width: radius * 2, height: radius * 2)
         centerCircleLayer.cornerRadius = radius
         centerCircleLayer.backgroundColor = UIColor.black.cgColor
         centerCircleLayer.borderColor = UIColor.mainTintColor.cgColor
         centerCircleLayer.borderWidth = radius / 2
         
-        layer.addSublayer(lapHandLayer)
-        layer.addSublayer(mainHandLayer)
-        layer.addSublayer(centerCircleLayer)
+        lapHandLayer = CALayer()
+        layer.addSublayer(lapHandLayer!)
+        lapHandLayer?.backgroundColor = UIColor.analogClockLapHandColor.cgColor
+        lapHandLayer?.anchorPoint = CGPoint(x: 0.5, y: 0.825)
+        lapHandLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
+        lapHandLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)
+        
+        mainHandLayer = CALayer()
+        layer.addSublayer(mainHandLayer!)
+        mainHandLayer?.backgroundColor = UIColor.mainTintColor.cgColor
+        mainHandLayer?.anchorPoint = CGPoint(x: 0.5, y: 0.825)
+        mainHandLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
+        mainHandLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)
     }
     
     private func setupViewProperties() {

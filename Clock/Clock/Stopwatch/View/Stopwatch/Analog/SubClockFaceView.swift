@@ -12,7 +12,7 @@ fileprivate var viewSize: CGSize = .zero
 
 class SubClockFaceView: UIView {
 
-    var handLayer: CALayer!
+    var handLayer: CALayer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,10 +88,10 @@ class SubClockFaceView: UIView {
         let instanceWidth: CGFloat = 2.5
         
         handLayer = CALayer()
-        handLayer.backgroundColor = UIColor.mainTintColor.cgColor
-        handLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
-        handLayer.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
-        handLayer.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2)
+        handLayer?.backgroundColor = UIColor.mainTintColor.cgColor
+        handLayer?.anchorPoint = CGPoint(x: 0.5, y: 1)
+        handLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
+        handLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2)
         
         let radius:CGFloat = 4
         let centerCircleLayer = CALayer()
@@ -99,7 +99,7 @@ class SubClockFaceView: UIView {
         centerCircleLayer.cornerRadius = radius
         centerCircleLayer.backgroundColor = UIColor.mainTintColor.cgColor
         
-        layer.addSublayer(handLayer)
+        layer.addSublayer(handLayer!)
         layer.addSublayer(centerCircleLayer)
     }
     

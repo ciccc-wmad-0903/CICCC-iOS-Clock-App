@@ -98,7 +98,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         
         digitalCurrentLapText = digitalCurrentLap
             .map({ $0?.toStopwatchString() ?? nil })
-            .asDriver(onErrorJustReturn: TimeInterval(0).toStopwatchString())
+            .asDriver(onErrorJustReturn: nil)
         
         analogCurrentDegree = digitalCurrent
             .map({ CGFloat(Double.pi * 2 * $0.truncatingRemainder(dividingBy: 60) / 60) })
