@@ -55,22 +55,26 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     // MARK: - Private Properties(Stopwatch)
     private let stopwatchStatus = BehaviorRelay<StopwatchStatus>(value: .stop)
     private let stopwatchBase = BehaviorRelay<Date?>(value: nil)
-    private let stopwatchPauseStart = BehaviorRelay<Date?>(value: nil)
     private let stopwatchLapStart = BehaviorRelay<Date?>(value: nil)
     private let stopwatchLaps = BehaviorRelay<[Lap]>(value: [])
+    private var stopwatchPauseStart: Date?
     
     private let digitalCurrent = BehaviorRelay<TimeInterval>(value: 0)
     private let digitalCurrentLap = BehaviorRelay<TimeInterval?>(value: nil)
     
-    private var stopwatchCurrent: TimeInterval { get { stopwatchBase.value?.distance(to: Date()) ?? 0 } }
-    private var stopwatchLapCurrent: TimeInterval? { get { stopwatchLapStart.value?.distance(to: Date()) } }
+    private var stopwatchCurrent: TimeInterval {
+        get { stopwatchBase.value?.distance(to: stopwatchPauseStart != nil ? stopwatchPauseStart! : Date()) ?? 0 }
+    }
+    private var stopwatchLapCurrent: TimeInterval? {
+        get { stopwatchLapStart.value?.distance(to: stopwatchPauseStart != nil ? stopwatchPauseStart! : Date()) }
+    }
     
     private let fps = 23.976
     private var minLap: (lap: TimeInterval, index: Int) = (0, -1)
     private var maxLap: (lap: TimeInterval, index: Int) = (0, -1)
     
     // MARK: - Initialization
-    init(stopwatch: Stopwatch, coordinator: StopwatchCoordinator) {
+    init(coordinator: StopwatchCoordinator, stopwatch: Stopwatch) {
         self.coordinator = coordinator
         
         leftButtonStatus = stopwatchStatus
@@ -116,12 +120,13 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             .asDriver(onErrorJustReturn: ([]))
         
         stopwatchStatus
-            .observeOn(MainScheduler.asyncInstance)
+            .observeOn(MainScheduler.instance)
+            .distinctUntilChanged()
             .do(onNext: { status in
                 self.frameUpdater(isStart: status == .start)
-                self.coordinator.cacheStopwatch(stopwatch: Stopwatch(status: status,
+                self.coordinator.saveStopwatch(stopwatch: Stopwatch(status: status,
                                                                      base: self.stopwatchBase.value,
-                                                                     pauseStart: self.stopwatchPauseStart.value,
+                                                                     pauseStart: self.stopwatchPauseStart,
                                                                      lapStart: self.stopwatchLapStart.value,
                                                                      laps: self.stopwatchLaps.value))
             })
@@ -130,10 +135,11 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         
         stopwatchLaps
             .observeOn(globalScheduler)
+            .distinctUntilChanged()
             .do(onNext: { laps in
-                self.coordinator.cacheStopwatch(stopwatch: Stopwatch(status: self.stopwatchStatus.value,
+                self.coordinator.saveStopwatch(stopwatch: Stopwatch(status: self.stopwatchStatus.value,
                                                                      base: self.stopwatchBase.value,
-                                                                     pauseStart: self.stopwatchPauseStart.value,
+                                                                     pauseStart: self.stopwatchPauseStart,
                                                                      lapStart: self.stopwatchLapStart.value,
                                                                      laps: laps))
             })
@@ -170,11 +176,10 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     private func bindOnViewWillAppear() {
         viewWillAppear
-            .observeOn(MainScheduler.asyncInstance)
+            .observeOn(MainScheduler.instance)
             .do(onNext: {
+                self.updateCurrentData()
                 if self.stopwatchStatus.value == .start {
-                    self.digitalCurrent.accept(self.stopwatchCurrent)
-                    self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
                     self.frameUpdater(isStart: true)
                 }
             })
@@ -192,7 +197,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     private func bindOnDidTapLeftButton() {
         didTapLeftButton
-            .observeOn(MainScheduler.asyncInstance)
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 switch self.stopwatchStatus.value {
                 case .start: // To Check Lap
@@ -209,6 +215,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     private func bindOnDidTapRightButton() {
         didTapRightButton
             .observeOn(MainScheduler.instance)
+            .subscribeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 switch self.stopwatchStatus.value {
                 case .stop: // To Start
@@ -224,8 +231,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     // MARK: - Service Methods
     private func loadStopwatch(stopwatch: Stopwatch) {
+        stopwatchPauseStart = stopwatch.pauseStart
         stopwatchBase.accept(stopwatch.base)
-        stopwatchPauseStart.accept(stopwatch.pauseStart)
         stopwatchLapStart.accept(stopwatch.lapStart)
         stopwatchLaps.accept(stopwatch.laps)
         stopwatchStatus.accept(stopwatch.status)
@@ -233,7 +240,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     
     private func stopwatchReset() {
         stopwatchBase.accept(nil)
-        stopwatchPauseStart.accept(nil)
+        stopwatchPauseStart = nil
         stopwatchLapStart.accept(nil)
         stopwatchLaps.accept([])
         stopwatchStatus.accept(.stop)
@@ -246,11 +253,12 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     }
     
     private func stopwatchRestart() {
-        if let base = stopwatchBase.value, let lap = stopwatchLapStart.value, let pauseStart = stopwatchPauseStart.value {
-            let interval = pauseStart.distance(to: Date())
+        if let base = stopwatchBase.value, let lap = stopwatchLapStart.value, let pauseStart = stopwatchPauseStart {
+            let current = Date()
+            let interval = pauseStart.distance(to: current)
+            stopwatchPauseStart = nil
             stopwatchBase.accept(base.addingTimeInterval(interval))
             stopwatchLapStart.accept(lap.addingTimeInterval(interval))
-            stopwatchPauseStart.accept(nil)
             stopwatchStatus.accept(.start)
         } else {
             stopwatchReset()
@@ -258,9 +266,10 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
     }
     
     private func stopwatchPause() {
-        if stopwatchStatus.value == .start, stopwatchPauseStart.value == nil {
-            stopwatchPauseStart.accept(Date())
+        if stopwatchStatus.value == .start, stopwatchPauseStart == nil {
+            stopwatchPauseStart = Date()
             stopwatchStatus.accept(.pause)
+            updateCurrentData()
         } else {
             stopwatchReset()
         }
@@ -315,12 +324,15 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
             let interval = Int(1000 / fps)
             let frameUpdater = Observable<Int>
                 .interval(RxTimeInterval.milliseconds(interval), scheduler: uiScheduler)
-                .map ({ _ in
-                    self.digitalCurrent.accept(self.stopwatchCurrent)
-                    self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
-                })
+                .map ({ _ in self.updateCurrentData() })
                 .replayAll()
             frameUpdateDisposable.setDisposable(frameUpdater.connect())
         }
     }
+    
+    private func updateCurrentData() {
+        self.digitalCurrent.accept(self.stopwatchCurrent)
+        self.digitalCurrentLap.accept(self.stopwatchLapCurrent)
+    }
+    
 }
