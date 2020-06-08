@@ -9,25 +9,67 @@
 import UIKit
 import Foundation
 
-class AddAlarmTableViewController: UIViewController {
+class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var widthAnchor: NSLayoutConstraint?
+    var heightAnchor: NSLayoutConstraint?
+    
+    let mainView: UIView = {
+        let main = UIView()
+        // important when setting contraints programmatically
+        main.translatesAutoresizingMaskIntoConstraints = false
+        main.backgroundColor = .black
+        return main
+    }()
     
     //    var segueInfo: SegueInfo!
     var datepicker : UIDatePicker {
         var datepicker = UIDatePicker()
-        datepicker = UIDatePicker.init(frame: CGRect(x:0, y:40, width:252, height:150))
+        datepicker.translatesAutoresizingMaskIntoConstraints = false
+        datepicker = UIDatePicker.init(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.width, height:150))
         datepicker.setValue(UIColor(red:0.95, green:0.92, blue:0.90, alpha:1.0), forKeyPath: "textColor")
-        datepicker.datePickerMode = .date
+        datepicker.datePickerMode = .time
         return datepicker
     }
-
+    
+    var tableView : UITableView {
+        var table = UITableView()
+        table = UITableView(frame: CGRect(x: 100, y: 250, width: 252, height: 150))
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.delegate = self
+        table.dataSource = self
+        table.contentInset.top = 120
+        table.verticalScrollIndicatorInsets.top = 120
+        table.keyboardDismissMode = .interactive
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "id")
+        return table
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(datepicker)
-        view.backgroundColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Add Alarm"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
+        view.backgroundColor = .black
+        view.addSubview(mainView)
+        setupLayout()
+    }
+    
+    fileprivate func setupLayout() {
+        mainView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        mainView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        widthAnchor = mainView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7, constant: 0)
+        widthAnchor?.isActive = true
+        
+        heightAnchor = mainView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7, constant: 0)
+        heightAnchor?.isActive = true
+        
+        datepicker.frame = CGRect(x: 0, y: 40, width: self.view.frame.width, height: 200)
+        
+        mainView.addSubview(datepicker)
+
+        mainView.addSubview(tableView)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,7 +85,6 @@ class AddAlarmTableViewController: UIViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 5
-
         }
         else {
             return 1
