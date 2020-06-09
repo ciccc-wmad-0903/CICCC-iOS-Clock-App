@@ -29,6 +29,7 @@ class StopwatchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        reloadAnalogClockView()
         viewModel.viewWillAppear.accept(())
     }
     
