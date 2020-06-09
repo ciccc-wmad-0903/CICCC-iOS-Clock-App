@@ -12,7 +12,6 @@ class StopwatchDigitalLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        text = "00:00.00"
         textColor = .white
         font = .monospacedDigitSystemFont(ofSize: 100, weight: .thin)
         textAlignment = .center
