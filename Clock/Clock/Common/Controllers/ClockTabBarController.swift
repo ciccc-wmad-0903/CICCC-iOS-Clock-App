@@ -28,20 +28,19 @@ class ClockTabBarController: UITabBarController {
         viewControllers = [
             UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopwatchNC, timerVC ]
         
-        let whiteTextColorAttribution = [NSAttributedString.Key.foregroundColor : UIColor.white]
         worldClockTVC.view.backgroundColor = .black
         worldClockTVC.navigationController?.navigationBar.barTintColor = .black
         worldClockTVC.navigationController?.navigationBar.prefersLargeTitles = true
-        worldClockTVC.navigationController?.navigationBar.titleTextAttributes = whiteTextColorAttribution
-        worldClockTVC.navigationController?.navigationBar.largeTitleTextAttributes = whiteTextColorAttribution
+        worldClockTVC.navigationController?.navigationBar.titleTextAttributes = UIColor.whiteTextColorAttribution
+        worldClockTVC.navigationController?.navigationBar.largeTitleTextAttributes = UIColor.whiteTextColorAttribution
         worldClockTVC.navigationItem.title = "World Clock"
         worldClockTVC.navigationItem.largeTitleDisplayMode = .always
         
         alarmTVC.view.backgroundColor = .black
         alarmTVC.navigationController?.navigationBar.barTintColor = .black
         alarmTVC.navigationController?.navigationBar.prefersLargeTitles = true
-        alarmTVC.navigationController?.navigationBar.titleTextAttributes = whiteTextColorAttribution
-        alarmTVC.navigationController?.navigationBar.largeTitleTextAttributes = whiteTextColorAttribution
+        alarmTVC.navigationController?.navigationBar.titleTextAttributes = UIColor.whiteTextColorAttribution
+        alarmTVC.navigationController?.navigationBar.largeTitleTextAttributes = UIColor.whiteTextColorAttribution
         alarmTVC.navigationItem.title = "Alarm"
         alarmTVC.navigationItem.largeTitleDisplayMode = .always
         
