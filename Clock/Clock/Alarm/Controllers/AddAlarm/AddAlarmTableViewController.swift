@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddAlarmTableViewController: UITableViewController {
     
     var widthAnchor: NSLayoutConstraint?
     var heightAnchor: NSLayoutConstraint?
@@ -30,19 +30,6 @@ class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITabl
         datepicker.setValue(UIColor(red:0.95, green:0.92, blue:0.90, alpha:1.0), forKeyPath: "textColor")
         datepicker.datePickerMode = .time
         return datepicker
-    }
-    
-    var tableView : UITableView {
-        var table = UITableView()
-        table = UITableView(frame: CGRect(x: 100, y: 250, width: 252, height: 150))
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.delegate = self
-        table.dataSource = self
-        table.contentInset.top = 120
-        table.verticalScrollIndicatorInsets.top = 120
-        table.keyboardDismissMode = .interactive
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "id")
-        return table
     }
     
     override func viewDidLoad() {
@@ -69,10 +56,18 @@ class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITabl
         
         mainView.addSubview(datepicker)
 
-        mainView.addSubview(tableView)
+//        table = UITableView(frame: CGRect(x: 100, y: 250, width: 252, height: 150))
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.contentInset.top = 120
+        tableView.verticalScrollIndicatorInsets.top = 120
+        tableView.keyboardDismissMode = .interactive
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
+        
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         //        if segueInfo.isEditMode {
         //            return 2
@@ -82,7 +77,7 @@ class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITabl
         //        }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 5
         }
@@ -91,7 +86,7 @@ class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = tableView.dequeueReusableCell(withIdentifier: "settingIdentifier")
         if(cell == nil) {
@@ -138,8 +133,8 @@ class AddAlarmTableViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let _ = tableView.cellForRow(at: indexPath)
         //        if indexPath.section == 0 {
         //            switch indexPath.row{
         //            case 0:

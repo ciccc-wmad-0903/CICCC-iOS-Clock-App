@@ -12,10 +12,16 @@ class AlarmTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewAlarmTapped(_:)))
         self.navigationItem.leftBarButtonItem?.tintColor = .mainTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
-        
-        
+    }
+    
+    @objc func addNewAlarmTapped(_ sender: UIBarButtonItem){
+        let addNewAlarmTVC = AddAlarmTableViewController(style: .grouped)
+        present(UINavigationController(rootViewController: addNewAlarmTVC), animated: true, completion: nil)
     }
     
     // MARK: - Table view data source

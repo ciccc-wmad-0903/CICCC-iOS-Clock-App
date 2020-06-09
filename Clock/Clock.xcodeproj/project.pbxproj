@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04E33554248D69470091B33F /* CustomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33552248D69470091B33F /* CustomCellTableViewCell.swift */; };
+		04E33555248D69470091B33F /* TimeZonesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */; };
+		04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33556248D69500091B33F /* WorldClockTableViewController.swift */; };
+		04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */; };
 		6F0972DE248CD4D6001C798A /* StopwatchDigitalLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */; };
 		6F0972E0248CD764001C798A /* StopwatchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0972DF248CD764001C798A /* StopwatchTableView.swift */; };
 		6F18CFE0248AD77500E91F3F /* UIDevice+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */; };
@@ -23,10 +27,6 @@
 		6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */; };
 		6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41624849B31007B5593 /* Stopwatch.swift */; };
 		6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */; };
-		04E33554248D69470091B33F /* CustomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33552248D69470091B33F /* CustomCellTableViewCell.swift */; };
-		04E33555248D69470091B33F /* TimeZonesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */; };
-		04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33556248D69500091B33F /* WorldClockTableViewController.swift */; };
-		04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */; };
 		6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBC824806CFA0062818E /* AppDelegate.swift */; };
 		6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBCA24806CFA0062818E /* SceneDelegate.swift */; };
 		6FDACBD224806CFF0062818E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD124806CFF0062818E /* Assets.xcassets */; };
@@ -45,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E33552248D69470091B33F /* CustomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellTableViewCell.swift; sourceTree = "<group>"; };
+		04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZonesTableViewCell.swift; sourceTree = "<group>"; };
+		04E33556248D69500091B33F /* WorldClockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockTableViewController.swift; sourceTree = "<group>"; };
+		04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTimeZoneTableViewController.swift; sourceTree = "<group>"; };
 		6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDigitalLabel.swift; sourceTree = "<group>"; };
 		6F0972DF248CD764001C798A /* StopwatchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchTableView.swift; sourceTree = "<group>"; };
@@ -62,10 +66,6 @@
 		6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
 		6FC1C41624849B31007B5593 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchScrollView.swift; sourceTree = "<group>"; };
-		04E33552248D69470091B33F /* CustomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellTableViewCell.swift; sourceTree = "<group>"; };
-		04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZonesTableViewCell.swift; sourceTree = "<group>"; };
-		04E33556248D69500091B33F /* WorldClockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockTableViewController.swift; sourceTree = "<group>"; };
-		04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTimeZoneTableViewController.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACBC824806CFA0062818E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FDACBCA24806CFA0062818E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04E33551248D68DA0091B33F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04E33552248D69470091B33F /* CustomCellTableViewCell.swift */,
+				04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6F0972E1248CE0B7001C798A /* LapTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +134,22 @@
 				6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */,
 			);
 			path = Analog;
+			sourceTree = "<group>";
+		};
+		6F19732F248F26EE006F5ED6 /* AddAlarm */ = {
+			isa = PBXGroup;
+			children = (
+				9DF9AB262485C03B00C89681 /* AddAlarmTableViewController.swift */,
+			);
+			path = AddAlarm;
+			sourceTree = "<group>";
+		};
+		6F197330248F2701006F5ED6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9DF9AB292485C67000C89681 /* SegueInfo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6F1A5D24248474FD00DCFB72 /* Coordinator */ = {
@@ -167,15 +192,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		04E33551248D68DA0091B33F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				04E33552248D69470091B33F /* CustomCellTableViewCell.swift */,
-				04E33553248D69470091B33F /* TimeZonesTableViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		6FDACBBC24806CFA0062818E = {
 			isa = PBXGroup;
 			children = (
@@ -197,7 +213,6 @@
 		6FDACBC724806CFA0062818E /* Clock */ = {
 			isa = PBXGroup;
 			children = (
-				9DF9AB242485C00800C89681 /* AddAlarm */,
 				6FDACBDD248071D40062818E /* Common */,
 				6FDACBDE248071DB0062818E /* WorldClock */,
 				6FDACBE12480722B0062818E /* Alarm */,
@@ -262,6 +277,7 @@
 		6FDACBE12480722B0062818E /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
+				6F197330248F2701006F5ED6 /* Models */,
 				6FDACBE9248075AB0062818E /* Controllers */,
 			);
 			path = Alarm;
@@ -294,6 +310,7 @@
 		6FDACBE9248075AB0062818E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6F19732F248F26EE006F5ED6 /* AddAlarm */,
 				6FDACBF4248076840062818E /* AlarmTableViewController.swift */,
 			);
 			path = Controllers;
@@ -348,31 +365,6 @@
 				6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9DF9AB242485C00800C89681 /* AddAlarm */ = {
-			isa = PBXGroup;
-			children = (
-				9DF9AB282485C66400C89681 /* Model */,
-				9DF9AB252485C01A00C89681 /* Controller */,
-			);
-			path = AddAlarm;
-			sourceTree = "<group>";
-		};
-		9DF9AB252485C01A00C89681 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				9DF9AB262485C03B00C89681 /* AddAlarmTableViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		9DF9AB282485C66400C89681 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				9DF9AB292485C67000C89681 /* SegueInfo.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
