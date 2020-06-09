@@ -99,14 +99,14 @@ class MainClockFaceView: UIView {
         
         lapHandLayer = CALayer()
         layer.addSublayer(lapHandLayer!)
-        lapHandLayer?.backgroundColor = UIColor.analogClockLapHandColor.cgColor
+        lapHandLayer?.backgroundColor = UIColor.clear.cgColor
         lapHandLayer?.anchorPoint = CGPoint(x: 0.5, y: 0.825)
         lapHandLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
         lapHandLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)
         
         mainHandLayer = CALayer()
         layer.addSublayer(mainHandLayer!)
-        mainHandLayer?.backgroundColor = UIColor.mainTintColor.cgColor
+        mainHandLayer?.backgroundColor = UIColor.clear.cgColor
         mainHandLayer?.anchorPoint = CGPoint(x: 0.5, y: 0.825)
         mainHandLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
         mainHandLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)

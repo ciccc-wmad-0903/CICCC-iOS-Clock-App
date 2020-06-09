@@ -33,18 +33,21 @@ class StopwatchScrollView: UIScrollView, UIScrollViewDelegate {
     
     func setMainHandAngle(_ radian: CGFloat) {
         CALayer.performWithoutAnimation {
+            analogClockView?.mainAnalogClockFace.mainHandLayer?.backgroundColor = UIColor.mainTintColor.cgColor
             analogClockView?.mainAnalogClockFace.mainHandLayer?.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
         }
     }
     
     func setLapHandAngle(_ radian: CGFloat) {
         CALayer.performWithoutAnimation {
+            analogClockView?.mainAnalogClockFace.lapHandLayer?.backgroundColor = UIColor.analogClockLapHandColor.cgColor
             analogClockView?.mainAnalogClockFace.lapHandLayer?.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
         }
     }
     
     func setSubHandAngle(_ radian: CGFloat) {
         CALayer.performWithoutAnimation {
+            analogClockView?.subAnalogClockFace.handLayer?.backgroundColor = UIColor.mainTintColor.cgColor
             analogClockView?.subAnalogClockFace.handLayer?.transform = CATransform3DMakeRotation(radian, 0, 0, 1)
         }
     }
