@@ -88,7 +88,7 @@ class SubClockFaceView: UIView {
         let instanceWidth: CGFloat = 2.5
         
         handLayer = CALayer()
-        handLayer?.backgroundColor = UIColor.mainTintColor.cgColor
+        handLayer?.backgroundColor = UIColor.clear.cgColor
         handLayer?.anchorPoint = CGPoint(x: 0.5, y: 1)
         handLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
         handLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2)
