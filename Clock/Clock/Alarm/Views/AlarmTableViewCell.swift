@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlarmTableViewCell: UITableViewCell {
+class AlarmTableViewCell: ClockTableViewCell {
     
     lazy var timeLabel: UILabel = {
         let tl = UILabel()
