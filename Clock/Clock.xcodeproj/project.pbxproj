@@ -32,6 +32,9 @@
 		6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41624849B31007B5593 /* Stopwatch.swift */; };
 		6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */; };
 		6FC695FB2490AFFD00625619 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695FA2490AFFD00625619 /* Persistence.swift */; };
+		6FC695FE2490CC8D00625619 /* TimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695FD2490CC8D00625619 /* TimerCoordinator.swift */; };
+		6FC696022490CCF000625619 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC696012490CCF000625619 /* TimerModel.swift */; };
+		6FC696042490CD0300625619 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC696032490CD0300625619 /* TimerViewModel.swift */; };
 		6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBC824806CFA0062818E /* AppDelegate.swift */; };
 		6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBCA24806CFA0062818E /* SceneDelegate.swift */; };
 		6FDACBD224806CFF0062818E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDACBD124806CFF0062818E /* Assets.xcassets */; };
@@ -77,6 +80,9 @@
 		6FC1C41624849B31007B5593 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		6FC4604D248CC63300E74841 /* StopwatchScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchScrollView.swift; sourceTree = "<group>"; };
 		6FC695FA2490AFFD00625619 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		6FC695FD2490CC8D00625619 /* TimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCoordinator.swift; sourceTree = "<group>"; };
+		6FC696012490CCF000625619 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		6FC696032490CD0300625619 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		6FDACBC524806CFA0062818E /* Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FDACBC824806CFA0062818E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FDACBCA24806CFA0062818E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +222,30 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		6FC695FC2490CC7800625619 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6FC695FD2490CC8D00625619 /* TimerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6FC695FF2490CCC000625619 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6FC696012490CCF000625619 /* TimerModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6FC696002490CCD200625619 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				6FC696032490CD0300625619 /* TimerViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		6FDACBBC24806CFA0062818E = {
 			isa = PBXGroup;
 			children = (
@@ -293,7 +323,10 @@
 		6FDACBE02480721D0062818E /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				6FDACBEF248075BB0062818E /* Controllers */,
+				6FC695FC2490CC7800625619 /* Coordinator */,
+				6FDACBEF248075BB0062818E /* Views */,
+				6FC695FF2490CCC000625619 /* Model */,
+				6FC696002490CCD200625619 /* View Model */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -352,12 +385,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		6FDACBEF248075BB0062818E /* Controllers */ = {
+		6FDACBEF248075BB0062818E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				6FDACBF8248076B50062818E /* TimerViewController.swift */,
 			);
-			path = Controllers;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		6FDACC0024807B920062818E /* Controllers */ = {
@@ -519,8 +552,10 @@
 				6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */,
 				6F0972DE248CD4D6001C798A /* StopwatchDigitalLabel.swift in Sources */,
 				04E33555248D69470091B33F /* TimeZonesTableViewCell.swift in Sources */,
+				6FC695FE2490CC8D00625619 /* TimerCoordinator.swift in Sources */,
 				04E33554248D69470091B33F /* CustomCellTableViewCell.swift in Sources */,
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
+				6FC696042490CD0300625619 /* TimerViewModel.swift in Sources */,
 				6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */,
 				6F3135B5248CE445000A9DF6 /* AnalogClockView.swift in Sources */,
 				6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */,
@@ -529,6 +564,7 @@
 				6F2010F0248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift in Sources */,
 				6F45DB3D248F33680031136F /* DatePickerTableViewCell.swift in Sources */,
 				6FDACBFE2480799D0062818E /* VerticalStackView.swift in Sources */,
+				6FC696022490CCF000625619 /* TimerModel.swift in Sources */,
 				04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */,
 				04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */,
 				6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */,
