@@ -12,6 +12,7 @@ extension UIColor {
     static let whiteTextColorAttribution = [NSAttributedString.Key.foregroundColor : UIColor.white]
     static let mainTintColor = UIColor(red: 0xFD / 255.0, green: 0x9D / 255.0, blue: 0x2B / 255.0, alpha: 1.0)
     static let modalViewBackground = UIColor(red: 0x1C / 255.0, green: 0x1C / 255.0, blue: 0x1C / 255.0, alpha: 1.0)
+    static let tableViewCellSelectedBackgroundColor = UIColor(red: 0x4D / 255.0, green: 0x4D / 255.0, blue: 0x4D / 255.0, alpha: 1.0)
     
     // Stopwatch Colors
     static let tableViewSeparatorColor = UIColor(red: 0x33 / 255.0, green: 0x33 / 255.0, blue: 0x33 / 255.0, alpha: 1.0)
