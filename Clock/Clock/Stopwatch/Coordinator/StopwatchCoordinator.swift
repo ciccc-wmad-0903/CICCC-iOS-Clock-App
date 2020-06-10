@@ -35,20 +35,19 @@ class StopwatchCoordinatorImpl: Coordinator {
     
 }
 
+private let archiveFileName = "stopwatch"
 extension StopwatchCoordinatorImpl: StopwatchCoordinator {
     
     func saveStopwatch(stopwatch: Stopwatch) {
         if self.stopwatch != stopwatch {
             self.stopwatch = stopwatch
-            if let encodedStopwatch = try? PropertyListEncoder().encode(stopwatch) {
-                try? encodedStopwatch.write(to: archiveURL, options: .noFileProtection)
-            }
+            Persistence.saveData(data: stopwatch, plistName: archiveFileName)
         }
     }
     
     func loadStopwatch() -> Stopwatch {
-        if let retrievedStopwatchData = try? Data(contentsOf: archiveURL), let decodedStopwatch = try? PropertyListDecoder().decode(Stopwatch.self, from: retrievedStopwatchData) {
-            return decodedStopwatch
+        if let stopwatch = Persistence.loadData(Stopwatch.self, plistName: archiveFileName) {
+            return stopwatch
         } else {
             return Stopwatch()
         }
