@@ -13,29 +13,13 @@ class AlarmTableViewController: UITableViewController {
     // MARK: - Properties
     
     // Need to be uncommented
-//    private var alarms: [Alarm] = [] {
-//        didSet {
-//            saveAlarms()
-//            // TODO: UserNotification update/setup
-//        }
-//    }
-    
-    // Dummy Start: Must be deleted!
-    private var alarms: [Alarm] = [
-        // Every day
-        Alarm(alarm: Date(), repeatable: [true, true, true, true, true, true, true], label: "Hello alarm", sound: "Hell no"),
-        // Never
-        Alarm(alarm: Date(), repeatable: [false, false, false, false, false, false, false], label: "Hello alarm2", sound: "Apex", isEnable: false),
-        // Weekends
-        Alarm(alarm: Date(), repeatable: [true, false, false, false, false, false, true], label: "Hello alarm2", sound: "Ring"),
-        // Mon Tue Wed Fri Sat Sun
-        Alarm(alarm: Date(), repeatable: [true, true, true, true, false, true, true], label: "Hello alarm", sound: "Bell", isEnable: false),
-        // Every Sunday
-        Alarm(alarm: Date(), repeatable: [true, false, false, false, false, false, false], label: "Hello alarm3", sound: "Ring2"),
-        // Weekdays
-        Alarm(alarm: Date(), repeatable: [false, true, true, true, true, true, false], label: "Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm Hello alarm", sound: "Hell no"),
-    ]
-    // Dummy End
+    private var alarms: [Alarm] = [] {
+        didSet {
+            saveAlarms()
+            // TODO: UserNotification update/setup
+        }
+    }
+
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -91,13 +75,13 @@ class AlarmTableViewController: UITableViewController {
     }
     
     // MARK: - Service Methods
+    private let plistFileName = "alarms"
     private func saveAlarms() {
-        print("TODO: Save Alarms")
-        
+        Persistence.saveData(data: alarms, plistName: plistFileName)
     }
     
     private func loadAlarms() {
-        print("TODO: Load Alarms")
+        alarms = Persistence.loadData([Alarm].self, plistName: plistFileName) ?? []
     }
     
     // MARK: - Table view data source

@@ -19,10 +19,6 @@ class StopwatchCoordinatorImpl: Coordinator {
     
     private var stopwatch: Stopwatch?
     
-    private let archiveURL: URL = {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("stopwatch").appendingPathExtension("plist")
-    }()
-    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
