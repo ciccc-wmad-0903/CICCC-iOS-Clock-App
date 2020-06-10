@@ -81,11 +81,16 @@ class AddEditAlarmTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    private func repeatTapped() {
+        let repeatCheckTVC = RepeatCheckTableViewController(style: .grouped)
+        self.show(repeatCheckTVC, sender: Any?.self)
+    }
+    
     // MARK: - Setup UI Methods
     private func setupLayout() {
         view.backgroundColor = .modalViewBackground
         title = isEditMode ? "Edit Alarm" : "Add Alarm"
-        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.barTintColor = .rightDetailCellBackgroundColor
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.titleTextAttributes = UIColor.whiteTextColorAttribution
         
@@ -94,7 +99,7 @@ class AddEditAlarmTableViewController: UITableViewController {
                                                             action: isEditMode ? #selector(editTapped(_:)) : #selector(saveTapped(_:)))
         navigationItem.leftBarButtonItem?.tintColor = .mainTintColor
         navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
-        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
@@ -137,7 +142,7 @@ class AddEditAlarmTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         switch (indexPath.section, indexPath.row) {
         case (1, 0):
-            // TODO: Repeat Check TableView
+            repeatTapped()
             break
         case (1, 1):
             // TODO: Edit Label View
@@ -159,7 +164,7 @@ class AddEditAlarmTableViewController: UITableViewController {
         }
         return heightForSection1_2
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 || section == 1 {
             return 0
@@ -182,6 +187,5 @@ class AddEditAlarmTableViewController: UITableViewController {
             return UIView.init(frame: .zero)
         }
     }
-    
     
 }
