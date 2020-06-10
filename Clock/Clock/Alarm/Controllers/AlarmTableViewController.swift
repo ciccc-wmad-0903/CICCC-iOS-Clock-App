@@ -78,6 +78,7 @@ class AlarmTableViewController: UITableViewController {
     }
     
     private func editAlarmTapped(index: Int) {
+        setEditing(false, animated: true)
         let addNewAlarmTVC = AddEditAlarmTableViewController(style: .grouped)
         addNewAlarmTVC.editOrDeleteAlarm = editAlarm
         addNewAlarmTVC.editIndex = index
