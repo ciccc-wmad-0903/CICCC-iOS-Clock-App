@@ -27,7 +27,6 @@ class RepeatCheckTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return days.count
     }
     
@@ -41,5 +40,17 @@ class RepeatCheckTableViewController: UITableViewController {
 
         cell?.textLabel?.text = self.days[indexPath.row]
         return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath){
+            if cell.accessoryType == .checkmark {
+                 cell.accessoryType = .none
+            } else {
+                cell.tintColor = .mainTintColor
+                 cell.accessoryType = .checkmark
+            }
+        }
     }
 }
