@@ -10,63 +10,67 @@ import Foundation
 
 class NotificationSound {
     
-    private static var _sound: [String]?
-    private static var _soundClassic: [String]?
-    private static var _displaySound: [String]?
-    private static var _displaySoundClassic: [String]?
-
-    static var sound: [String] {
+    private static let defaultSoundName = "Radar"
+    private static let soundExtension = "caf"
+    private static let classicSoundPrefix = "C_"
+    private static let maxNumberOfClassic = 1000
+    
+    static func getID(selectedIndex: Int, isClassic: Bool) -> Int {
+        return isClassic ? selectedIndex : selectedIndex + maxNumberOfClassic
+    }
+    
+    static func getSoundFileName(index: Int) -> String {
+        return index < maxNumberOfClassic ? soundClassic[index] : sound[index - maxNumberOfClassic]
+    }
+    
+    private static var _cafContents: [String]?
+    private static var cafContents: [String] {
         get {
-            if let sound = _sound { return sound } else {
-                let contents = try? FileManager.default.contentsOfDirectory(at: Bundle.main.bundleURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-                if let contents = contents {
-                    let ringtones = contents.map { $0.lastPathComponent }.filter { $0.hasSuffix("caf")}.filter { !$0.hasPrefix("C_") }
-                    _sound = ringtones
-                    return ringtones
+            if let cafContents = _cafContents { return cafContents } else {
+                if let contents = try? FileManager.default.contentsOfDirectory(at: Bundle.main.bundleURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
+                    _cafContents = contents.map { $0.lastPathComponent }.filter { $0.hasSuffix(soundExtension) }
+                    return _cafContents!
                 } else {
-                    _sound = nil
                     return []
                 }
             }
+        }
+    }
+    
+    static var sound: [String] {
+        get {
+            var ringtones = cafContents.filter { !$0.hasPrefix(classicSoundPrefix) }.sorted()
+            for (index, name) in ringtones.enumerated() {
+                if name.elementsEqual("\(defaultSoundName).\(soundExtension)") {
+                    ringtones.insert(ringtones.remove(at: index), at: 0)
+                    break
+                }
+            }
+            return ringtones
         }
     }
     
     static var soundClassic: [String] {
         get {
-            if let soundClassic = _soundClassic { return soundClassic } else {
-                let contents = try? FileManager.default.contentsOfDirectory(at: Bundle.main.bundleURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-                if let contents = contents {
-                    let ringtones = contents.map { $0.lastPathComponent }.filter { $0.hasSuffix("caf") }.filter { $0.hasPrefix("C_") }
-                    _soundClassic = ringtones
-                    return ringtones
-                } else {
-                    _soundClassic = nil
-                    return []
-                }
-            }
+            let ringtones = cafContents.filter { $0.hasPrefix(classicSoundPrefix) }.sorted()
+            return ringtones
         }
     }
     
     static var displaySound: [String] {
         get {
-            if let displaySound = _displaySound { return displaySound } else {
-                let displaySound = sound.map { String($0.prefix(upTo: $0.lastIndex(of: ".")!)) }
-                    .map { $0.replacingOccurrences(of: "_", with: " ") }
-                _displaySound = displaySound
-                return displaySound
-            }
+            let displaySound = sound.map { String($0.prefix(upTo: $0.lastIndex(of: ".")!)) }
+                .map { $0.replacingOccurrences(of: "_", with: " ") }
+            return displaySound
         }
     }
     
     static var displaySoundClassic: [String] {
         get {
-            if let displaySoundClassic = _displaySoundClassic { return displaySoundClassic } else {
-                let displaySoundClassic = soundClassic.map { $0.prefix(upTo: $0.lastIndex(of: ".")!) }
-                    .map { String($0.suffix(from: $0.index($0.startIndex, offsetBy: 2))) }
-                    .map { $0.replacingOccurrences(of: "_", with: " ") }
-                _displaySoundClassic = displaySoundClassic
-                return displaySoundClassic
-            }
+            let displaySoundClassic = soundClassic.map { $0.prefix(upTo: $0.lastIndex(of: ".")!) }
+                .map { String($0.suffix(from: $0.index($0.startIndex, offsetBy: 2))) }
+                .map { $0.replacingOccurrences(of: "_", with: " ") }
+            return displaySoundClassic
         }
     }
     
