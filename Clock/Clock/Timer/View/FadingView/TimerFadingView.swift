@@ -13,6 +13,7 @@ class TimerFadingView: UIView {
     private(set) var fadingViewSize: CGSize!
     
     lazy var setTimePicker = TimerSetTimePicker()
+    lazy var remainingView = TimerRemainCircleView(size: .init(width: self.fadingViewSize.height * 0.9, height: self.fadingViewSize.height * 0.9))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +23,7 @@ class TimerFadingView: UIView {
         
         setupViewProperties()
         setupSetTimePicker()
+        setupRemainCircleView()
     }
     
     private func setupViewProperties() {
@@ -32,6 +34,12 @@ class TimerFadingView: UIView {
     private func setupSetTimePicker() {
         addSubview(setTimePicker)
         setTimePicker.matchParent(padding: .init(top: fadingViewSize.height / 4, left: 24, bottom: fadingViewSize.height / 4, right: 24))
+    }
+    
+    private func setupRemainCircleView() {
+        remainingView.constraintWidth(equalToConstant: self.fadingViewSize.height * 0.9, heightEqualToConstant: self.fadingViewSize.height * 0.9)
+        addSubview(remainingView)
+        remainingView.centerXYin(self)        
     }
     
     required init?(coder: NSCoder) {

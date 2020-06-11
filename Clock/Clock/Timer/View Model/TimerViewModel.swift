@@ -66,7 +66,7 @@ final class TimerViewModelImpl: TimerViewModel {
     private let timerSoundID = BehaviorRelay<Int?>(value: nil)
     
     private let remaining = BehaviorRelay<TimeInterval>(value: 0)
-    private let remainingPercent = BehaviorRelay<Double>(value: 100.0)
+    private let remainingPercent = BehaviorRelay<Double>(value: 1.0)
     
     private var timerRemaining: TimeInterval {
         get {

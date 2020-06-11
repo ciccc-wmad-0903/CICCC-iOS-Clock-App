@@ -12,6 +12,8 @@ class TimerSetTimePicker: UIPickerView {
     
     private(set) var setTimePickerSize: CGSize!
     
+    var pickerDelegate: TimerSetPickerDelegate?
+    
     private lazy var hourLabel: UILabel = {
         let label = UILabel(frame: .init(x: 0, y: 0, width: setTimePickerSize.width / 7, height: setTimePickerSize.height / 8.5))
         label.text = (self.hour == 1) ? "hour" : "hours"
@@ -120,7 +122,6 @@ extension TimerSetTimePicker: UIPickerViewDataSource {
 extension TimerSetTimePicker: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("Pick: (\(component), \(row))")
         hourLabel.text = component == 0 && row == 1 ? "hour" : "hours"
         switch component {
         case 0: hour = row
@@ -128,6 +129,7 @@ extension TimerSetTimePicker: UIPickerViewDelegate {
         case 2: second = row
         default: break
         }
+        pickerDelegate?.timerSetTime(hour: hour, minute: minute, second: second)
     }
     
 }

@@ -12,6 +12,10 @@ import RxSwift
 
 let reloadTimerRemainingViewNotification = Notification.Name("TimerViewController.reloadRemainingView")
 
+protocol TimerSetPickerDelegate {
+    func timerSetTime(hour: Int, minute: Int, second: Int)
+}
+
 class TimerViewController: UIViewController {
 
     // MARK: - Lifecycle Methods
@@ -86,6 +90,13 @@ extension TimerViewController {
         viewModel.isShownTimerPickerView
             .drive(onNext: {
                 self.timerFadingView.setTimePicker.isHidden = !$0
+                self.timerFadingView.remainingView.isHidden = $0
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.remainingCirclePercent
+            .drive(onNext: {
+                self.timerFadingView.remainingView.setRemainingCircle(percent: CGFloat($0))
             })
             .disposed(by: disposeBag)
     }
@@ -114,7 +125,6 @@ extension TimerViewController {
     
 }
 
-
 // MARK: - UI Setup
 extension TimerViewController {
     
@@ -134,6 +144,7 @@ extension TimerViewController {
                            trailingAnchor: nil,
                            bottomAnchor: nil,
                            size: timerFadingView.fadingViewSize)
+        timerFadingView.setTimePicker.pickerDelegate = self
     }
     
     private func setupUIButtons() {
@@ -172,4 +183,13 @@ extension TimerViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         viewModel.setTimerSound.accept(1005)
     }
+}
+
+// MARK: - Timer Set Delegate
+extension TimerViewController: TimerSetPickerDelegate {
+    
+    func timerSetTime(hour: Int, minute: Int, second: Int) {
+        viewModel.valueChangedPicker.accept((hour, minute, second))
+    }
+    
 }
