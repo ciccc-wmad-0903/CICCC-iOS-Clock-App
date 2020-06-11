@@ -9,10 +9,13 @@
 import Foundation
 
 struct TimerModel: Codable, Equatable {
-    var status: TimerStatus = .stop
-    var base: Date?
+    var dueTime: Date?
     var pauseStart: Date?
-    var timer: TimeInterval?
+    
+    // Status
+    var status: TimerStatus = .stop
+    var setTime: TimeInterval = 600.0
+    var soundID: Int? = NotificationSound.defaultID
 }
 
 enum TimerStatus: Int, Codable {

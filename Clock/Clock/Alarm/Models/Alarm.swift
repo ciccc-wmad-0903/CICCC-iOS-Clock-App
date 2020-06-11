@@ -25,12 +25,12 @@ struct Alarm: Codable {
     static var DEFAULT_DATE: Date { get { Date() } }
     static let DEFAULT_REPEAT: [Bool] = .init(repeating: false, count: 7)
     static let DEFAULT_LABEL = "Alarm"
-    static let DEFAULT_SOUND_ID = 1000
+    static let DEFAULT_SOUND_ID = NotificationSound.defaultID
     
     var alarm: Date = Alarm.DEFAULT_DATE
     var repeatable: [Bool] = Alarm.DEFAULT_REPEAT
     var label: String = Alarm.DEFAULT_LABEL
-    var sound: Int = Alarm.DEFAULT_SOUND_ID
+    var sound: Int? = Alarm.DEFAULT_SOUND_ID
     var isEnable: Bool = true
     
     func repeatableToString() -> String {
