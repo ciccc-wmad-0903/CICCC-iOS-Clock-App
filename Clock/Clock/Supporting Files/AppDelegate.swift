@@ -35,6 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIApplication.shared.registerForRemoteNotifications()
         }
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([
+            UNNotificationPresentationOptions.alert,
+            UNNotificationPresentationOptions.sound
+        ])
+    }
 
     // MARK: UISceneSession Lifecycle
 
