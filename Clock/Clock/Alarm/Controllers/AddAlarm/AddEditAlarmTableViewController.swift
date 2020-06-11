@@ -86,6 +86,11 @@ class AddEditAlarmTableViewController: UITableViewController {
         self.show(repeatCheckTVC, sender: Any?.self)
     }
     
+    private func labelTapped(){
+        let labelTVC = LabelViewController()
+        self.show(labelTVC, sender: Any?.self)
+    }
+    
     private func setupLayout() {
         view.backgroundColor = .modalViewBackground
         title = isEditMode ? "Edit Alarm" : "Add Alarm"
@@ -97,7 +102,8 @@ class AddEditAlarmTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: isEditMode ? .edit : .save, target: self, action: isEditMode ? #selector(editTapped(_:)) : #selector(saveTapped(_:)))
         navigationItem.leftBarButtonItem?.tintColor = .mainTintColor
         navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
@@ -143,7 +149,7 @@ class AddEditAlarmTableViewController: UITableViewController {
             repeatTapped()
             break
         case (1, 1):
-            // TODO: Edit Label View
+            labelTapped()
             break
         case (1, 2):
             // TODO: Sound ID Selection TableView
