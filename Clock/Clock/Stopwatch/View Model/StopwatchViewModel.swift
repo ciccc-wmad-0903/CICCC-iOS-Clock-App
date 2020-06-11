@@ -178,9 +178,13 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         viewWillAppear
             .observeOn(MainScheduler.instance)
             .do(onNext: {
-                self.updateCurrentData()
                 if self.stopwatchStatus.value == .start {
                     self.frameUpdater(isStart: true)
+                } else {
+                    Observable.just(())
+                        .delay(.milliseconds(10), scheduler: MainScheduler.instance)
+                        .do(onNext: { self.updateCurrentData() })
+                        .subscribe().disposed(by: self.disposeBag)
                 }
             })
             .subscribe()

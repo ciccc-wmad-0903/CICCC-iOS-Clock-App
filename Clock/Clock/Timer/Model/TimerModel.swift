@@ -9,5 +9,12 @@
 import Foundation
 
 struct TimerModel: Codable, Equatable {
-    
+    var status: TimerStatus = .stop
+    var base: Date?
+    var pauseStart: Date?
+    var timer: TimeInterval?
+}
+
+enum TimerStatus: Int, Codable {
+    case start, stop, pause
 }
