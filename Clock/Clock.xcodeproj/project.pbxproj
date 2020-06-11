@@ -110,6 +110,8 @@
 		6FDACBFF2480799D0062818E /* UIView+ConstraintLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACBFC2480799D0062818E /* UIView+ConstraintLayout.swift */; };
 		6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACC0124807BAA0062818E /* ClockTabBarController.swift */; };
 		6FDACC0524807E470062818E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDACC0424807E470062818E /* Colors.swift */; };
+		9D4903BF2491991F0019B306 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4903BE2491991F0019B306 /* LabelViewController.swift */; };
+		9D4903C12491A2300019B306 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4903C02491A2300019B306 /* LabelTableViewCell.swift */; };
 		9DA3042E2490399700B78B5E /* RepeatCheckTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA3042D2490399700B78B5E /* RepeatCheckTableViewController.swift */; };
 		9DF9AB272485C03B00C89681 /* AddEditAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9AB262485C03B00C89681 /* AddEditAlarmTableViewController.swift */; };
 		9DF9AB2A2485C67000C89681 /* SegueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF9AB292485C67000C89681 /* SegueInfo.swift */; };
@@ -224,6 +226,8 @@
 		6FDACC0124807BAA0062818E /* ClockTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTabBarController.swift; sourceTree = "<group>"; };
 		6FDACC0424807E470062818E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8E6BD1991426663C06014BFA /* Pods-Clock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock.release.xcconfig"; path = "Target Support Files/Pods-Clock/Pods-Clock.release.xcconfig"; sourceTree = "<group>"; };
+		9D4903BE2491991F0019B306 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		9D4903C02491A2300019B306 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		9DA3042D2490399700B78B5E /* RepeatCheckTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCheckTableViewController.swift; sourceTree = "<group>"; };
 		9DF9AB262485C03B00C89681 /* AddEditAlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditAlarmTableViewController.swift; sourceTree = "<group>"; };
 		9DF9AB292485C67000C89681 /* SegueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueInfo.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 			children = (
 				9DF9AB262485C03B00C89681 /* AddEditAlarmTableViewController.swift */,
 				9DA3042D2490399700B78B5E /* RepeatCheckTableViewController.swift */,
+				9D4903BE2491991F0019B306 /* LabelViewController.swift */,
 			);
 			path = AddAlarm;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				6F45DB3A248F31A00031136F /* RightDetailTableViewCell.swift */,
 				6F45DB3C248F33680031136F /* DatePickerTableViewCell.swift */,
 				6F8F08FF248F7E27000A135B /* AlarmTableViewCell.swift */,
+				9D4903C02491A2300019B306 /* LabelTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -859,6 +865,7 @@
 				6FDACBFE2480799D0062818E /* VerticalStackView.swift in Sources */,
 				6FC696022490CCF000625619 /* TimerModel.swift in Sources */,
 				04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */,
+				9D4903C12491A2300019B306 /* LabelTableViewCell.swift in Sources */,
 				04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */,
 				6F2CAD162492EB43005536C7 /* SelectSoundIdTableViewController.swift in Sources */,
 				6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */,
@@ -876,6 +883,7 @@
 				6F3135B7248CE66E000A9DF6 /* MainClockFaceView.swift in Sources */,
 				9DF9AB272485C03B00C89681 /* AddEditAlarmTableViewController.swift in Sources */,
 				6F3D1AAB2490EA6600A20F63 /* ClockTableViewCell.swift in Sources */,
+				9D4903BF2491991F0019B306 /* LabelViewController.swift in Sources */,
 				6F86D346248D2A43009C607A /* CALayer+withoutAnimation.swift in Sources */,
 				6F45DB38248F2FD50031136F /* Alarm.swift in Sources */,
 				6F8F0900248F7E27000A135B /* AlarmTableViewCell.swift in Sources */,
