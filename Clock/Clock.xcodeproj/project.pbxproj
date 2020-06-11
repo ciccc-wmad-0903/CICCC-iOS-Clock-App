@@ -13,6 +13,8 @@
 		04E33559248D69500091B33F /* AddTimeZoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33557248D69500091B33F /* AddTimeZoneTableViewController.swift */; };
 		6F0972DE248CD4D6001C798A /* StopwatchDigitalLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */; };
 		6F0972E0248CD764001C798A /* StopwatchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0972DF248CD764001C798A /* StopwatchTableView.swift */; };
+		6F0C4B91249251C700BBF513 /* TimerSetTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C4B90249251C700BBF513 /* TimerSetTimePicker.swift */; };
+		6F0C4B932492A15C00BBF513 /* TimerRemainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C4B922492A15C00BBF513 /* TimerRemainCircleView.swift */; };
 		6F18CFE0248AD77500E91F3F /* UIDevice+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */; };
 		6F18CFE2248B245D00E91F3F /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFE1248B245D00E91F3F /* CircleButton.swift */; };
 		6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */; };
@@ -20,10 +22,13 @@
 		6F1A5D292484756900DCFB72 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A5D282484756900DCFB72 /* Coordinator.swift */; };
 		6F2010F0248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */; };
 		6F2010F2248BBA0700683DD9 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */; };
+		6F2CAD112492C75A005536C7 /* TimerRemainDigitLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CAD102492C75A005536C7 /* TimerRemainDigitLabel.swift */; };
 		6F3135B5248CE445000A9DF6 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */; };
 		6F3135B7248CE66E000A9DF6 /* MainClockFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */; };
 		6F3135B9248CE67B000A9DF6 /* SubClockFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */; };
 		6F3D1AAB2490EA6600A20F63 /* ClockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1AAA2490EA6600A20F63 /* ClockTableViewCell.swift */; };
+		6F44D0C22492451A00A29EDE /* TimerSelectSoundTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44D0C12492451A00A29EDE /* TimerSelectSoundTableView.swift */; };
+		6F44D0C524924B6200A29EDE /* TimerSelectSoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44D0C424924B6200A29EDE /* TimerSelectSoundTableViewCell.swift */; };
 		6F45DB38248F2FD50031136F /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45DB37248F2FD50031136F /* Alarm.swift */; };
 		6F45DB3B248F31A00031136F /* RightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45DB3A248F31A00031136F /* RightDetailTableViewCell.swift */; };
 		6F45DB3D248F33680031136F /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45DB3C248F33680031136F /* DatePickerTableViewCell.swift */; };
@@ -81,6 +86,7 @@
 		6F54355E2491D1B7003CEB7A /* Hillside.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6F5435422491D1B6003CEB7A /* Hillside.caf */; };
 		6F54355F2491D1B7003CEB7A /* By_The_Seaside.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6F5435432491D1B7003CEB7A /* By_The_Seaside.caf */; };
 		6F5435602491D1B7003CEB7A /* Twinkle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6F5435442491D1B7003CEB7A /* Twinkle.caf */; };
+		6F54356524923FCC003CEB7A /* TimerFadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54356424923FCC003CEB7A /* TimerFadingView.swift */; };
 		6F86D346248D2A43009C607A /* CALayer+withoutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86D345248D2A43009C607A /* CALayer+withoutAnimation.swift */; };
 		6F8F0900248F7E27000A135B /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8F08FF248F7E27000A135B /* AlarmTableViewCell.swift */; };
 		6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */; };
@@ -116,6 +122,8 @@
 		6D9E14E1750D1352047F32F8 /* Pods_Clock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0972DD248CD4D6001C798A /* StopwatchDigitalLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchDigitalLabel.swift; sourceTree = "<group>"; };
 		6F0972DF248CD764001C798A /* StopwatchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchTableView.swift; sourceTree = "<group>"; };
+		6F0C4B90249251C700BBF513 /* TimerSetTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSetTimePicker.swift; sourceTree = "<group>"; };
+		6F0C4B922492A15C00BBF513 /* TimerRemainCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemainCircleView.swift; sourceTree = "<group>"; };
 		6F18CFDF248AD77500E91F3F /* UIDevice+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+size.swift"; sourceTree = "<group>"; };
 		6F18CFE1248B245D00E91F3F /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		6F18CFE3248B7BB400E91F3F /* TimeInterval+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+string.swift"; sourceTree = "<group>"; };
@@ -123,10 +131,13 @@
 		6F1A5D282484756900DCFB72 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6F2010EF248BB4F700683DD9 /* StopwatchLapsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchLapsTableViewCell.swift; sourceTree = "<group>"; };
 		6F2010F1248BBA0700683DD9 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		6F2CAD102492C75A005536C7 /* TimerRemainDigitLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemainDigitLabel.swift; sourceTree = "<group>"; };
 		6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 		6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainClockFaceView.swift; sourceTree = "<group>"; };
 		6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubClockFaceView.swift; sourceTree = "<group>"; };
 		6F3D1AAA2490EA6600A20F63 /* ClockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockTableViewCell.swift; sourceTree = "<group>"; };
+		6F44D0C12492451A00A29EDE /* TimerSelectSoundTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSelectSoundTableView.swift; sourceTree = "<group>"; };
+		6F44D0C424924B6200A29EDE /* TimerSelectSoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSelectSoundTableViewCell.swift; sourceTree = "<group>"; };
 		6F45DB37248F2FD50031136F /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		6F45DB3A248F31A00031136F /* RightDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6F45DB3C248F33680031136F /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -184,6 +195,7 @@
 		6F5435422491D1B6003CEB7A /* Hillside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hillside.caf; sourceTree = "<group>"; };
 		6F5435432491D1B7003CEB7A /* By_The_Seaside.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = By_The_Seaside.caf; sourceTree = "<group>"; };
 		6F5435442491D1B7003CEB7A /* Twinkle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Twinkle.caf; sourceTree = "<group>"; };
+		6F54356424923FCC003CEB7A /* TimerFadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFadingView.swift; sourceTree = "<group>"; };
 		6F86D345248D2A43009C607A /* CALayer+withoutAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+withoutAnimation.swift"; sourceTree = "<group>"; };
 		6F8F08FF248F7E27000A135B /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 		6FC1C41324848C1D007B5593 /* StopwatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewModel.swift; sourceTree = "<group>"; };
@@ -306,6 +318,15 @@
 			path = Digital;
 			sourceTree = "<group>";
 		};
+		6F44D0C324924B3500A29EDE /* SelectSoundTable */ = {
+			isa = PBXGroup;
+			children = (
+				6F44D0C12492451A00A29EDE /* TimerSelectSoundTableView.swift */,
+				6F44D0C424924B6200A29EDE /* TimerSelectSoundTableViewCell.swift */,
+			);
+			path = SelectSoundTable;
+			sourceTree = "<group>";
+		};
 		6F45DB39248F31810031136F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +411,17 @@
 				6F54350E2491D194003CEB7A /* C_Xylophone.caf */,
 			);
 			path = Classic;
+			sourceTree = "<group>";
+		};
+		6F54356324923F86003CEB7A /* FadingView */ = {
+			isa = PBXGroup;
+			children = (
+				6F54356424923FCC003CEB7A /* TimerFadingView.swift */,
+				6F0C4B90249251C700BBF513 /* TimerSetTimePicker.swift */,
+				6F0C4B922492A15C00BBF513 /* TimerRemainCircleView.swift */,
+				6F2CAD102492C75A005536C7 /* TimerRemainDigitLabel.swift */,
+			);
+			path = FadingView;
 			sourceTree = "<group>";
 		};
 		6FC1C41224848BF6007B5593 /* View Model */ = {
@@ -578,6 +610,8 @@
 			isa = PBXGroup;
 			children = (
 				6FDACBF8248076B50062818E /* TimerViewController.swift */,
+				6F44D0C324924B3500A29EDE /* SelectSoundTable */,
+				6F54356324923F86003CEB7A /* FadingView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -789,6 +823,7 @@
 				6FDACBF5248076840062818E /* AlarmTableViewController.swift in Sources */,
 				6FDACBC924806CFA0062818E /* AppDelegate.swift in Sources */,
 				6FC1C41424848C1D007B5593 /* StopwatchViewModel.swift in Sources */,
+				6F54356524923FCC003CEB7A /* TimerFadingView.swift in Sources */,
 				9DA3042E2490399700B78B5E /* RepeatCheckTableViewController.swift in Sources */,
 				6FC1C41724849B31007B5593 /* Stopwatch.swift in Sources */,
 				6FDACBCB24806CFA0062818E /* SceneDelegate.swift in Sources */,
@@ -797,6 +832,7 @@
 				6FC695FE2490CC8D00625619 /* TimerCoordinator.swift in Sources */,
 				04E33554248D69470091B33F /* CustomCellTableViewCell.swift in Sources */,
 				6F5434882491D07F003CEB7A /* NotificationSound.swift in Sources */,
+				6F44D0C22492451A00A29EDE /* TimerSelectSoundTableView.swift in Sources */,
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
 				6FC696042490CD0300625619 /* TimerViewModel.swift in Sources */,
 				6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */,
@@ -812,12 +848,15 @@
 				04E33558248D69500091B33F /* WorldClockTableViewController.swift in Sources */,
 				6FDACC0224807BAA0062818E /* ClockTabBarController.swift in Sources */,
 				9DF9AB2A2485C67000C89681 /* SegueInfo.swift in Sources */,
+				6F0C4B932492A15C00BBF513 /* TimerRemainCircleView.swift in Sources */,
 				6FDACBFF2480799D0062818E /* UIView+ConstraintLayout.swift in Sources */,
+				6F0C4B91249251C700BBF513 /* TimerSetTimePicker.swift in Sources */,
 				6FC695FB2490AFFD00625619 /* Persistence.swift in Sources */,
 				6F45DB3B248F31A00031136F /* RightDetailTableViewCell.swift in Sources */,
 				6F18CFE0248AD77500E91F3F /* UIDevice+size.swift in Sources */,
 				6FDACBF9248076B50062818E /* TimerViewController.swift in Sources */,
 				6FDACBF7248076A40062818E /* StopwatchViewController.swift in Sources */,
+				6F2CAD112492C75A005536C7 /* TimerRemainDigitLabel.swift in Sources */,
 				6F3135B9248CE67B000A9DF6 /* SubClockFaceView.swift in Sources */,
 				6F3135B7248CE66E000A9DF6 /* MainClockFaceView.swift in Sources */,
 				9DF9AB272485C03B00C89681 /* AddEditAlarmTableViewController.swift in Sources */,
@@ -825,6 +864,7 @@
 				6F86D346248D2A43009C607A /* CALayer+withoutAnimation.swift in Sources */,
 				6F45DB38248F2FD50031136F /* Alarm.swift in Sources */,
 				6F8F0900248F7E27000A135B /* AlarmTableViewCell.swift in Sources */,
+				6F44D0C524924B6200A29EDE /* TimerSelectSoundTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

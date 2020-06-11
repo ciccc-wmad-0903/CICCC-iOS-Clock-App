@@ -20,11 +20,15 @@ protocol TimerViewModel: class {
     
     // Output
     var leftButtonStatus: Driver<Bool> { get }
-    var rightButtonStatus: Driver<(UIColor, String, Bool)> { get }
+    var rightButtonStatus: Driver<(UIColor, String)> { get }
+    var rightButtonEnabled: Driver<(Bool)> { get }
     var dueDigitalTime: Driver<String> { get }
+    var isDueDigitalTimePaused: Driver<Bool> { get }
     var remainingDigitalTime: Driver<String> { get }
     var remainingCirclePercent: Driver<Double> { get }
     var setNameFromSoundID: Driver<String> { get }
+    var isShownTimerPickerView: Driver<Bool> { get }
+    var updateSetTimePicker: PublishRelay<(Int, Int, Int)> { get }
 }
 
 final class TimerViewModelImpl: TimerViewModel {
@@ -39,11 +43,16 @@ final class TimerViewModelImpl: TimerViewModel {
     
     // MARK: - Output
     let leftButtonStatus: Driver<Bool>
-    let rightButtonStatus: Driver<(UIColor, String, Bool)>
+    var rightButtonStatus: Driver<(UIColor, String)>
+    var rightButtonEnabled: Driver<(Bool)>
     let dueDigitalTime: Driver<String>
+    var isDueDigitalTimePaused: Driver<Bool>
     let remainingDigitalTime: Driver<String>
     let remainingCirclePercent: Driver<Double>
     let setNameFromSoundID: Driver<String>
+    let isShownTimerPickerView: Driver<Bool>
+    let updateSetTimePicker = PublishRelay<(Int, Int, Int)>()
+    
     
     // MARK: - Private Properties(Reactive)
     private let coordinator: TimerCoordinator
@@ -61,7 +70,7 @@ final class TimerViewModelImpl: TimerViewModel {
     private let timerSoundID = BehaviorRelay<Int?>(value: nil)
     
     private let remaining = BehaviorRelay<TimeInterval>(value: 0)
-    private let remainingPercent = BehaviorRelay<Double>(value: 100.0)
+    private let remainingPercent = BehaviorRelay<Double>(value: 1.0)
     
     private var timerRemaining: TimeInterval {
         get {
@@ -84,28 +93,36 @@ final class TimerViewModelImpl: TimerViewModel {
             })
             .asDriver(onErrorJustReturn: false)
         
-        rightButtonStatus = Observable
-            .combineLatest(timerStatus, timerSetTime)
+        rightButtonStatus = timerStatus
             .map({
-                switch $0.0 {
-                case .stop: return (UIColor.systemGreen, "Start", $0.1 != 0 ? true : false)
-                case .start: return (UIColor.systemRed, "Pause", true)
-                case .pause: return (UIColor.systemGreen, "Resume", true)
+                switch $0 {
+                case .stop: return (UIColor.systemGreen, "Start")
+                case .start: return (UIColor.systemRed, "Pause")
+                case .pause: return (UIColor.systemGreen, "Resume")
                 }
             })
-            .asDriver(onErrorJustReturn: (UIColor.systemGreen, "Start", true))
+            .asDriver(onErrorJustReturn: (UIColor.systemGreen, "Start"))
+                
+        rightButtonEnabled = timerSetTime
+            .map { $0 > 0.1 }
+            .asDriver(onErrorJustReturn: true)
         
         dueDigitalTime = timerDueTime
             .map ({
                 guard let dueDate = $0 else { return "" }
                 let timeFormatter = DateFormatter()
                 timeFormatter.timeStyle = .short
-                return String(timeFormatter.string(from: dueDate).dropLast(3))
+                return String(timeFormatter.string(from: dueDate))
             })
             .asDriver(onErrorJustReturn: "")
         
+        isDueDigitalTimePaused = timerStatus
+            .map { $0 == .pause }
+            .asDriver(onErrorJustReturn: false)
+        
         remainingDigitalTime = remaining
             .map { $0.toTimerString() }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: "")
         
         remainingCirclePercent = remainingPercent
@@ -114,6 +131,10 @@ final class TimerViewModelImpl: TimerViewModel {
         setNameFromSoundID = timerSoundID
             .map { NotificationSound.getSoundName(index: $0) ?? "Stop Playing" }
             .asDriver(onErrorJustReturn: NotificationSound.defaultName)
+        
+        isShownTimerPickerView = timerStatus
+            .map { return $0 == .stop }
+            .asDriver(onErrorJustReturn: true)
         
         timerStatus
             .observeOn(MainScheduler.instance)
@@ -166,8 +187,9 @@ final class TimerViewModelImpl: TimerViewModel {
                 if self.timerStatus.value == .start {
                     self.frameUpdater(isStart: true)
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(10)) {
-                        self.updateCurrentData()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                        self.updateCurrentData(oneShot: true)
+                        self.updateSetTimePicker.accept(self.timeIntervalToHMS())
                     }
                 }
             })
@@ -226,8 +248,9 @@ final class TimerViewModelImpl: TimerViewModel {
     private func bindOnValueChangedPicker() {
         valueChangedPicker
             .observeOn(MainScheduler.instance)
-            .subscribeOn(MainScheduler.instance)
-            .subscribe(onNext: { self.timerSetTime.accept(Double($0) * 3600 + Double($1) * 60 + Double($2)) })
+            .subscribeOn(MainScheduler.asyncInstance)
+            .subscribe(onNext: {
+                self.timerSetTime.accept(Double($0) * 3600 + Double($1) * 60 + Double($2)) })
             .disposed(by: disposeBag)
     }
     
@@ -247,6 +270,7 @@ final class TimerViewModelImpl: TimerViewModel {
         if let dueTime = timerDueTime.value, let pauseStart = timerPauseStart.value {
             timerDueTime.accept(dueTime.addingTimeInterval(pauseStart.distance(to: Date())))
             timerStatus.accept(.start)
+            timerPauseStart.accept(nil)
         } else {
             timerReset()
         }
@@ -256,6 +280,13 @@ final class TimerViewModelImpl: TimerViewModel {
         timerDueTime.accept(nil)
         timerPauseStart.accept(nil)
         timerStatus.accept(.stop)
+        remainingPercent.accept(1.0)
+        updateCurrentData(oneShot: true)
+    }
+    
+    private func timeIntervalToHMS() -> (Int, Int, Int) {
+        let interval = timerSetTime.value
+        return (Int(interval / 3600), Int(interval / 60), Int(interval) % 60)
     }
     
     private func loadTimer(timer: TimerModel) {
@@ -264,6 +295,8 @@ final class TimerViewModelImpl: TimerViewModel {
         timerStatus.accept(timer.status)
         timerSetTime.accept(timer.setTime)
         timerSoundID.accept(timer.soundID)
+        
+        updateSetTimePicker.accept(timeIntervalToHMS())
         
         if timerRemaining <= 0.0 {
             timerReset()
@@ -298,10 +331,14 @@ final class TimerViewModelImpl: TimerViewModel {
         }
     }
     
-    private func updateCurrentData() {
+    private func updateCurrentData(oneShot: Bool = false) {
         let remain = self.timerRemaining
-        self.remaining.accept(remain)
-        self.remainingPercent.accept(remain / timerSetTime.value)
+        if oneShot || remain > 0 {
+            self.remaining.accept(remain)
+            self.remainingPercent.accept(remain / timerSetTime.value)
+        } else {
+            timerReset()
+        }
     }
     
 }

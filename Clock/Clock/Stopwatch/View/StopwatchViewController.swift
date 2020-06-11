@@ -48,7 +48,7 @@ class StopwatchViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     lazy var leftButton = CircleButton(title: "Lap", baseColor: .white, isEnabled: false)
-    lazy var rightButton = CircleButton(title: "Start", baseColor: .systemRed)
+    lazy var rightButton = CircleButton(title: "Start", baseColor: .systemGreen)
     lazy var stopwatchScrollView = StopwatchScrollView()
     lazy var lapTableView = StopwatchTableView()
 }
