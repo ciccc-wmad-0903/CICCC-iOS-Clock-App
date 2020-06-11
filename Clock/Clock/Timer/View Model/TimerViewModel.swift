@@ -93,7 +93,7 @@ final class TimerViewModelImpl: TimerViewModel {
             .combineLatest(timerStatus, timerSetTime)
             .map({
                 switch $0.0 {
-                case .stop: return (UIColor.systemGreen, "Start", $0.1 != 0 ? true : false)
+                case .stop: return (UIColor.systemGreen, "Start", $0.1 > 0.1 ? true : false)
                 case .start: return (UIColor.systemRed, "Pause", true)
                 case .pause: return (UIColor.systemGreen, "Resume", true)
                 }
@@ -177,6 +177,7 @@ final class TimerViewModelImpl: TimerViewModel {
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(10)) {
                         self.updateCurrentData()
+                        self.updateSetTimePicker.accept(self.timeIntervalToHMS())
                     }
                 }
             })
@@ -236,6 +237,7 @@ final class TimerViewModelImpl: TimerViewModel {
         valueChangedPicker
             .observeOn(MainScheduler.instance)
             .subscribeOn(MainScheduler.instance)
+            .distinctUntilChanged ({ return $0 == $0 && $1 == $1 && $2 == $2 })
             .subscribe(onNext: { self.timerSetTime.accept(Double($0) * 3600 + Double($1) * 60 + Double($2)) })
             .disposed(by: disposeBag)
     }
@@ -265,6 +267,12 @@ final class TimerViewModelImpl: TimerViewModel {
         timerDueTime.accept(nil)
         timerPauseStart.accept(nil)
         timerStatus.accept(.stop)
+        remainingPercent.accept(1.0)
+    }
+    
+    private func timeIntervalToHMS() -> (Int, Int, Int) {
+        let interval = timerSetTime.value
+        return (Int(interval / 3600), Int(interval / 60), Int(interval.truncatingRemainder(dividingBy: 60)))
     }
     
     private func loadTimer(timer: TimerModel) {
