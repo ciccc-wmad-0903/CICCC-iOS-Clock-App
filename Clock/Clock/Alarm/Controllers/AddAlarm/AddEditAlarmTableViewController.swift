@@ -86,7 +86,6 @@ class AddEditAlarmTableViewController: UITableViewController {
         self.show(repeatCheckTVC, sender: Any?.self)
     }
     
-    // MARK: - Setup UI Methods
     private func setupLayout() {
         view.backgroundColor = .modalViewBackground
         title = isEditMode ? "Edit Alarm" : "Add Alarm"
@@ -95,8 +94,7 @@ class AddEditAlarmTableViewController: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = UIColor.whiteTextColorAttribution
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: isEditMode ? .edit : .save, target: self,
-                                                            action: isEditMode ? #selector(editTapped(_:)) : #selector(saveTapped(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: isEditMode ? .edit : .save, target: self, action: isEditMode ? #selector(editTapped(_:)) : #selector(saveTapped(_:)))
         navigationItem.leftBarButtonItem?.tintColor = .mainTintColor
         navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
