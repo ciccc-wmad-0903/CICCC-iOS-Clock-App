@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxCocoa
 
 struct Stopwatch: Codable, Equatable {
     var status: StopwatchStatus = .stop
