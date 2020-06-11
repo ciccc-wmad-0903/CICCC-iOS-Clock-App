@@ -13,8 +13,8 @@ class ClockNotification {
     
     static let shared = ClockNotification()
     
-    func createNotification(id: String, interval: TimeInterval, title: String, body: String = "", soundId: Int? = nil) {
-        createNotification(id: id, date: Date(timeIntervalSinceNow: interval), title: title, body: body, soundId: soundId)
+    func createNotification(id: String, interval: TimeInterval, title: String, body: String = "", soundId: Int? = nil, repeats: Bool = false) {
+        createNotification(id: id, date: Date(timeIntervalSinceNow: interval), title: title, body: body, soundId: soundId, repeats: repeats)
     }
     
     func createNotification(id: String, date: Date, title: String, body: String = "", soundId: Int? = nil, repeats: Bool = false) {
@@ -29,7 +29,9 @@ class ClockNotification {
         
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { (error) in
-            print("NotificationCenter Error: \(error.debugDescription)")
+            if let error = error {
+                print("NotificationCenter Error: \(error)")
+            }
         }
     }
     
