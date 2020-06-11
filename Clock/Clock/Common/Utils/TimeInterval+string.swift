@@ -9,6 +9,7 @@
 import Foundation
 
 extension TimeInterval {
+    
     func toStopwatchString() -> String {
         let time = NSInteger(self)
         
@@ -23,4 +24,18 @@ extension TimeInterval {
             return String(format: "%02d:%02d.%02d", minutes, seconds, ms)
         }
     }
+    
+    func toTimerString() -> String {
+        let time = NSInteger(self)
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = time / 3600
+        
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
+    }
+    
 }

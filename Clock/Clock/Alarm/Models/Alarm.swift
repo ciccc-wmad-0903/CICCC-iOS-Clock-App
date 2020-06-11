@@ -13,7 +13,7 @@ import Foundation
 /// - [alarm] property: Date type value for alarm time
 /// - [repeatable] property: Bool array for Sunday(index: 0) ~ Saturday(index: 6)
 /// - [label] property: String value for alarm label
-/// - **TODO: Must be checked!** [sound] property: String value for alarm sound ID
+/// - [sound] property: String value for alarm sound ID
 /// - [isEnable] property: Bool value for enable/disable alarm
 struct Alarm: Codable {
 
@@ -25,14 +25,12 @@ struct Alarm: Codable {
     static var DEFAULT_DATE: Date { get { Date() } }
     static let DEFAULT_REPEAT: [Bool] = .init(repeating: false, count: 7)
     static let DEFAULT_LABEL = "Alarm"
-    static let DEFAULT_SOUND_ID = "Radar"
+    static let DEFAULT_SOUND_ID = NotificationSound.defaultID
     
     var alarm: Date = Alarm.DEFAULT_DATE
     var repeatable: [Bool] = Alarm.DEFAULT_REPEAT
     var label: String = Alarm.DEFAULT_LABEL
-    /// - **TODO: Must be checked!**
-    /// > [sound] property: String value for alarm sound ID
-    var sound: String = Alarm.DEFAULT_SOUND_ID
+    var sound: Int? = Alarm.DEFAULT_SOUND_ID
     var isEnable: Bool = true
     
     func repeatableToString() -> String {

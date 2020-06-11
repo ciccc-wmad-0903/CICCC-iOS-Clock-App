@@ -22,11 +22,11 @@ class ClockTabBarController: UITabBarController {
         alarmTVC.tabBarItem = UITabBarItem(title: "Alarm", image: UIImage.init(systemName: "alarm.fill")?.withTintColor(UIColor.mainTintColor), tag: 1)
         let stopwatchNC = UINavigationController()
         stopwatchNC.tabBarItem = UITabBarItem(title: "Stopwatch", image: UIImage.init(systemName: "stopwatch.fill")?.withTintColor(UIColor.mainTintColor), tag: 2)
-        let timerVC = TimerViewController()
-        timerVC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage.init(systemName: "timer")?.withTintColor(UIColor.mainTintColor), tag: 3)
+        let timerNC = UINavigationController()
+        timerNC.tabBarItem = UITabBarItem(title: "Timer", image: UIImage.init(systemName: "timer")?.withTintColor(UIColor.mainTintColor), tag: 3)
         
         viewControllers = [
-            UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopwatchNC, timerVC ]
+            UINavigationController(rootViewController: worldClockTVC), UINavigationController(rootViewController: alarmTVC), stopwatchNC, timerNC ]
         
         worldClockTVC.view.backgroundColor = .black
         worldClockTVC.navigationController?.navigationBar.barTintColor = .black
@@ -47,7 +47,8 @@ class ClockTabBarController: UITabBarController {
         let stopwatchCoordinator = StopwatchCoordinatorImpl(navigationController: stopwatchNC)
         stopwatchCoordinator.start()
         
-        timerVC.view.backgroundColor = .black
+        let timerCoordinator = TimerCoordinatorImpl(navigationController: timerNC)
+        timerCoordinator.start()
     }
     
 }

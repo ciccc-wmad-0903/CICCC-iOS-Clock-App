@@ -33,7 +33,7 @@ class RepeatCheckTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "daysCell")
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+            cell = ClockTableViewCell(style: .default, reuseIdentifier: "Cell")
             cell?.backgroundColor = .rightDetailCellBackgroundColor
             cell?.textLabel?.textColor = .white
         }
