@@ -16,7 +16,7 @@ class TimerSelectSoundTableViewCell: ClockTableViewCell {
         textLabel?.text = "When Timer Ends"
         textLabel?.textColor = .white
         textLabel?.font = .systemFont(ofSize: 15, weight: .medium)
-        detailTextLabel?.textColor = .timerSoundNameColor
+        detailTextLabel?.textColor = .timerLightGrayColor
         detailTextLabel?.font = .systemFont(ofSize: 14)
         accessoryType = .disclosureIndicator
     }

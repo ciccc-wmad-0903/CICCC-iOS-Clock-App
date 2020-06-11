@@ -76,14 +76,17 @@ extension TimerViewController {
             .disposed(by: disposeBag)
         
         viewModel.rightButtonStatus
-            .drive(onNext: { color, title, enabled in
+            .drive(onNext: { color, title in
                 DispatchQueue.main.async {
                     self.rightButton.baseColor = color
                     self.rightButton.setTitle(title, for: .normal)
-                    self.rightButton.isEnabled = enabled
                 }
             })
             .disposed(by: disposeBag)
+        
+        viewModel.rightButtonEnabled
+            .drive(onNext: { enabled in DispatchQueue.main.async { self.rightButton.isEnabled = enabled } })
+        .disposed(by: disposeBag)
     }
     
     private func bindOnRemainingView() {
@@ -99,6 +102,22 @@ extension TimerViewController {
                 self.timerFadingView.remainingView.setRemainingCircle(percent: CGFloat($0))
             })
             .disposed(by: disposeBag)
+        
+        viewModel.remainingDigitalTime
+            .drive(onNext: {
+                self.timerFadingView.remainingView.setRemainDigitLabelText(remainDigit: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.dueDigitalTime
+            .drive(onNext: {
+                self.timerFadingView.remainingView.setDueTimeLabelText(dueTime: $0)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isDueDigitalTimePaused
+            .drive(onNext: { self.timerFadingView.remainingView.isDueTimePaused(isPaused: $0) })
+            .disposed(by: disposeBag)
     }
     
     private func bindOnSetTimer() {
@@ -109,8 +128,6 @@ extension TimerViewController {
                 self.timerFadingView.setTimePicker.setTime(hour: hour, minute: minute, second: second)
             })
             .disposed(by: disposeBag)
-        
-        
     }
     
     private func bindOnSelectSound() {
