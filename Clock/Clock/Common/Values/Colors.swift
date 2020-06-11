@@ -23,4 +23,7 @@ extension UIColor {
     // Alarm Colors
     static let rightDetailCellBackgroundColor = UIColor(red: 0x2C / 255.0, green: 0x2C / 255.0, blue: 0x2C / 255.0, alpha: 1.0)
     static let alarmDisableTextColor = UIColor(red: 0x8D / 255.0, green: 0x8D / 255.0, blue: 0x8D / 255.0, alpha: 1.0)
+    
+    // Timer Colors
+    static let timerSoundNameColor = UIColor(red: 0x98 / 255.0, green: 0x98 / 255.0, blue: 0x98 / 255.0, alpha: 1.0)
 }

@@ -25,6 +25,8 @@ protocol TimerViewModel: class {
     var remainingDigitalTime: Driver<String> { get }
     var remainingCirclePercent: Driver<Double> { get }
     var setNameFromSoundID: Driver<String> { get }
+    var isShownTimerPickerView: Driver<Bool> { get }
+    var updateSetTimePicker: PublishRelay<(Int, Int, Int)> { get }
 }
 
 final class TimerViewModelImpl: TimerViewModel {
@@ -44,6 +46,9 @@ final class TimerViewModelImpl: TimerViewModel {
     let remainingDigitalTime: Driver<String>
     let remainingCirclePercent: Driver<Double>
     let setNameFromSoundID: Driver<String>
+    let isShownTimerPickerView: Driver<Bool>
+    let updateSetTimePicker = PublishRelay<(Int, Int, Int)>()
+    
     
     // MARK: - Private Properties(Reactive)
     private let coordinator: TimerCoordinator
@@ -114,6 +119,10 @@ final class TimerViewModelImpl: TimerViewModel {
         setNameFromSoundID = timerSoundID
             .map { NotificationSound.getSoundName(index: $0) ?? "Stop Playing" }
             .asDriver(onErrorJustReturn: NotificationSound.defaultName)
+        
+        isShownTimerPickerView = timerStatus
+            .map { return $0 == .stop }
+            .asDriver(onErrorJustReturn: true)
         
         timerStatus
             .observeOn(MainScheduler.instance)
@@ -264,6 +273,8 @@ final class TimerViewModelImpl: TimerViewModel {
         timerStatus.accept(timer.status)
         timerSetTime.accept(timer.setTime)
         timerSoundID.accept(timer.soundID)
+        
+        updateSetTimePicker.accept((Int(timer.setTime / 3600), Int(timer.setTime / 60), Int(timer.setTime.truncatingRemainder(dividingBy: 60))))
         
         if timerRemaining <= 0.0 {
             timerReset()
