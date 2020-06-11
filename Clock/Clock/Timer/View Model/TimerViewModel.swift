@@ -255,15 +255,19 @@ final class TimerViewModelImpl: TimerViewModel {
     }
     
     // MARK: - Service Methods
+    private let notificationID = "ClockTimerNotification"
+    
     private func timerStart() {
         timerPauseStart.accept(nil)
         timerDueTime.accept(Date().addingTimeInterval(timerSetTime.value))
         timerStatus.accept(.start)
+        ClockNotification.shared.createNotification(id: notificationID, interval: timerRemaining, title: "Timer", soundId: timerSoundID.value)
     }
     
     private func timerPause() {
         timerPauseStart.accept(Date())
         timerStatus.accept(.pause)
+        ClockNotification.shared.cancelNotification(id: notificationID)
     }
     
     private func timerResume() {
@@ -271,6 +275,7 @@ final class TimerViewModelImpl: TimerViewModel {
             timerDueTime.accept(dueTime.addingTimeInterval(pauseStart.distance(to: Date())))
             timerStatus.accept(.start)
             timerPauseStart.accept(nil)
+            ClockNotification.shared.createNotification(id: notificationID, interval: timerRemaining, title: "Timer", soundId: timerSoundID.value)
         } else {
             timerReset()
         }
@@ -282,6 +287,7 @@ final class TimerViewModelImpl: TimerViewModel {
         timerStatus.accept(.stop)
         remainingPercent.accept(1.0)
         updateCurrentData(oneShot: true)
+        ClockNotification.shared.cancelNotification(id: notificationID)
     }
     
     private func timeIntervalToHMS() -> (Int, Int, Int) {
