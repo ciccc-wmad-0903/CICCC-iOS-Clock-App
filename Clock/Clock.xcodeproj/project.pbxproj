@@ -512,8 +512,8 @@
 			isa = PBXGroup;
 			children = (
 				6FC695FC2490CC7800625619 /* Coordinator */,
-				6FDACBEF248075BB0062818E /* Views */,
 				6FC695FF2490CCC000625619 /* Model */,
+				6FDACBEF248075BB0062818E /* View */,
 				6FC696002490CCD200625619 /* View Model */,
 			);
 			path = Timer;
@@ -574,12 +574,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		6FDACBEF248075BB0062818E /* Views */ = {
+		6FDACBEF248075BB0062818E /* View */ = {
 			isa = PBXGroup;
 			children = (
 				6FDACBF8248076B50062818E /* TimerViewController.swift */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		6FDACC0024807B920062818E /* Controllers */ = {

@@ -226,8 +226,8 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
                     self.stopwatchStart()
                 case .start: // To Pause
                     self.stopwatchPause()
-                case .pause: // To Restart
-                    self.stopwatchRestart()
+                case .pause: // To Resume
+                    self.stopwatchResume()
                 }
             })
             .disposed(by: disposeBag)
@@ -256,7 +256,7 @@ final class StopwatchViewModelImpl: StopwatchViewModel {
         stopwatchStatus.accept(.start)
     }
     
-    private func stopwatchRestart() {
+    private func stopwatchResume() {
         if let base = stopwatchBase.value, let lap = stopwatchLapStart.value, let pauseStart = stopwatchPauseStart {
             let current = Date()
             let interval = pauseStart.distance(to: current)

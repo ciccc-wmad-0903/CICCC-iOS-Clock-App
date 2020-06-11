@@ -15,12 +15,39 @@ class NotificationSound {
     private static let classicSoundPrefix = "C_"
     private static let maxNumberOfClassic = 1000
     
+    static var defaultID: Int { get { maxNumberOfClassic } }
+    
+    static var defaultName: String { get { getSoundName(index: defaultID) ?? defaultSoundName } }
+    
     static func getID(selectedIndex: Int, isClassic: Bool) -> Int {
         return isClassic ? selectedIndex : selectedIndex + maxNumberOfClassic
     }
     
-    static func getSoundFileName(index: Int) -> String {
+    static func getSoundFileName(index: Int?) -> String? {
+        guard let index = index else { return nil }
+        return index < maxNumberOfClassic ? rawSoundClassic[index] : rawSound[index - maxNumberOfClassic]
+    }
+    
+    static func getSoundName(index: Int?) -> String? {
+        guard let index = index else { return nil }
         return index < maxNumberOfClassic ? soundClassic[index] : sound[index - maxNumberOfClassic]
+    }
+    
+    static var sound: [String] {
+        get {
+            let displaySound = rawSound.map { String($0.prefix(upTo: $0.lastIndex(of: ".")!)) }
+                .map { $0.replacingOccurrences(of: "_", with: " ") }
+            return displaySound
+        }
+    }
+    
+    static var soundClassic: [String] {
+        get {
+            let displaySoundClassic = rawSoundClassic.map { $0.prefix(upTo: $0.lastIndex(of: ".")!) }
+                .map { String($0.suffix(from: $0.index($0.startIndex, offsetBy: 2))) }
+                .map { $0.replacingOccurrences(of: "_", with: " ") }
+            return displaySoundClassic
+        }
     }
     
     private static var _cafContents: [String]?
@@ -37,7 +64,7 @@ class NotificationSound {
         }
     }
     
-    static var sound: [String] {
+    private static var rawSound: [String] {
         get {
             var ringtones = cafContents.filter { !$0.hasPrefix(classicSoundPrefix) }.sorted()
             for (index, name) in ringtones.enumerated() {
@@ -50,27 +77,10 @@ class NotificationSound {
         }
     }
     
-    static var soundClassic: [String] {
+    private static var rawSoundClassic: [String] {
         get {
             let ringtones = cafContents.filter { $0.hasPrefix(classicSoundPrefix) }.sorted()
             return ringtones
-        }
-    }
-    
-    static var displaySound: [String] {
-        get {
-            let displaySound = sound.map { String($0.prefix(upTo: $0.lastIndex(of: ".")!)) }
-                .map { $0.replacingOccurrences(of: "_", with: " ") }
-            return displaySound
-        }
-    }
-    
-    static var displaySoundClassic: [String] {
-        get {
-            let displaySoundClassic = soundClassic.map { $0.prefix(upTo: $0.lastIndex(of: ".")!) }
-                .map { String($0.suffix(from: $0.index($0.startIndex, offsetBy: 2))) }
-                .map { $0.replacingOccurrences(of: "_", with: " ") }
-            return displaySoundClassic
         }
     }
     
