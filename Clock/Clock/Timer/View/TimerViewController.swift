@@ -198,7 +198,7 @@ extension TimerViewController {
 extension TimerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.setTimerSound.accept(1005)
+        viewModel.pushToSelectSoundView.accept(())
     }
 }
 

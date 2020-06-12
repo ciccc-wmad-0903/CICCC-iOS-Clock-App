@@ -11,6 +11,7 @@ import UIKit
 protocol TimerCoordinator: class {
     func saveTimer(timer: TimerModel)
     func loadTimer() -> TimerModel
+    func pushToView(viewController: UIViewController)
 }
 
 class TimerCoordinatorImpl: Coordinator {
@@ -33,6 +34,10 @@ class TimerCoordinatorImpl: Coordinator {
 
 private let archiveFileName = "timer"
 extension TimerCoordinatorImpl: TimerCoordinator {
+    
+    func pushToView(viewController: UIViewController) {
+        navigationController.present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
+    }
     
     func saveTimer(timer: TimerModel) {
         if self.timer != timer {
