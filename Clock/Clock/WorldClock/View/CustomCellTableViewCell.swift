@@ -12,6 +12,7 @@ class CustomCellTableViewCell: UITableViewCell {
     
     let timeZoneName: UILabel = {
        let tmZnNm = UILabel()
+        tmZnNm.font = .boldSystemFont(ofSize: 20)
         tmZnNm.textColor = .white
         tmZnNm.translatesAutoresizingMaskIntoConstraints = false
                
@@ -20,6 +21,7 @@ class CustomCellTableViewCell: UITableViewCell {
   
     let timeLabel: UILabel = {
         let tmLb = UILabel()
+        tmLb.font = tmLb.font.withSize(35)
         tmLb.textColor = .white
         tmLb.translatesAutoresizingMaskIntoConstraints = false
        
@@ -34,15 +36,17 @@ class CustomCellTableViewCell: UITableViewCell {
         RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
         setupConstraints()
     }
+    
     private func setupConstraints() {
         
-        let verStackView = VerticalStackView(arrangedSubviews: [timeZoneName, timeLabel], spacing: 10 ,distribution: .fillEqually )
-        contentView.addSubview(verStackView)
+        let horStackView = HorizontalStackView(arrangedSubviews: [timeZoneName, timeLabel], spacing: 60 , distribution: .equalCentering )
+        horStackView.isLayoutMarginsRelativeArrangement = true
+        contentView.addSubview(horStackView)
         NSLayoutConstraint.activate([
-            verStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            verStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            verStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            verStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)])
+            horStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            horStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            horStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            horStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -10)])
         
     }
 //   MARK: - Getting timeLabel

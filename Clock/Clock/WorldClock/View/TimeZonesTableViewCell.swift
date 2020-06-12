@@ -12,6 +12,8 @@ class TimeZonesTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle , reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
+        textLabel?.textColor = .white
     }
 
     required init?(coder: NSCoder) {
