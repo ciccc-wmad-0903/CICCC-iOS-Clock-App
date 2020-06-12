@@ -54,6 +54,7 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
                 title = "Ringtones"
             }
         }
+        PlayAudioFile.shared.stopPlaying()
         tableView.reloadData()
     }
     
@@ -105,8 +106,8 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        super.dismiss(animated: flag, completion: completion)
         PlayAudioFile.shared.stopPlaying()
+        super.dismiss(animated: flag, completion: completion)
     }
     
     @objc private func setAndDismissView() {
