@@ -9,13 +9,38 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        registerForRemoteNotificationInApp()
         return true
+    }
+    
+    func registerForRemoteNotificationInApp() {
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.requestAuthorization(options: [.sound, .alert]) { (granted, error) in
+                if error == nil {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                } else {
+                    print("Couldn't grant user permission for sound and alert. Alarm and Timer are disabled.")
+                }
+            }
+        } else {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([
+            UNNotificationPresentationOptions.alert,
+            UNNotificationPresentationOptions.sound
+        ])
     }
 
     // MARK: UISceneSession Lifecycle
