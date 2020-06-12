@@ -16,7 +16,7 @@ class PlayAudioFile {
     static let shared = PlayAudioFile()
     
     func playAudioFile(soundId: Int?) {
-        if let soundPlayer = soundPlayer { if soundPlayer.isPlaying { soundPlayer.stop() } }
+        stopPlaying()
         guard let soundId = soundId else { return }
         guard let url = Bundle.main.url(forResource: String(NotificationSound.getSoundFileName(index: soundId)?.dropLast(4) ?? ""),
                                         withExtension: "caf") else { return }
@@ -36,5 +36,9 @@ class PlayAudioFile {
         } catch let error {
             print(error.localizedDescription)
         }
+    }
+    
+    func stopPlaying() {
+        if let soundPlayer = soundPlayer { if soundPlayer.isPlaying { soundPlayer.stop() } }
     }
 }

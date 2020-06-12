@@ -103,10 +103,12 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
     
     @objc private func setAndDismissView() {
         selectSoundIdDelegate?.getSoundId(soundId: soundId)
+        PlayAudioFile.shared.stopPlaying()
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func dismissView() {
+        PlayAudioFile.shared.stopPlaying()
         dismiss(animated: true, completion: nil)
     }
 
