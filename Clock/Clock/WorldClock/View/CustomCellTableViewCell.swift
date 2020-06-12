@@ -12,6 +12,7 @@ class CustomCellTableViewCell: UITableViewCell {
     
     let timeZoneName: UILabel = {
        let tmZnNm = UILabel()
+        tmZnNm.textColor = .white
         tmZnNm.translatesAutoresizingMaskIntoConstraints = false
                
         return tmZnNm
@@ -19,6 +20,7 @@ class CustomCellTableViewCell: UITableViewCell {
   
     let timeLabel: UILabel = {
         let tmLb = UILabel()
+        tmLb.textColor = .white
         tmLb.translatesAutoresizingMaskIntoConstraints = false
        
         return tmLb
@@ -28,6 +30,8 @@ class CustomCellTableViewCell: UITableViewCell {
         super.init(style: style , reuseIdentifier: reuseIdentifier)
         let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setTime), userInfo: nil, repeats: true)
        
+        
+        RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
         setupConstraints()
     }
     private func setupConstraints() {
@@ -35,8 +39,8 @@ class CustomCellTableViewCell: UITableViewCell {
         let verStackView = VerticalStackView(arrangedSubviews: [timeZoneName, timeLabel], spacing: 10 ,distribution: .fillEqually )
         contentView.addSubview(verStackView)
         NSLayoutConstraint.activate([
-            verStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            verStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            verStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            verStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             verStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             verStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)])
         
@@ -51,7 +55,7 @@ class CustomCellTableViewCell: UITableViewCell {
         if timeZoneName.text != "" {
            
             let formatter = DateFormatter()
-            formatter.timeStyle = .long
+            formatter.timeStyle = .short
             formatter.timeZone = TimeZone(identifier: timeZoneName.text!)
             
             let timeNow = Date()

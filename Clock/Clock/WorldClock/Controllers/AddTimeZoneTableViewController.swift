@@ -18,7 +18,7 @@ class AddTimeZoneTableViewController: UITableViewController, UISearchBarDelegate
     private let TimeZoneID = "TimeZoneID"
     private var timeZones: [String] = []
     private let searchBar = UISearchBar(frame: .zero)
-    private var delegate: WorldClockProtocol?
+    var delegate: WorldClockProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +58,13 @@ class AddTimeZoneTableViewController: UITableViewController, UISearchBarDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TimeZoneID, for: indexPath) as! TimeZonesTableViewCell
         cell.textLabel?.text = timeZones[indexPath.row]
-        
+        cell.backgroundColor = .gray
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let SelectedTZ: String = timeZones[indexPath.row]
         delegate?.addTimeZone(timeZone: SelectedTZ)
+        
         self.dismiss(animated: true, completion: nil)
         print(SelectedTZ)
         
