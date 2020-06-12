@@ -17,6 +17,7 @@ protocol TimerViewModel: class {
     var didTapRightButton: PublishRelay<Void> { get }
     var setTimerSound: PublishRelay<Int?> { get }
     var valueChangedPicker: PublishRelay<(Int, Int, Int)> { get }
+    var pushToSelectSoundView: PublishRelay<Void> { get }
     
     // Output
     var leftButtonStatus: Driver<Bool> { get }
@@ -40,6 +41,7 @@ final class TimerViewModelImpl: TimerViewModel {
     let didTapRightButton = PublishRelay<Void>()
     let setTimerSound = PublishRelay<Int?>()
     let valueChangedPicker = PublishRelay<(Int, Int, Int)>()
+    var pushToSelectSoundView = PublishRelay<Void>()
     
     // MARK: - Output
     let leftButtonStatus: Driver<Bool>
@@ -175,6 +177,7 @@ final class TimerViewModelImpl: TimerViewModel {
         bindOnDidTapRightButton()
         bindOnSetTimerSound()
         bindOnValueChangedPicker()
+        bindOnPushToSelectSoundView()
         
         loadTimer(timer: timer)
     }
@@ -254,6 +257,19 @@ final class TimerViewModelImpl: TimerViewModel {
             .disposed(by: disposeBag)
     }
     
+    private func bindOnPushToSelectSoundView() {
+        pushToSelectSoundView
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                let selectSoundTVC = SelectSoundIdTableViewController()
+                selectSoundTVC.selectSoundIdDelegate = self
+                selectSoundTVC.soundId = self.timerSoundID.value
+                selectSoundTVC.fromWhere = .timer
+                self.coordinator.pushToView(viewController: selectSoundTVC)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     // MARK: - Service Methods
     private let notificationID = "ClockTimerNotification"
     
@@ -261,7 +277,7 @@ final class TimerViewModelImpl: TimerViewModel {
         timerPauseStart.accept(nil)
         timerDueTime.accept(Date().addingTimeInterval(timerSetTime.value))
         timerStatus.accept(.start)
-        ClockNotification.shared.createNotification(id: notificationID, interval: timerRemaining, title: "Timer", soundId: timerSoundID.value)
+        ClockNotification.shared.createNotification(id: notificationID, interval: timerRemaining + 0.5, title: "Timer", soundId: timerSoundID.value)
     }
     
     private func timerPause() {
@@ -275,7 +291,7 @@ final class TimerViewModelImpl: TimerViewModel {
             timerDueTime.accept(dueTime.addingTimeInterval(pauseStart.distance(to: Date())))
             timerStatus.accept(.start)
             timerPauseStart.accept(nil)
-            ClockNotification.shared.createNotification(id: notificationID, interval: timerRemaining, title: "Timer", soundId: timerSoundID.value)
+            ClockNotification.shared.createNotification(id: notificationID, interval: timerRemaining + 0.5, title: "Timer", soundId: timerSoundID.value)
         } else {
             timerReset()
         }
@@ -339,12 +355,18 @@ final class TimerViewModelImpl: TimerViewModel {
     
     private func updateCurrentData(oneShot: Bool = false) {
         let remain = self.timerRemaining
-        if oneShot || remain > 0 {
+        if oneShot || remain > -0.5 {
             self.remaining.accept(remain)
-            self.remainingPercent.accept(remain / timerSetTime.value)
+            self.remainingPercent.accept(remain / (timerSetTime.value))
         } else {
             timerReset()
         }
     }
     
+}
+
+extension TimerViewModelImpl: SelectSoundIdDelegate {
+    func getSoundId(soundId: Int) {
+        timerSoundID.accept(soundId)
+    }
 }

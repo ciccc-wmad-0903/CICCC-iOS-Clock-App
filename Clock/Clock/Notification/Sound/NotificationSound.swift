@@ -13,7 +13,8 @@ class NotificationSound {
     private static let defaultSoundName = "Radar"
     private static let soundExtension = "caf"
     private static let classicSoundPrefix = "C_"
-    private static let maxNumberOfClassic = 1000
+    
+    static let maxNumberOfClassic = 1000
     
     static var defaultID: Int { get { maxNumberOfClassic } }
     
