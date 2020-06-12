@@ -88,15 +88,6 @@ class MainClockFaceView: UIView {
     private func drawHands(_ rect: CGRect) {
         let instanceWidth: CGFloat = 2.5
         
-        let radius:CGFloat = 4.5
-        let centerCircleLayer = CALayer()
-        layer.addSublayer(centerCircleLayer)
-        centerCircleLayer.frame = CGRect(x: rect.midX - radius, y: rect.midY - radius, width: radius * 2, height: radius * 2)
-        centerCircleLayer.cornerRadius = radius
-        centerCircleLayer.backgroundColor = UIColor.black.cgColor
-        centerCircleLayer.borderColor = UIColor.mainTintColor.cgColor
-        centerCircleLayer.borderWidth = radius / 2
-        
         lapHandLayer = CALayer()
         layer.addSublayer(lapHandLayer!)
         lapHandLayer?.backgroundColor = UIColor.clear.cgColor
@@ -110,6 +101,15 @@ class MainClockFaceView: UIView {
         mainHandLayer?.anchorPoint = CGPoint(x: 0.5, y: 0.825)
         mainHandLayer?.position = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
         mainHandLayer?.bounds = CGRect(x: 0, y: 0, width: instanceWidth, height: rect.size.height / 2 * 1.21)
+        
+        let radius:CGFloat = 4.5
+        let centerCircleLayer = CALayer()
+        layer.addSublayer(centerCircleLayer)
+        centerCircleLayer.frame = CGRect(x: rect.midX - radius, y: rect.midY - radius, width: radius * 2, height: radius * 2)
+        centerCircleLayer.cornerRadius = radius
+        centerCircleLayer.backgroundColor = UIColor.black.cgColor
+        centerCircleLayer.borderColor = UIColor.mainTintColor.cgColor
+        centerCircleLayer.borderWidth = radius / 2
     }
     
     private func setupViewProperties() {

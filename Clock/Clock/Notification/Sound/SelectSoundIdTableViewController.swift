@@ -41,6 +41,7 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if !forClassic {
             switch fromWhere {
             case .alarm:
@@ -53,9 +54,11 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
                 title = "Ringtones"
             }
         }
+        tableView.reloadData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         title = "Back"
     }
     
@@ -101,14 +104,17 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
         tableView.reloadData()
     }
     
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        PlayAudioFile.shared.stopPlaying()
+    }
+    
     @objc private func setAndDismissView() {
         selectSoundIdDelegate?.getSoundId(soundId: soundId)
-        PlayAudioFile.shared.stopPlaying()
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func dismissView() {
-        PlayAudioFile.shared.stopPlaying()
         dismiss(animated: true, completion: nil)
     }
 
@@ -119,11 +125,7 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return sound.count
-        } else {
-            return 1
-        }
+        return section == 0 ? sound.count : 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,12 +153,14 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
             tableView.reloadData()
             PlayAudioFile.shared.playAudioFile(soundId: soundId)
         } else {
+            PlayAudioFile.shared.stopPlaying()
             let selectSoundTVC = SelectSoundIdTableViewController()
             selectSoundTVC.selectSoundIdDelegate = self
             selectSoundTVC.soundId = soundId
             selectSoundTVC.fromWhere = .itself
             navigationController?.pushViewController(selectSoundTVC, animated: true)
         }
+        
     }
     
 }
