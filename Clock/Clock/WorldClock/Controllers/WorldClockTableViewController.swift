@@ -11,7 +11,7 @@ import UIKit
 class WorldClockTableViewController: UITableViewController, WorldClockProtocol {
   
     private let cellID = "cellID"
-    private var TimeZonesToDisplay : [String] = ["Europe/London", "Europe/Paris", "Canada/Vancouver"]
+    private var TimeZonesToDisplay : [String] = []
    
   
     
@@ -37,6 +37,7 @@ class WorldClockTableViewController: UITableViewController, WorldClockProtocol {
     
     @objc func addNewTimeZone(_ sender: UIBarButtonItem){
         let addTimeZoneTVC = AddTimeZoneTableViewController()
+        addTimeZoneTVC.delegate = self
         let embedNav = UINavigationController(rootViewController: addTimeZoneTVC)
         
         present(embedNav, animated: true, completion: nil)
@@ -63,9 +64,15 @@ class WorldClockTableViewController: UITableViewController, WorldClockProtocol {
     }
    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 80
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+        tableView.deselectRow(at: indexPath, animated: true)
+    
+        }
+
 //   MARK: - Edit
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

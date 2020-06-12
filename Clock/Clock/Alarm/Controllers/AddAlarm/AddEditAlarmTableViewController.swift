@@ -91,6 +91,11 @@ class AddEditAlarmTableViewController: UITableViewController {
         self.show(labelTVC, sender: Any?.self)
     }
     
+    private func soundTapped(){
+        let selectSoundTVC = SelectSoundIdTableViewController()
+        self.show(selectSoundTVC, sender: Any?.self)
+    }
+    
     private func setupLayout() {
         view.backgroundColor = .modalViewBackground
         title = isEditMode ? "Edit Alarm" : "Add Alarm"
@@ -152,7 +157,7 @@ class AddEditAlarmTableViewController: UITableViewController {
             labelTapped()
             break
         case (1, 2):
-            // TODO: Sound ID Selection TableView
+            soundTapped()
             break
         case (2, 0):
             deleteTapped()

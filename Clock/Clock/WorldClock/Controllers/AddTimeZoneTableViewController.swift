@@ -13,61 +13,69 @@ protocol WorldClockProtocol {
     
 }
 
-class AddTimeZoneTableViewController: UITableViewController, UISearchBarDelegate {
+class AddTimeZoneTableViewController: UIViewController, UISearchBarDelegate {
+    
+    lazy var tableView = UITableView()
     
     private let TimeZoneID = "TimeZoneID"
     private var timeZones: [String] = []
     private let searchBar = UISearchBar(frame: .zero)
+    private var topView: UIView!
     var delegate: WorldClockProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        navigationItem.title = "Choose a City"
-        self.navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
-        self.view.backgroundColor = .darkGray
-        self.navigationController?.navigationBar.backgroundColor = .gray
 
-        tableView.register(TimeZonesTableViewCell.self, forCellReuseIdentifier: TimeZoneID)
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.rightBarButtonItem?.tintColor = .mainTintColor
+        self.view.backgroundColor = .black
 
         timeZones = NSTimeZone.knownTimeZoneNames
         
         searchBarConstrains()
+        tableViewConstraints()
     }
-
+    
     private func searchBarConstrains() {
-        navigationController?.navigationBar.addSubview(searchBar)
-        searchBar.sizeToFit()
+        topView = UIView()
+        topView.constraintHeight(equalToConstant: 80)
+        topView.backgroundColor = .modalViewBackground
+        topView.tintColor = .modalViewBackground
+        view.addSubview(topView)
+        topView.anchors(topAnchor: view.safeAreaLayoutGuide.topAnchor, leadingAnchor: view.leadingAnchor, trailingAnchor: view.trailingAnchor, bottomAnchor: nil)
+        
+        let barTitle = UILabel()
+        barTitle.constraintWidth(equalToConstant: view.frame.size.width, heightEqualToConstant: 20)
+        barTitle.text = "Choose a City"
+        barTitle.font = .systemFont(ofSize: 15, weight: .medium)
+        barTitle.textColor = .white
+        barTitle.textAlignment = .center
+        barTitle.setContentCompressionResistancePriority(.required, for: .vertical)
+        topView.addSubview(barTitle)
+        barTitle.anchors(topAnchor: topView.topAnchor, leadingAnchor: nil, trailingAnchor: nil, bottomAnchor: nil,
+                         padding: .init(top: 6, left: 0, bottom: 0, right: 0))
+        
         searchBar.placeholder = "Search"
-        searchBar.backgroundColor = .lightGray
         searchBar.delegate = self
         searchBar.showsCancelButton = true
-
-    }
-        
-// MARK: - Table view data
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeZones.count
+        searchBar.searchTextField.textColor = .white
+        searchBar.searchTextField.tintColor = .mainTintColor
+        searchBar.barTintColor = .modalViewBackground
+        let attributes:[NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainTintColor]
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
+        topView.addSubview(searchBar)
+        searchBar.anchors(topAnchor: nil, leadingAnchor: topView.leadingAnchor, trailingAnchor: topView.trailingAnchor, bottomAnchor: topView.bottomAnchor,
+                          padding: .init(top: 0, left: 6, bottom: 0, right: 6))
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TimeZoneID, for: indexPath) as! TimeZonesTableViewCell
-        cell.textLabel?.text = timeZones[indexPath.row]
-        cell.backgroundColor = .gray
-        return cell
-    }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let SelectedTZ: String = timeZones[indexPath.row]
-        delegate?.addTimeZone(timeZone: SelectedTZ)
-        
-        self.dismiss(animated: true, completion: nil)
-        print(SelectedTZ)
-        
+    private func tableViewConstraints() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = .black
+        tableView.separatorColor = .tableViewSeparatorColor
+        tableView.register(TimeZonesTableViewCell.self, forCellReuseIdentifier: TimeZoneID)
+        view.addSubview(tableView)
+        tableView.anchors(topAnchor: topView.bottomAnchor, leadingAnchor: view.leadingAnchor, trailingAnchor: view.trailingAnchor, bottomAnchor: view.bottomAnchor)
     }
 
 // MARK: - SearchBar
@@ -82,7 +90,33 @@ class AddTimeZoneTableViewController: UITableViewController, UISearchBarDelegate
         } else {
             timeZones = NSTimeZone.knownTimeZoneNames
         }
-        tableView?.reloadData()
+        tableView.reloadData()
+    }
+    
+}
+
+// MARK: - Table view data
+extension AddTimeZoneTableViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return timeZones.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TimeZoneID, for: indexPath) as! TimeZonesTableViewCell
+        cell.textLabel?.text = timeZones[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let SelectedTZ: String = timeZones[indexPath.row]
+        delegate?.addTimeZone(timeZone: SelectedTZ)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
