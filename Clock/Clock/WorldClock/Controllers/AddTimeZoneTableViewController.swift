@@ -66,7 +66,7 @@ class AddTimeZoneTableViewController: UITableViewController, UISearchBarDelegate
         delegate?.addTimeZone(timeZone: SelectedTZ)
         
         self.dismiss(animated: true, completion: nil)
-        print(SelectedTZ)
+//        print(SelectedTZ)
         
     }
 

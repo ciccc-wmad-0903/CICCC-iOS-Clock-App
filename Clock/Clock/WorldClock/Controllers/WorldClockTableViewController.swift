@@ -37,6 +37,7 @@ class WorldClockTableViewController: UITableViewController, WorldClockProtocol {
     
     @objc func addNewTimeZone(_ sender: UIBarButtonItem){
         let addTimeZoneTVC = AddTimeZoneTableViewController()
+        addTimeZoneTVC.delegate = self
         let embedNav = UINavigationController(rootViewController: addTimeZoneTVC)
         
         present(embedNav, animated: true, completion: nil)
