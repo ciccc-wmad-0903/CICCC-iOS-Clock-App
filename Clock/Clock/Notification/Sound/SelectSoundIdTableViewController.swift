@@ -147,6 +147,7 @@ class SelectSoundIdTableViewController: UITableViewController, SelectSoundIdDele
             soundId = indexPath.row + (forClassic ? 0 : NotificationSound.maxNumberOfClassic)
             if forClassic { selectSoundIdDelegate?.getSoundId(soundId: soundId) }
             tableView.reloadData()
+            PlayAudioFile.shared.playAudioFile(soundId: soundId)
         } else {
             let selectSoundTVC = SelectSoundIdTableViewController()
             selectSoundTVC.selectSoundIdDelegate = self
