@@ -39,7 +39,7 @@ class CustomCellTableViewCell: UITableViewCell {
     
     private func setupConstraints() {
         
-        let horStackView = HorizontalStackView(arrangedSubviews: [timeZoneName, timeLabel], spacing: 60 , distribution: .equalCentering )
+        let horStackView = HorizontalStackView(arrangedSubviews: [timeZoneName, timeLabel], spacing: 10 , distribution: .equalCentering )
         horStackView.isLayoutMarginsRelativeArrangement = true
         contentView.addSubview(horStackView)
         NSLayoutConstraint.activate([
