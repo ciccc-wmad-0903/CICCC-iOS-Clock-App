@@ -58,6 +58,8 @@ class AddTimeZoneTableViewController: UIViewController, UISearchBarDelegate {
         searchBar.placeholder = "Search"
         searchBar.delegate = self
         searchBar.showsCancelButton = true
+        searchBar.searchTextField.textColor = .white
+        searchBar.searchTextField.tintColor = .mainTintColor
         searchBar.barTintColor = .modalViewBackground
         let attributes:[NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainTintColor]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
