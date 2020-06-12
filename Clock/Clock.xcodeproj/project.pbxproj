@@ -25,6 +25,7 @@
 		6F2CAD112492C75A005536C7 /* TimerRemainDigitLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CAD102492C75A005536C7 /* TimerRemainDigitLabel.swift */; };
 		6F2CAD132492DFDB005536C7 /* ClockNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CAD122492DFDB005536C7 /* ClockNotification.swift */; };
 		6F2CAD162492EB43005536C7 /* SelectSoundIdTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CAD152492EB43005536C7 /* SelectSoundIdTableViewController.swift */; };
+		6F2CAD182492F930005536C7 /* SelectSoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CAD172492F930005536C7 /* SelectSoundTableViewCell.swift */; };
 		6F3135B5248CE445000A9DF6 /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */; };
 		6F3135B7248CE66E000A9DF6 /* MainClockFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */; };
 		6F3135B9248CE67B000A9DF6 /* SubClockFaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */; };
@@ -138,6 +139,7 @@
 		6F2CAD102492C75A005536C7 /* TimerRemainDigitLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRemainDigitLabel.swift; sourceTree = "<group>"; };
 		6F2CAD122492DFDB005536C7 /* ClockNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNotification.swift; sourceTree = "<group>"; };
 		6F2CAD152492EB43005536C7 /* SelectSoundIdTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSoundIdTableViewController.swift; sourceTree = "<group>"; };
+		6F2CAD172492F930005536C7 /* SelectSoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSoundTableViewCell.swift; sourceTree = "<group>"; };
 		6F3135B4248CE445000A9DF6 /* AnalogClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 		6F3135B6248CE66E000A9DF6 /* MainClockFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainClockFaceView.swift; sourceTree = "<group>"; };
 		6F3135B8248CE67B000A9DF6 /* SubClockFaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubClockFaceView.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			children = (
 				6F5434872491D07F003CEB7A /* NotificationSound.swift */,
 				6F2CAD152492EB43005536C7 /* SelectSoundIdTableViewController.swift */,
+				6F2CAD172492F930005536C7 /* SelectSoundTableViewCell.swift */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				6F44D0C22492451A00A29EDE /* TimerSelectSoundTableView.swift in Sources */,
 				6FDACBFD2480799D0062818E /* HorizontalStackView.swift in Sources */,
 				6FC696042490CD0300625619 /* TimerViewModel.swift in Sources */,
+				6F2CAD182492F930005536C7 /* SelectSoundTableViewCell.swift in Sources */,
 				6FC4604E248CC63300E74841 /* StopwatchScrollView.swift in Sources */,
 				6F3135B5248CE445000A9DF6 /* AnalogClockView.swift in Sources */,
 				6F18CFE4248B7BB400E91F3F /* TimeInterval+string.swift in Sources */,
